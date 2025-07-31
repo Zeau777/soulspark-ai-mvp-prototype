@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Sparkles, Users } from "lucide-react";
+
 const HeroSection = () => {
-  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 overflow-hidden">
+  return (
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
       
@@ -28,7 +30,9 @@ const HeroSection = () => {
               AI-Powered Soul-Care
             </span>
             <br />
-            <span className="text-foreground">for a Purpose-Driven Generation.</span>
+            <span className="text-foreground">
+              for a Purpose-Driven Generation
+            </span>
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -74,6 +78,8 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default HeroSection;
