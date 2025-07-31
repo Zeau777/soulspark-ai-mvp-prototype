@@ -5,7 +5,7 @@ const CTASection = () => {
   const audiences = [
     {
       icon: GraduationCap,
-      title: "Colleges & Youth Groups",
+      title: "Colleges & Universities",
       description: "Support student mental health and spiritual wellbeing across your campus community.",
       cta: "Partner with Us",
       benefits: ["LMS integration", "Student life partnerships", "Chaplaincy team collaboration"]
