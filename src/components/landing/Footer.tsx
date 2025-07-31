@@ -52,10 +52,7 @@ const Footer = () => {
               <Mail className="h-4 w-4 mr-3 text-primary" />
               <span>hello@mysoulsparkai.com</span>
             </div>
-            <div className="flex items-center text-sm text-muted-foreground">
-              <Phone className="h-4 w-4 mr-3 text-primary" />
-              <span>1-800-SOULSPARK</span>
-            </div>
+            
             <div className="flex items-center text-sm text-muted-foreground">
               <MapPin className="h-4 w-4 mr-3 text-primary" />
               <span>Supporting souls worldwide</span>
