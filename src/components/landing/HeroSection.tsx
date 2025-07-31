@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Sparkles, Users } from "lucide-react";
-
 const HeroSection = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
       
@@ -25,20 +23,15 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight lg:text-5xl">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               AI-Powered Soul-Care
             </span>
             <br />
-            <span className="text-foreground">
-              for a Purpose-Driven Generation
-            </span>
+            <span className="text-foreground">for a Purpose-Driven Generation.</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Experience personalized, faith-centered emotional and spiritual support designed for Gen Z and Millennials. 
-            Daily soul-care that meets you where you are.
-          </p>
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed md:text-xl">Experience personalized, faith-centered emotional and spiritual support designed for Gen Z and Millennials. Daily soul-care that meets you where you are, speaks your language, and helps you grow from the inside out.</p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -57,7 +50,7 @@ const HeroSection = () => {
                 <Heart className="h-8 w-8 text-primary" />
               </div>
               <h3 className="font-semibold text-lg mb-2">Daily SoulDrops</h3>
-              <p className="text-muted-foreground">60-second soul-care experiences tailored to your spiritual journey</p>
+              <p className="text-muted-foreground">60-second soul-care experiences tailored to your emotional and spiritual rhythm.</p>
             </div>
             
             <div className="text-center">
@@ -65,7 +58,7 @@ const HeroSection = () => {
                 <Sparkles className="h-8 w-8 text-primary" />
               </div>
               <h3 className="font-semibold text-lg mb-2">AI Soul-Care Coach</h3>
-              <p className="text-muted-foreground">Empathetic, faith-based guidance whenever you need support</p>
+              <p className="text-muted-foreground">Empathetic, faith-based guidance whenever you need support or a soul-friend to talk to.</p>
             </div>
             
             <div className="text-center">
@@ -73,13 +66,11 @@ const HeroSection = () => {
                 <Users className="h-8 w-8 text-primary" />
               </div>
               <h3 className="font-semibold text-lg mb-2">Impact That Matters</h3>
-              <p className="text-muted-foreground">Your spiritual growth creates real-world impact through our giving program</p>
+              <p className="text-muted-foreground">Your spiritual growth creates real-world impact through our  “1 SoulDrop = 1 Meal” initiative.</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;

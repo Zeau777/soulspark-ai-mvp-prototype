@@ -1,18 +1,12 @@
 import { Heart, Mail, Phone, MapPin } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="bg-card border-t border-border/40">
+  return <footer className="bg-card border-t border-border/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand section */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
-              <img 
-                src="/lovable-uploads/7dc06000-59f3-4a4f-85de-22d7a9410636.png" 
-                alt="SoulSpark AI" 
-                className="h-8 w-auto mr-3"
-              />
+              <img src="/lovable-uploads/7dc06000-59f3-4a4f-85de-22d7a9410636.png" alt="SoulSpark AI" className="h-8 w-auto mr-3" />
             </div>
             <p className="text-muted-foreground leading-relaxed mb-6 max-w-md">
               AI-powered soul-care for a purpose-driven generation. Strengthening spiritual and emotional wellbeing 
@@ -20,7 +14,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center text-sm text-muted-foreground">
               <Heart className="h-4 w-4 text-primary mr-2" />
-              <span>Made with love for your spiritual journey</span>
+              <span>Made with love for your emotional and spiritual journey.</span>
             </div>
           </div>
 
@@ -71,9 +65,7 @@ const Footer = () => {
 
         {/* Bottom section */}
         <div className="border-t border-border/40 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © 2024 SoulSpark AI. All rights reserved.
-          </div>
+          <div className="text-sm text-muted-foreground mb-4 md:mb-0">© 2025 SoulSpark AI. All rights reserved.</div>
           <div className="flex space-x-6 text-sm">
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
@@ -81,8 +73,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
