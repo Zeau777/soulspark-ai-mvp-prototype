@@ -8,21 +8,21 @@ const CTASection = () => {
       title: "Colleges & Youth Groups",
       description: "Support student mental health and spiritual wellbeing across your campus community.",
       cta: "Partner with Us",
-      benefits: ["Campus-wide deployment", "Student success metrics", "Faith-inclusive support"]
+      benefits: ["LMS integration", "Student life partnerships", "Chaplaincy team collaboration"]
     },
     {
       icon: Building2,
       title: "Companies & ERGs",
       description: "Strengthen employee wellbeing with faith-centered emotional support and resilience building.",
       cta: "Request Demo",
-      benefits: ["Employee engagement", "Diversity & inclusion", "Mental health support"]
+      benefits: ["Slack & Teams integration", "Zoom wellness sessions", "Employee engagement tracking"]
     },
     {
       icon: Trophy,
       title: "Sports Organizations",
       description: "Help athletes maintain mental clarity and spiritual strength alongside physical performance.",
       cta: "Get Started",
-      benefits: ["Performance enhancement", "Team unity", "Holistic athlete care"]
+      benefits: ["Slack & Teams integration", "Zoom team sessions", "Performance tracking"]
     }
   ];
 
