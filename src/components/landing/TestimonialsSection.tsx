@@ -22,7 +22,7 @@ const TestimonialsSection = () => {
       name: "Priya K.",
       role: "Division I Athlete",
       organization: "Stanford Athletics",
-      quote: "Training is intense, but SoulSpark helps me stay centered. The personalized prayers and breathwork are game-changers.",
+      quote: "Training is intense, but SoulSpark AI helps me stay centered. The personalized prayers and breathwork are game-changers.",
       rating: 5,
       impact: "28-day streak"
     }
