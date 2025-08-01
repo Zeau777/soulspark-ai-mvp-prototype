@@ -17,7 +17,7 @@ const HowItWorksSection = () => {
     {
       icon: Activity,
       title: "Pulse Check",
-      description: "You check in with how you feel — stressed, anxious, burned out — and SoulSpark AI responds with faith-fueled care that meets you there.",
+      description: "Check in with how you feel, and SoulSpark AI responds with soul care rooted in faith — right when you need it most.",
       step: "03"
     },
     {
