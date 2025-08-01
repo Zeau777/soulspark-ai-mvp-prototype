@@ -23,7 +23,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight lg:text-5xl">
+          <h1 className="text-4xl font-bold text-foreground mb-6 leading-tight lg:text-5xl md:text-5xl">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               AI-Powered Soul-Care
             </span>
