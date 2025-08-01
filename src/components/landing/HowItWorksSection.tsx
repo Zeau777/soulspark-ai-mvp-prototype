@@ -1,4 +1,4 @@
-import { UserPlus, Brain, Heart, TrendingUp } from "lucide-react";
+import { UserPlus, Brain, Heart, Activity, TrendingUp } from "lucide-react";
 
 const HowItWorksSection = () => {
   const steps = [
@@ -15,16 +15,22 @@ const HowItWorksSection = () => {
       step: "02"
     },
     {
+      icon: Activity,
+      title: "Pulse Check",
+      description: "You check in with how you feel — stressed, tired, grateful — and SoulSpark responds with faith-fueled care that meets you there.",
+      step: "03"
+    },
+    {
       icon: Heart,
       title: "Receive Daily SoulDrops",
       description: "Get personalized 60-second soul-care experiences: quotes, reflections, breathwork, scripture, or prayers.",
-      step: "03"
+      step: "04"
     },
     {
       icon: TrendingUp,
       title: "Grow & Impact",
       description: "Track your spiritual growth streaks while creating real-world impact through our meals donation program.",
-      step: "04"
+      step: "05"
     }
   ];
 
@@ -36,7 +42,7 @@ const HowItWorksSection = () => {
             How <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">SoulSpark AI</span> Works
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Four simple steps to transform your spiritual and emotional wellbeing while making a positive impact in the world.
+            Five simple steps to transform your spiritual and emotional wellbeing while making a positive impact in the world.
           </p>
         </div>
 
