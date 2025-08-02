@@ -23,7 +23,7 @@ const HowItWorksSection = () => {
     {
       icon: Heart,
       title: "Receive Daily SoulDrops",
-      description: "Get personalized 60-second soul-care experiences: quotes, reflections, breathwork, scripture, or prayers.",
+      description: "Get personalized 60-second soul-care experiences: AI-generated devotional, journal prompt, breathwork, or guided prayer, powered by your context.",
       step: "04"
     },
     {
