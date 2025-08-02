@@ -11,7 +11,7 @@ const About = () => {
             About <span className="text-gradient">SoulSpark AI</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            SoulSpark AI exists to ignite a global movement of emotionally resilient, purpose-driven young people by pioneering AI-powered, faith-centered soul-care.
+            SoulSpark AI exists to ignite a global movement of emotionally resilient, purpose-driven young people by pioneering AI-powered, faith-centered soul care.
           </p>
         </div>
       </section>
