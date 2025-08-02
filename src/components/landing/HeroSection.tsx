@@ -24,9 +24,7 @@ const HeroSection = () => {
           </div>
 
           <h1 className="text-4xl font-bold text-foreground mb-6 leading-tight lg:text-5xl md:text-5xl">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              AI-Powered Soul-Care
-            </span>
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AI-Powered Soul Care</span>
             <br />
             <span className="text-foreground">for a Purpose-Driven Generation.</span>
           </h1>
