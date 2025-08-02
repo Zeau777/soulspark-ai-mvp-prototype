@@ -8,8 +8,10 @@ const Footer = () => {
             <div className="flex items-center mb-4">
               <img src="/lovable-uploads/7dc06000-59f3-4a4f-85de-22d7a9410636.png" alt="SoulSpark AI" className="h-8 w-auto mr-3" />
             </div>
-            <p className="text-muted-foreground leading-relaxed mb-6 max-w-md text-sm">The AI-Powered OS for Soul-Centered Workplaces, Campuses, and Locker Rooms. Strengthening spiritual and emotional wellbeing through personalized, faith-centered support. Every time you check in, we donate a meal to a hungry child.
-Grow your soul. Change the world.</p>
+            <p className="text-muted-foreground leading-relaxed mb-6 max-w-md text-sm">AI-Powered Soul Care Platform for Purpose-Driven Workplaces, Campuses, and Teams.
+Nurturing emotional strength and spiritual resilience with personalized, faith-centered support — anytime, anywhere.
+Every time you check in, a hungry child is fed.
+Fuel your soul. Uplift your people. Transform the world.</p>
             <div className="flex items-center text-sm text-muted-foreground">
               <Heart className="h-4 w-4 text-primary mr-2" />
               <span>Made with love for your emotional and spiritual journey.</span>
