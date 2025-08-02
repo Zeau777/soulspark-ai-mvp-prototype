@@ -37,7 +37,7 @@ const About = () => {
             <h2 className="text-3xl font-bold">Our Vision</h2>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            By 2028, SoulSpark AI will be the go-to platform for faith and wellness among Gen Z and Millennials, powering millions of lives across campuses, companies, and sports teams — and serving as the official soul-care partner of the LA Olympics. One minute a day. One soul at a time. One world forever changed.
+            By 2028, SoulSpark AI will be the go-to soul care OS among Gen Z and Millennials, powering millions of lives across campuses, companies, and communities — and serving as the official soul care partner of the LA Olympics. One minute a day. One soul at a time. One world forever changed.
           </p>
           <blockquote className="border-l-4 border-primary pl-6 italic text-lg text-foreground">
             "Just like people check Calm or Spotify daily — they'll check SoulSpark AI daily for the health of their soul."
