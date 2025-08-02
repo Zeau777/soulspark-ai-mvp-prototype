@@ -1,8 +1,6 @@
 import { Users, Target, Eye, BookOpen, Heart } from "lucide-react";
-
 const About = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
@@ -36,9 +34,7 @@ const About = () => {
             <Eye className="h-8 w-8 text-primary" />
             <h2 className="text-3xl font-bold">Our Vision</h2>
           </div>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            By 2028, SoulSpark AI will be the go-to soul care OS among Gen Z and Millennials, powering millions of lives across campuses, companies, and communities — and serving as the official soul care partner of the LA Olympics. One minute a day. One soul at a time. One world forever changed.
-          </p>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-6">By 2028, SoulSpark AI will be the go-to soul care OS platform among Gen Z and Millennials, powering millions of lives across campuses, companies, and communities — and serving as the official soul care partner of the LA Olympics. One minute a day. One soul at a time. One world forever changed.</p>
           <blockquote className="border-l-4 border-primary pl-6 italic text-lg text-foreground">
             "Just like people check Calm or Spotify daily — they'll check SoulSpark AI for the health of their soul."
           </blockquote>
@@ -70,8 +66,6 @@ const About = () => {
           </p>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default About;
