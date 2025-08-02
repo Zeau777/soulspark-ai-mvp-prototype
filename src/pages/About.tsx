@@ -53,7 +53,7 @@ const About = () => {
             <h2 className="text-3xl font-bold">Our Story</h2>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Founded by a diverse team passionate about faith, technology, and social good, SoulSpark AI was born from a simple yet profound idea: wellness apps often overlook the soul. Inspired by the rising stress, loneliness and identity loss among Gen Z and Millennials, we created a platform that meets you where you are—spiritually and emotionally. Our beta program is already sparking change, with early users praising its impact on their daily lives.
+            Founded by a diverse team passionate about faith, technology, and social good, SoulSpark AI was born from a simple yet profound idea: wellness apps often overlook the soul. Inspired by the rising stress, loneliness and identity crisis among Gen Z and Millennials, we created a platform that meets you where you are—spiritually and emotionally. Our beta program is already sparking change, with early users praising its impact on their daily lives.
           </p>
         </div>
       </section>
