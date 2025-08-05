@@ -34,6 +34,13 @@ const HeroSection = () => {
 
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed md:text-lg">Experience personalized, faith-centered emotional and spiritual support designed for Gen Z and Millennials. Daily soul care that meets you where you are, speaks your language, and helps you grow from the inside out. It's like Duolingo for your soul, but smarter.</p>
 
+          {/* Guarantee Statement */}
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg font-semibold text-foreground">
+              Purpose. Peace. Clarity. Guaranteed in 90 days — or your money back.
+            </p>
+          </div>
+
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Button variant="spiritual" size="lg" className="text-lg px-8 py-4 min-w-[200px]" onClick={() => navigate('/auth')}>
