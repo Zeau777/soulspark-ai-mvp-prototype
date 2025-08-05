@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="bg-background/95 backdrop-blur-sm border-b border-border/40 sticky top-0 z-50">
@@ -38,10 +40,10 @@ const Navigation = () => {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" onClick={() => navigate('/auth')}>
               Sign In
             </Button>
-            <Button variant="spiritual" size="sm">
+            <Button variant="spiritual" size="sm" onClick={() => navigate('/auth')}>
               Join Now
             </Button>
           </div>
@@ -91,10 +93,10 @@ const Navigation = () => {
                 For Organizations
               </a>
               <div className="flex flex-col space-y-2 px-3 pt-4">
-                <Button variant="ghost" size="sm" className="w-full">
+                <Button variant="ghost" size="sm" className="w-full" onClick={() => navigate('/auth')}>
                   Sign In
                 </Button>
-                <Button variant="spiritual" size="sm" className="w-full">
+                <Button variant="spiritual" size="sm" className="w-full" onClick={() => navigate('/auth')}>
                   Join Now
                 </Button>
               </div>

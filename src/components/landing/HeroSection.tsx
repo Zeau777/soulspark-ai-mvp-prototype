@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Sparkles, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
+  const navigate = useNavigate();
+  
   return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
@@ -33,10 +36,10 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button variant="spiritual" size="lg" className="text-lg px-8 py-4 min-w-[200px]">
+            <Button variant="spiritual" size="lg" className="text-lg px-8 py-4 min-w-[200px]" onClick={() => navigate('/auth')}>
               Start Your Journey
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-4 min-w-[200px]">
+            <Button variant="outline" size="lg" className="text-lg px-8 py-4 min-w-[200px]" onClick={() => navigate('/auth')}>
               Request Demo
             </Button>
           </div>
