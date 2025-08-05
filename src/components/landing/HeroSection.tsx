@@ -46,9 +46,6 @@ const HeroSection = () => {
             <Button variant="spiritual" size="lg" className="text-lg px-8 py-4 min-w-[200px]" onClick={() => navigate('/auth')}>
               Start Your Journey
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-4 min-w-[200px]" onClick={() => navigate('/auth')}>
-              Request Demo
-            </Button>
           </div>
 
           {/* Value propositions */}

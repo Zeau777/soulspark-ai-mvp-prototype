@@ -87,9 +87,6 @@ const HowItWorksSection = () => {
             <button className="bg-gradient-to-r from-primary to-accent text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:shadow-glow transition-all duration-300">
               Start Free Today
             </button>
-            <button className="border border-primary/20 text-primary px-8 py-3 rounded-lg font-semibold hover:bg-primary/5 transition-colors">
-              Watch Demo
-            </button>
           </div>
         </div>
       </div>

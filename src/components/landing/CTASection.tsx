@@ -14,7 +14,7 @@ const CTASection = () => {
       icon: Building2,
       title: "Companies & ERGs",
       description: "Strengthen employee wellbeing with faith-centered emotional support and resilience building.",
-      cta: "Request Demo",
+      cta: "Get Started",
       benefits: ["Slack & Teams integration", "Zoom wellness sessions", "Employee engagement tracking + custom admin dashboard"]
     },
     {
@@ -105,13 +105,10 @@ const CTASection = () => {
             Ready to Bring SoulSpark AI to Your Organization?
           </h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Schedule a personalized demo to see how our AI-powered soul-care platform can support your community's 
+            Download our partnership guide to see how our AI-powered soul-care platform can support your community's 
             emotional and spiritual wellbeing.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="spiritual" size="lg">
-              Schedule Demo
-            </Button>
             <Button variant="outline" size="lg">
               Download Partnership Guide
             </Button>
