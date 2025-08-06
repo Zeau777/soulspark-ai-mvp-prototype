@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Building2, Trophy, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const CTASection = () => {
+  const navigate = useNavigate();
+  
   const audiences = [
     {
       icon: GraduationCap,
@@ -39,11 +42,21 @@ const CTASection = () => {
               Join thousands of Gen Z and Millennials who have found peace, purpose, and spiritual growth through AI-powered soul-care.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="spiritual" size="lg" className="text-lg px-8 py-4">
+              <Button 
+                variant="spiritual" 
+                size="lg" 
+                className="text-lg px-8 py-4"
+                onClick={() => navigate('/auth')}
+              >
                 Start Your Journey Today
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-4">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-8 py-4"
+                onClick={() => navigate('/auth')}
+              >
                 Join via Invite Code
               </Button>
             </div>
