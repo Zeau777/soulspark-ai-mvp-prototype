@@ -61,7 +61,7 @@ const Footer = () => {
         <div className="border-t border-border/40 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-muted-foreground mb-4 md:mb-0">© 2025 SoulSpark AI. All rights reserved.</div>
           <div className="flex space-x-6 text-sm">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a>
           </div>
