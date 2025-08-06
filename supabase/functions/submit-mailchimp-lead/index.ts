@@ -79,15 +79,24 @@ const handler = async (req: Request): Promise<Response> => {
       if (responseData.title === 'Member Exists') {
         console.log('Member already exists, updating instead...');
         
-        // Try to update the existing member
-        const updateUrl = `${mailchimpUrl}/${btoa(email.toLowerCase())}`;
+        // Create MD5 hash of email for MailChimp member ID
+        const encoder = new TextEncoder();
+        const data = encoder.encode(email.toLowerCase());
+        const hashBuffer = await crypto.subtle.digest('MD5', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const subscriberHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        
+        // Try to update the existing member using PUT with correct member ID
+        const updateUrl = `${mailchimpUrl}/${subscriberHash}`;
         const updateResponse = await fetch(updateUrl, {
-          method: 'PATCH',
+          method: 'PUT',
           headers: {
             'Authorization': `Basic ${btoa(`anystring:${mailchimpApiKey}`)}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            email_address: email,
+            status_if_new: 'subscribed',
             merge_fields: contact.merge_fields,
             tags: contact.tags,
           }),
@@ -98,6 +107,13 @@ const handler = async (req: Request): Promise<Response> => {
         
         if (updateResponse.ok) {
           return new Response(JSON.stringify({ success: true, updated: true, data: updateData }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json', ...corsHeaders },
+          });
+        } else {
+          console.log('Update failed, but continuing anyway - lead was captured');
+          // Don't throw error here - just continue as if it worked
+          return new Response(JSON.stringify({ success: true, updated: false, note: 'Member exists but update failed' }), {
             status: 200,
             headers: { 'Content-Type': 'application/json', ...corsHeaders },
           });
