@@ -99,7 +99,7 @@ const TestimonialsSection = () => {
             <div className="text-sm text-muted-foreground">User Rating</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary mb-2">200+</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary mb-2">50+</div>
             <div className="text-sm text-muted-foreground">Partner Organizations</div>
           </div>
         </div>
