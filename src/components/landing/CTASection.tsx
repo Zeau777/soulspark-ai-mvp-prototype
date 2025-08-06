@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { GraduationCap, Building2, Trophy, ArrowRight, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import LeadMagnetForm from "./LeadMagnetForm";
+import { supabase } from "@/integrations/supabase/client";
 
 const CTASection = () => {
   const navigate = useNavigate();
@@ -58,17 +59,40 @@ const CTASection = () => {
   ];
 
   const handleLeadMagnetSubmit = async (data: Record<string, string>, type: string) => {
-    // Here you would integrate with your email service (e.g., Mailchimp, ConvertKit, etc.)
-    console.log(`${type} lead magnet submission:`, data);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // In a real implementation, you would:
-    // 1. Save the lead to your database
-    // 2. Send the partnership guide via email
-    // 3. Add them to your email sequence
-    // 4. Notify your team if they requested a demo
+    try {
+      // Map form data to database fields
+      const organizationFieldMap: Record<string, string> = {
+        'Colleges': 'schoolName',
+        'Companies': 'companyName', 
+        'Sports Teams': 'organizationName'
+      };
+      
+      const organizationField = organizationFieldMap[type];
+      const organizationName = data[organizationField] || '';
+
+      // Save lead to database
+      const { error } = await supabase
+        .from('partnership_leads')
+        .insert({
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: data.email,
+          organization_name: organizationName,
+          role: data.role,
+          partnership_type: type.toLowerCase().replace(' ', '_'),
+          wants_demo: data.demo === 'true'
+        });
+
+      if (error) {
+        console.error('Error saving lead:', error);
+        throw error;
+      }
+
+      console.log(`${type} lead saved successfully:`, data);
+    } catch (error) {
+      console.error('Failed to save lead:', error);
+      throw error;
+    }
   };
 
   return (
