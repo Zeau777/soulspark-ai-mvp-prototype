@@ -104,7 +104,11 @@ const CTASection = () => {
               </ul>
 
               {/* CTA */}
-              <Button variant="outline" className="w-full group-hover:bg-primary/5 transition-colors">
+              <Button 
+                variant="outline" 
+                className="w-full group-hover:bg-primary/5 transition-colors"
+                onClick={() => navigate('/auth')}
+              >
                 {audience.cta}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -122,7 +126,11 @@ const CTASection = () => {
             emotional and spiritual wellbeing.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline" size="lg">
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => navigate('/auth')}
+            >
               Download Partnership Guide
             </Button>
           </div>
