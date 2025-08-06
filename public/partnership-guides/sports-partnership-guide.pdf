@@ -9,8 +9,8 @@ endobj
 2 0 obj
 <<
 /Type /Pages
-/Kids [3 0 R]
-/Count 1
+/Kids [3 0 R 4 0 R]
+/Count 2
 >>
 endobj
 
@@ -19,10 +19,11 @@ endobj
 /Type /Page
 /Parent 2 0 R
 /MediaBox [0 0 612 792]
-/Contents 4 0 R
+/Contents 5 0 R
 /Resources <<
 /Font <<
-/F1 5 0 R
+/F1 6 0 R
+/F2 7 0 R
 >>
 >>
 >>
@@ -30,23 +31,52 @@ endobj
 
 4 0 obj
 <<
-/Length 200
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 8 0 R
+/Resources <<
+/Font <<
+/F1 6 0 R
+/F2 7 0 R
+>>
+>>
+>>
+endobj
+
+5 0 obj
+<<
+/Length 350
 >>
 stream
 BT
-/F1 24 Tf
-50 750 Td
-(SoulSpark AI Sports Partnership Guide) Tj
-0 -50 Td
-/F1 12 Tf
-(This is a sample partnership guide for sports teams.) Tj
+/F1 28 Tf
+306 650 Td
+-150 0 Td
+(SoulSpark AI) Tj
+0 -40 Td
+/F1 20 Tf
+-65 0 Td
+(Sports Teams Partnership Guide) Tj
+0 -100 Td
+/F2 14 Tf
+-100 0 Td
+(Helping the next generation grow spiritually, emotionally, and) Tj
 0 -20 Td
-(Contact us at partners@mysoulsparkai.com for the full guide.) Tj
+(socially—one soul at a time.) Tj
 ET
 endstream
 endobj
 
-5 0 obj
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+
+7 0 obj
 <<
 /Type /Font
 /Subtype /Type1
@@ -54,19 +84,105 @@ endobj
 >>
 endobj
 
+8 0 obj
+<<
+/Length 1800
+>>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(About SoulSpark AI) Tj
+0 -30 Td
+/F2 12 Tf
+(SoulSpark AI is the first AI-powered soul-care platform built to help Gen Z and Millennials build) Tj
+0 -15 Td
+(emotional resilience, grow spiritually, and reconnect with their God-given identity — in just 1–3 minutes) Tj
+0 -15 Td
+(a day. Designed for modern organizations, SoulSpark uses personalized AI, spiritual wellness, and) Tj
+0 -15 Td
+(real-world impact to care for your people and communities.) Tj
+
+0 -40 Td
+/F1 16 Tf
+(Why Sports Teams Partner with SoulSpark AI) Tj
+0 -30 Td
+/F2 12 Tf
+(• Build mental strength and emotional resilience in athletes) Tj
+0 -15 Td
+(• Provide a daily space for grounding and growth) Tj
+0 -15 Td
+(• Support team chaplains and coaches with AI-powered care) Tj
+0 -15 Td
+(• Foster identity beyond performance and competition) Tj
+
+0 -40 Td
+/F1 16 Tf
+(Partnership Benefits) Tj
+0 -30 Td
+/F2 12 Tf
+(✓ Boosts belonging and spiritual wellness) Tj
+0 -15 Td
+(✓ Improves retention and resilience) Tj
+0 -15 Td
+(✓ Daily engagement in under 3 minutes) Tj
+0 -15 Td
+(✓ Real-time emotional and spiritual trends) Tj
+0 -15 Td
+(✓ Create tangible impact—meals donated for every action) Tj
+
+0 -40 Td
+/F1 16 Tf
+(Easy Setup for Your Org) Tj
+0 -30 Td
+/F2 12 Tf
+(1. Sign up for a SoulSpark AI Partner Plan) Tj
+0 -15 Td
+(2. Invite your members via custom link or code) Tj
+0 -15 Td
+(3. Customize your experience \(branding, spiritual tone\)) Tj
+0 -15 Td
+(4. Track well-being and engagement from your dashboard) Tj
+0 -15 Td
+(5. Celebrate growth and global impact together) Tj
+
+0 -40 Td
+/F1 16 Tf
+(Real-World Impact) Tj
+0 -30 Td
+/F2 12 Tf
+(Every action your members take in SoulSpark — a prayer, check-in, or reflection — unlocks a meal for) Tj
+0 -15 Td
+(a child in need. This turns personal growth into global hope.) Tj
+
+0 -40 Td
+/F1 16 Tf
+(Ready to Partner?) Tj
+0 -30 Td
+/F2 12 Tf
+(Email partners@mysoulsparkai.com or visit our website to schedule a live demo and) Tj
+0 -15 Td
+(get started with your team today.) Tj
+ET
+endstream
+endobj
+
 xref
-0 6
+0 9
 0000000000 65535 f 
 0000000010 00000 n 
 0000000079 00000 n 
-0000000136 00000 n 
-0000000271 00000 n 
-0000000522 00000 n 
+0000000144 00000 n 
+0000000285 00000 n 
+0000000426 00000 n 
+0000000828 00000 n 
+0000000898 00000 n 
+0000000961 00000 n 
 trailer
 <<
-/Size 6
+/Size 9
 /Root 1 0 R
 >>
 startxref
-609
+2814
 %%EOF
