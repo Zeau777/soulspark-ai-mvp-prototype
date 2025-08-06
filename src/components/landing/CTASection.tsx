@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Building2, Trophy, ArrowRight, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import LeadMagnetForm from "./LeadMagnetForm";
 
 
@@ -70,24 +71,26 @@ const CTASection = () => {
       const organizationField = organizationFieldMap[type];
       const organizationName = data[organizationField] || '';
 
-      // MailChimp integration - submit to MailChimp list
-      const mailchimpData = {
-        email_address: data.email,
-        status: 'subscribed',
-        merge_fields: {
-          FNAME: data.firstName,
-          LNAME: data.lastName,
-          ORGNAME: organizationName,
-          ROLE: data.role,
-          PARTTYPE: type,
-          WANTSDEMO: data.demo === 'true' ? 'Yes' : 'No'
-        },
-        tags: [type.toLowerCase().replace(' ', '_'), 'partnership_lead']
+      // Send to MailChimp via edge function
+      const mailchimpPayload = {
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        company: organizationName,
+        phone: data.phone || '',
+        interest: type,
+        demo: data.demo || 'false'
       };
 
-      // For now, log the data that would be sent to MailChimp
-      // You'll need to set up the actual MailChimp API integration
-      console.log(`${type} lead for MailChimp:`, mailchimpData);
+      const response = await supabase.functions.invoke('submit-mailchimp-lead', {
+        body: mailchimpPayload
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+
+      console.log('Lead submitted to MailChimp successfully:', response.data);
       
       // Trigger PDF download
       const pdfMap: Record<string, string> = {
