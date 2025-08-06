@@ -87,7 +87,7 @@ const TestimonialsSection = () => {
         {/* Trust indicators */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-border/40">
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary mb-2">10K+</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary mb-2">1K+</div>
             <div className="text-sm text-muted-foreground">Souls Strengthened</div>
           </div>
           <div className="text-center">
