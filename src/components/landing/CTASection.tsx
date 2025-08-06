@@ -17,14 +17,14 @@ const CTASection = () => {
       icon: Building2,
       title: "Companies & ERGs",
       description: "Strengthen employee wellbeing with faith-centered emotional support and resilience building.",
-      cta: "Get Started",
+      cta: "Partner with Us",
       benefits: ["Slack & Teams integration", "Zoom wellness sessions", "Employee engagement tracking + custom admin dashboard"]
     },
     {
       icon: Trophy,
       title: "Sports Organizations",
       description: "Help athletes maintain mental clarity and spiritual strength alongside physical performance.",
-      cta: "Get Started",
+      cta: "Partner with Us",
       benefits: ["Slack & Teams integration", "Zoom team sessions", "Performance tracking + custom admin dashboard"]
     }
   ];
