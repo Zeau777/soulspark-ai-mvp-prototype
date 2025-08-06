@@ -91,7 +91,7 @@ const TestimonialsSection = () => {
             <div className="text-sm text-muted-foreground">Souls Strengthened</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary mb-2">50K+</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary mb-2">5K+</div>
             <div className="text-sm text-muted-foreground">Meals Donated</div>
           </div>
           <div className="text-center">
