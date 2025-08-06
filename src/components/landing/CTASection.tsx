@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { GraduationCap, Building2, Trophy, ArrowRight, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import LeadMagnetForm from "./LeadMagnetForm";
-import { supabase } from "@/integrations/supabase/client";
+
 
 const CTASection = () => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const CTASection = () => {
 
   const handleLeadMagnetSubmit = async (data: Record<string, string>, type: string) => {
     try {
-      // Map form data to database fields
+      // Map form data to MailChimp format
       const organizationFieldMap: Record<string, string> = {
         'Colleges': 'schoolName',
         'Companies': 'companyName', 
@@ -70,27 +70,45 @@ const CTASection = () => {
       const organizationField = organizationFieldMap[type];
       const organizationName = data[organizationField] || '';
 
-      // Save lead to database
-      const { error } = await supabase
-        .from('partnership_leads')
-        .insert({
-          first_name: data.firstName,
-          last_name: data.lastName,
-          email: data.email,
-          organization_name: organizationName,
-          role: data.role,
-          partnership_type: type.toLowerCase().replace(' ', '_'),
-          wants_demo: data.demo === 'true'
-        });
+      // MailChimp integration - submit to MailChimp list
+      const mailchimpData = {
+        email_address: data.email,
+        status: 'subscribed',
+        merge_fields: {
+          FNAME: data.firstName,
+          LNAME: data.lastName,
+          ORGNAME: organizationName,
+          ROLE: data.role,
+          PARTTYPE: type,
+          WANTSDEMO: data.demo === 'true' ? 'Yes' : 'No'
+        },
+        tags: [type.toLowerCase().replace(' ', '_'), 'partnership_lead']
+      };
 
-      if (error) {
-        console.error('Error saving lead:', error);
-        throw error;
+      // For now, log the data that would be sent to MailChimp
+      // You'll need to set up the actual MailChimp API integration
+      console.log(`${type} lead for MailChimp:`, mailchimpData);
+      
+      // Trigger PDF download
+      const pdfMap: Record<string, string> = {
+        'Colleges': '/partnership-guides/college-partnership-guide.pdf',
+        'Companies': '/partnership-guides/corporate-partnership-guide.pdf',
+        'Sports Teams': '/partnership-guides/sports-partnership-guide.pdf'
+      };
+      
+      const pdfUrl = pdfMap[type];
+      if (pdfUrl) {
+        // Create download link
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = `${type.toLowerCase().replace(' ', '-')}-partnership-guide.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }
 
-      console.log(`${type} lead saved successfully:`, data);
     } catch (error) {
-      console.error('Failed to save lead:', error);
+      console.error('Failed to submit lead:', error);
       throw error;
     }
   };

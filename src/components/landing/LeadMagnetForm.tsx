@@ -81,7 +81,28 @@ const LeadMagnetForm: React.FC<LeadMagnetFormProps> = ({
         <p className="text-muted-foreground mb-4">
           Check your email for the {title} Partnership Guide and next steps.
         </p>
-        <Button variant="outline" className="gap-2">
+        <Button 
+          variant="outline" 
+          className="gap-2"
+          onClick={() => {
+            // Re-trigger download in case it didn't work
+            const pdfMap: Record<string, string> = {
+              'Colleges': '/partnership-guides/college-partnership-guide.pdf',
+              'Companies': '/partnership-guides/corporate-partnership-guide.pdf',
+              'Sports Teams': '/partnership-guides/sports-partnership-guide.pdf'
+            };
+            
+            const pdfUrl = pdfMap[title];
+            if (pdfUrl) {
+              const link = document.createElement('a');
+              link.href = pdfUrl;
+              link.download = `${title.toLowerCase().replace(' ', '-')}-partnership-guide.pdf`;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }
+          }}
+        >
           <Download className="h-4 w-4" />
           Download Backup Copy
         </Button>
