@@ -3,7 +3,6 @@ import { Heart, Sparkles, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
   const navigate = useNavigate();
-  
   return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
@@ -14,7 +13,7 @@ const HeroSection = () => {
           <div className="flex justify-center items-center space-x-6 mb-8 text-sm text-muted-foreground">
             <div className="flex items-center space-x-2">
               <Users className="h-4 w-4" />
-              <span>10,000+ souls strengthened</span>
+              <span>1,000+ souls strengthened</span>
             </div>
             <div className="flex items-center space-x-2">
               <Heart className="h-4 w-4" />
