@@ -142,6 +142,45 @@ export type Database = {
         }
         Relationships: []
       }
+      partnership_leads: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          organization_name: string | null
+          partnership_type: string
+          role: string | null
+          updated_at: string
+          wants_demo: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          organization_name?: string | null
+          partnership_type: string
+          role?: string | null
+          updated_at?: string
+          wants_demo?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          organization_name?: string | null
+          partnership_type?: string
+          role?: string | null
+          updated_at?: string
+          wants_demo?: boolean | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
