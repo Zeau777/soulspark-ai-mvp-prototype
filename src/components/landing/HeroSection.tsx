@@ -42,7 +42,7 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Experience SoulSpark AI, the world's first faith-centered behavioral AI trained on Scripture, timeless wisdom, and modern psychology.</p>
+          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Experience SoulSpark AI, the world's first B2B faith-fueled wellness behavioral AI OS platform trained on Scripture, timeless wisdom, and modern psychology.</p>
           
           <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Our proprietary SoulMatch AI™ delivers personalized spiritual guidance that grows with you, like a trusted mentor who truly understands your heart, your struggles, and your walk with God.</p>
           
