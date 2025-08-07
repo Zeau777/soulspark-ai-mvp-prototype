@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
+import About from "./pages/About";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Chat from "./pages/Chat";
@@ -55,6 +56,7 @@ const App = () => (
             {/* Public routes */}
             <Route path="/" element={<PublicRoute><Index /></PublicRoute>} />
             <Route path="/auth" element={<PublicRoute><Auth /></PublicRoute>} />
+            <Route path="/about" element={<About />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             
             {/* Protected routes */}
