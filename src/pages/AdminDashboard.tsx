@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 import { 
   Users, 
   TrendingUp, 
@@ -47,6 +48,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // Content upload form state
   const [contentForm, setContentForm] = useState({
@@ -234,7 +236,7 @@ export default function AdminDashboard() {
           <CardContent>
             <Button 
               variant="outline"
-              onClick={() => window.location.href = '/dashboard'}
+              onClick={() => navigate('/dashboard')}
             >
               Back to Dashboard
             </Button>
@@ -257,13 +259,13 @@ export default function AdminDashboard() {
             <div className="flex space-x-2">
               <Button 
                 variant="outline"
-                onClick={() => window.location.href = '/analytics'}
+                onClick={() => navigate('/analytics')}
               >
                 Platform Analytics
               </Button>
               <Button 
                 variant="outline"
-                onClick={() => window.location.href = '/dashboard'}
+                onClick={() => navigate('/dashboard')}
               >
                 Back to App
               </Button>

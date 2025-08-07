@@ -6,6 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 import { 
   Flame, 
   MessageSquare, 
@@ -48,6 +49,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const { user, signOut } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -176,7 +178,7 @@ export default function Dashboard() {
             <Button 
               className="w-full" 
               variant="spiritual"
-              onClick={() => window.location.href = '/onboarding'}
+              onClick={() => navigate('/onboarding')}
             >
               Complete Setup
             </Button>
@@ -201,11 +203,11 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" onClick={() => window.location.href = '/chat'}>
+            <Button variant="ghost" size="sm" onClick={() => navigate('/chat')}>
               <MessageSquare className="h-4 w-4 mr-2" />
               Soul Coach
             </Button>
-            <Button variant="ghost" size="sm" onClick={() => window.location.href = '/profile'}>
+            <Button variant="ghost" size="sm" onClick={() => navigate('/profile')}>
               <User className="h-4 w-4 mr-2" />
               Profile
             </Button>
@@ -330,7 +332,7 @@ export default function Dashboard() {
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="shadow-spiritual cursor-pointer hover:shadow-glow transition-all" 
-                onClick={() => window.location.href = '/chat'}>
+                onClick={() => navigate('/chat')}>
             <CardHeader>
               <div className="flex items-center space-x-2">
                 <MessageSquare className="h-5 w-5 text-primary" />
@@ -378,7 +380,7 @@ export default function Dashboard() {
             variant="ghost"
             size="sm"
             className="flex flex-col items-center gap-1"
-            onClick={() => window.location.href = '/dashboard'}
+            onClick={() => navigate('/dashboard')}
           >
             <Flame className="h-5 w-5" />
             <span className="text-xs">Home</span>
@@ -387,7 +389,7 @@ export default function Dashboard() {
             variant="ghost"
             size="sm"
             className="flex flex-col items-center gap-1"
-            onClick={() => window.location.href = '/chat'}
+            onClick={() => navigate('/chat')}
           >
             <MessageSquare className="h-5 w-5" />
             <span className="text-xs">Chat</span>
@@ -396,7 +398,7 @@ export default function Dashboard() {
             variant="ghost"
             size="sm"
             className="flex flex-col items-center gap-1"
-            onClick={() => window.location.href = '/community'}
+            onClick={() => navigate('/community')}
           >
             <Users className="h-5 w-5" />
             <span className="text-xs">Community</span>
@@ -405,7 +407,7 @@ export default function Dashboard() {
             variant="ghost"
             size="sm"
             className="flex flex-col items-center gap-1"
-            onClick={() => window.location.href = '/profile'}
+            onClick={() => navigate('/profile')}
           >
             <User className="h-5 w-5" />
             <span className="text-xs">Profile</span>

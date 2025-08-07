@@ -7,6 +7,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 import { 
   Users, 
   TrendingUp, 
@@ -62,6 +63,7 @@ export default function PlatformAnalytics() {
   const [isAdmin, setIsAdmin] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -285,7 +287,7 @@ export default function PlatformAnalytics() {
           <CardContent>
             <Button 
               variant="outline"
-              onClick={() => window.location.href = '/dashboard'}
+              onClick={() => navigate('/dashboard')}
             >
               Back to Dashboard
             </Button>
@@ -323,13 +325,13 @@ export default function PlatformAnalytics() {
             <div className="flex space-x-2">
               <Button 
                 variant="outline"
-                onClick={() => window.location.href = '/admin'}
+                onClick={() => navigate('/admin')}
               >
                 Org Dashboard
               </Button>
               <Button 
                 variant="outline"
-                onClick={() => window.location.href = '/dashboard'}
+                onClick={() => navigate('/dashboard')}
               >
                 Back to App
               </Button>
