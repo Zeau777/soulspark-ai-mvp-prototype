@@ -1,6 +1,8 @@
 import { Users, Target, Eye, BookOpen, Heart } from "lucide-react";
+
 const About = () => {
-  return <div className="min-h-screen bg-background">
+  return (
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
@@ -8,9 +10,7 @@ const About = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             About <span className="text-gradient">SoulSpark AI</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">SoulSpark AI is an AI-powered soul-care platform making it easy and personal for Gen Z and Millennials to access faith-centered, emotionally intelligent support for their mental, emotional, and spiritual wellbeing.
-Through partnerships with B2B organizations like employee resource groups, colleges, and professional sports teams — and a fast-growing direct-to-user platform — SoulSpark is closing the spiritual and emotional care gap for the next generation.
-It’s one of the biggest overlooked opportunities in faithtech and mental wellness — and every user engagement fuels real-world impact, like feeding a child in need.</p>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">SoulSpark AI is an AI-powered soul-care platform that makes it easy and personal for Gen Z and Millennials to access faith-centered, emotionally intelligent support for their mental, emotional, and spiritual wellbeing. It partners with B2B organizations such as employee resource groups, colleges, and professional sports teams, while also growing rapidly as a direct-to-user platform. SoulSpark is closing the spiritual and emotional care gap for the next generation. This is one of the most overlooked opportunities in faithtech and mental wellness, and every user engagement fuels real-world impact by helping feed a child in need.</p>
         </div>
       </section>
 
@@ -64,6 +64,8 @@ It’s one of the biggest overlooked opportunities in faithtech and mental welln
           </p>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
+
 export default About;
