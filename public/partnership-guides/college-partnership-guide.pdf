@@ -9,8 +9,8 @@ endobj
 2 0 obj
 <<
 /Type /Pages
-/Kids [3 0 R 4 0 R]
-/Count 2
+/Kids [3 0 R 4 0 R 5 0 R]
+/Count 3
 >>
 endobj
 
@@ -19,11 +19,11 @@ endobj
 /Type /Page
 /Parent 2 0 R
 /MediaBox [0 0 612 792]
-/Contents 5 0 R
+/Contents 6 0 R
 /Resources <<
 /Font <<
-/F1 6 0 R
-/F2 7 0 R
+/F1 7 0 R
+/F2 8 0 R
 >>
 >>
 >>
@@ -34,11 +34,11 @@ endobj
 /Type /Page
 /Parent 2 0 R
 /MediaBox [0 0 612 792]
-/Contents 8 0 R
+/Contents 9 0 R
 /Resources <<
 /Font <<
-/F1 6 0 R
-/F2 7 0 R
+/F1 7 0 R
+/F2 8 0 R
 >>
 >>
 >>
@@ -46,29 +46,42 @@ endobj
 
 5 0 obj
 <<
-/Length 350
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 10 0 R
+/Resources <<
+/Font <<
+/F1 7 0 R
+/F2 8 0 R
+>>
+>>
+>>
+endobj
+
+6 0 obj
+<<
+/Length 400
 >>
 stream
 BT
-/F1 28 Tf
-306 650 Td
--150 0 Td
-(SoulSpark AI) Tj
-0 -40 Td
-/F1 20 Tf
--50 0 Td
-(Colleges Partnership Guide) Tj
-0 -100 Td
+/F1 24 Tf
+306 720 Td
+-120 0 Td
+(SoulSpark AI Partnership Guide) Tj
+0 -30 Td
+/F1 18 Tf
+-80 0 Td
+(Colleges & Universities) Tj
+0 -60 Td
 /F2 14 Tf
 -100 0 Td
-(Helping the next generation grow spiritually, emotionally, and) Tj
-0 -20 Td
-(socially—one soul at a time.) Tj
+(Empowering the Next Generation — One Soul at a Time) Tj
 ET
 endstream
 endobj
 
-6 0 obj
+7 0 obj
 <<
 /Type /Font
 /Subtype /Type1
@@ -76,7 +89,7 @@ endobj
 >>
 endobj
 
-7 0 obj
+8 0 obj
 <<
 /Type /Font
 /Subtype /Type1
@@ -84,105 +97,157 @@ endobj
 >>
 endobj
 
-8 0 obj
+9 0 obj
 <<
-/Length 1800
+/Length 2400
 >>
 stream
 BT
 /F1 16 Tf
 50 750 Td
 (About SoulSpark AI) Tj
-0 -30 Td
-/F2 12 Tf
-(SoulSpark AI is the first AI-powered soul-care platform built to help Gen Z and Millennials build) Tj
-0 -15 Td
-(emotional resilience, grow spiritually, and reconnect with their God-given identity — in just 1–3 minutes) Tj
-0 -15 Td
-(a day. Designed for modern organizations, SoulSpark uses personalized AI, spiritual wellness, and) Tj
-0 -15 Td
-(real-world impact to care for your people and communities.) Tj
+0 -25 Td
+/F2 11 Tf
+(SoulSpark AI is an AI-powered soul-care platform making it easy and personal for Gen Z and) Tj
+0 -12 Td
+(Millennials to access faith-centered, emotionally intelligent support for their mental, emotional,) Tj
+0 -12 Td
+(and spiritual wellbeing. Through partnerships with B2B organizations like employee resource) Tj
+0 -12 Td
+(groups, colleges, and professional sports teams, SoulSpark is closing the spiritual and) Tj
+0 -12 Td
+(emotional care gap for the next generation.) Tj
 
-0 -40 Td
+0 -30 Td
 /F1 16 Tf
-(Why Colleges & Universities Partner with SoulSpark AI) Tj
-0 -30 Td
-/F2 12 Tf
-(• Support students' emotional and spiritual health) Tj
-0 -15 Td
-(• Offer digital discipleship tools for ministries and chaplains) Tj
-0 -15 Td
-(• Gain insights on spiritual engagement and burnout trends) Tj
-0 -15 Td
-(• Improve student belonging and campus community life) Tj
+(Colleges & Universities) Tj
+0 -25 Td
+/F2 11 Tf
+(• Christian colleges and faith-affiliated institutions) Tj
+0 -12 Td
+(• Campus ministries and student life departments) Tj
+0 -12 Td
+(• Chaplaincy programs seeking digital discipleship tools) Tj
 
-0 -40 Td
+0 -25 Td
+/F1 14 Tf
+(You get:) Tj
+0 -20 Td
+/F2 11 Tf
+(✓ A scalable spiritual care tool for students) Tj
+0 -12 Td
+(✓ Emotional and faith-based support during critical years) Tj
+0 -12 Td
+(✓ Pulse tracking + admin insights to improve student well-being) Tj
+0 -12 Td
+(✓ Easy integration into LMS or student portals) Tj
+
+0 -30 Td
+/F1 16 Tf
+(What Makes SoulSpark AI Different?) Tj
+0 -25 Td
+/F2 11 Tf
+(• AI Soul-Care Coach: 24/7 personalized emotional + spiritual support) Tj
+0 -12 Td
+(• Daily SoulDrops: Bite-sized, uplifting reflections in 1 min a day) Tj
+0 -12 Td
+(• Pulse + Burnout Detection: Real-time mood and engagement trends) Tj
+0 -12 Td
+(• Faith-In-Action Engine: Every user action = 1 meal donated to a hungry child) Tj
+0 -12 Td
+(• Org Admin Dashboard: Monitor team well-being, usage, and impact) Tj
+
+0 -30 Td
 /F1 16 Tf
 (Partnership Benefits) Tj
-0 -30 Td
-/F2 12 Tf
-(✓ Boosts belonging and spiritual wellness) Tj
+0 -25 Td
+/F2 11 Tf
+(✓ Boost Belonging: Strengthens identity, purpose, and community) Tj
+0 -12 Td
+(✓ Improve Retention: Emotionally grounded users stay engaged) Tj
+0 -12 Td
+(✓ Drive Daily Engagement: Simple rituals build strong habits) Tj
+0 -12 Td
+(✓ Real-Time Insights: Spot burnout and spiritual drift early) Tj
+0 -12 Td
+(✓ Social Impact: Make a global difference through local soul-care) Tj
+ET
+endstream
+endobj
+
+10 0 obj
+<<
+/Length 1200
+>>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(Easy Setup for Your Organization) Tj
+0 -25 Td
+/F2 11 Tf
+(1. Sign up for a SoulSpark Partnership Plan) Tj
 0 -15 Td
-(✓ Improves retention and resilience) Tj
+(2. Invite your students, staff, or athletes via link or Slack/Teams) Tj
 0 -15 Td
-(✓ Daily engagement in under 3 minutes) Tj
+(3. Customize your experience \(branding, spiritual tone, group names\)) Tj
 0 -15 Td
-(✓ Real-time emotional and spiritual trends) Tj
+(4. Track results + real-world impact from your org dashboard) Tj
 0 -15 Td
-(✓ Create tangible impact—meals donated for every action) Tj
+(5. Celebrate growth + meals donated as your community engages!) Tj
 
 0 -40 Td
 /F1 16 Tf
-(Easy Setup for Your Org) Tj
-0 -30 Td
-/F2 12 Tf
-(1. Sign up for a SoulSpark AI Partner Plan) Tj
+(Partnership Options) Tj
+0 -25 Td
+/F2 11 Tf
+(Starter: Small teams - 25 seats, basic dashboard, shared support) Tj
 0 -15 Td
-(2. Invite your members via custom link or code) Tj
+(Growth: Mid-size orgs - 100–500 seats, full dashboard, custom branding) Tj
 0 -15 Td
-(3. Customize your experience \(branding, spiritual tone\)) Tj
-0 -15 Td
-(4. Track well-being and engagement from your dashboard) Tj
-0 -15 Td
-(5. Celebrate growth and global impact together) Tj
+(Enterprise: Large orgs/institutions - Unlimited seats, API integration, white-label) Tj
 
 0 -40 Td
 /F1 16 Tf
-(Real-World Impact) Tj
-0 -30 Td
-/F2 12 Tf
-(Every action your members take in SoulSpark — a prayer, check-in, or reflection — unlocks a meal for) Tj
-0 -15 Td
-(a child in need. This turns personal growth into global hope.) Tj
+(Let's Spark a Soul-Care Movement Together) Tj
+0 -25 Td
+/F2 11 Tf
+(We believe that faith, mental health, and purpose must go hand in hand — and that your) Tj
+0 -12 Td
+(community deserves tools built for today's challenges. Let's work together to spark spiritual) Tj
+0 -12 Td
+(growth, fight burnout, and feed the world — one soul at a time.) Tj
 
 0 -40 Td
 /F1 16 Tf
 (Ready to Partner?) Tj
-0 -30 Td
-/F2 12 Tf
-(Email partners@mysoulsparkai.com or visit our website to schedule a live demo and) Tj
-0 -15 Td
-(get started with your team today.) Tj
+0 -25 Td
+/F2 11 Tf
+(Email partners@mysoulsparkai.com or visit our website to request a live demo and) Tj
+0 -12 Td
+(get started with your team today. We'd love to co-create something meaningful with you.) Tj
 ET
 endstream
 endobj
 
 xref
-0 9
+0 11
 0000000000 65535 f 
 0000000010 00000 n 
 0000000079 00000 n 
-0000000144 00000 n 
-0000000285 00000 n 
-0000000426 00000 n 
-0000000828 00000 n 
-0000000898 00000 n 
-0000000961 00000 n 
+0000000153 00000 n 
+0000000300 00000 n 
+0000000447 00000 n 
+0000000594 00000 n 
+0000001046 00000 n 
+0000001116 00000 n 
+0000001179 00000 n 
+0000003632 00000 n 
 trailer
 <<
-/Size 9
+/Size 11
 /Root 1 0 R
 >>
 startxref
-2814
+4885
 %%EOF
