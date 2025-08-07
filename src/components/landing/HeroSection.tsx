@@ -38,6 +38,13 @@ const HeroSection = () => {
             Designed for a Purpose-Driven Generation
           </p>
 
+          {/* CTA Button - Moved up for mobile visibility */}
+          <div className="flex justify-center mb-8">
+            <Button variant="spiritual" size="lg" className="text-lg px-8 py-4 min-w-[200px]" onClick={() => navigate('/auth')}>
+              Start Your Journey
+            </Button>
+          </div>
+
           <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Experience SoulSpark AI, the world's first faith-centered behavioral AI trained on Scripture, timeless wisdom, and modern psychology.</p>
           
           <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Our proprietary SoulMatch AI™ delivers personalized spiritual guidance that grows with you, like a trusted mentor who truly understands your heart, your struggles, and your walk with God.</p>
@@ -54,12 +61,6 @@ const HeroSection = () => {
             </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button variant="spiritual" size="lg" className="text-lg px-8 py-4 min-w-[200px]" onClick={() => navigate('/auth')}>
-              Start Your Journey
-            </Button>
-          </div>
 
           {/* Proprietary Edge Features */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
