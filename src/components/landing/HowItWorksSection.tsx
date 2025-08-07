@@ -1,6 +1,9 @@
 import { UserPlus, Brain, Heart, Activity, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const HowItWorksSection = () => {
+  const navigate = useNavigate();
   const steps = [
     {
       icon: UserPlus,
@@ -76,6 +79,13 @@ const HowItWorksSection = () => {
               )}
             </div>
           ))}
+        </div>
+
+        {/* CTA Button */}
+        <div className="flex justify-center mt-16">
+          <Button variant="spiritual" size="lg" className="text-lg px-8 py-4 min-w-[200px]" onClick={() => navigate('/auth')}>
+            Start Your Journey Today
+          </Button>
         </div>
 
       </div>
