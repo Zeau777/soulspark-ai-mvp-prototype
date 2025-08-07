@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Sparkles, Users, Brain, Shield, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 const HeroSection = () => {
   const navigate = useNavigate();
-
-  return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
       
@@ -97,36 +94,34 @@ const HeroSection = () => {
                 <Heart className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Faith-Centered Behavioral AI</h4>
-                  <p className="text-sm text-muted-foreground">Trained on Scripture, ancient wisdom, and psychological frameworks</p>
+                  <p className="text-sm text-muted-foreground">Trained on Scripture, ancient wisdom, and psychological frameworks.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <Users className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Social Impact Engine</h4>
-                  <p className="text-sm text-muted-foreground">Every user action creates real-world impact (like TOMS for soul care)</p>
+                  <p className="text-sm text-muted-foreground">Every user action creates real-world impact (like TOMS for soul care).</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <Sparkles className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Hyper-Personalization Engine</h4>
-                  <p className="text-sm text-muted-foreground">Adjusts tone, depth, and doctrine-level per user/org preference</p>
+                  <p className="text-sm text-muted-foreground">Adjusts tone, depth, and doctrine-level per user/org preference.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <Brain className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Dynamic Persona-Shaping AI</h4>
-                  <p className="text-sm text-muted-foreground">Personal AI soul coach that evolves with your spiritual journey</p>
+                  <p className="text-sm text-muted-foreground">Personal AI soul-care coach that evolves with your spiritual journey.</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
