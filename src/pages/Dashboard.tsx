@@ -15,7 +15,8 @@ import {
   Star,
   Gift,
   TrendingUp,
-  User
+  User,
+  Users
 } from 'lucide-react';
 
 interface Profile {
@@ -51,6 +52,11 @@ export default function Dashboard() {
   useEffect(() => {
     if (user) {
       fetchDashboardData();
+      
+      // Request notification permission on dashboard load
+      if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
     }
   }, [user]);
 
@@ -365,25 +371,47 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t">
-        <div className="flex justify-around py-3">
-          <Button variant="ghost" size="sm" className="flex flex-col space-y-1">
+      {/* Fixed bottom navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4">
+        <div className="flex justify-around items-center max-w-md mx-auto">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center gap-1"
+            onClick={() => window.location.href = '/dashboard'}
+          >
             <Flame className="h-5 w-5" />
             <span className="text-xs">Home</span>
           </Button>
-          <Button variant="ghost" size="sm" className="flex flex-col space-y-1"
-                  onClick={() => window.location.href = '/chat'}>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center gap-1"
+            onClick={() => window.location.href = '/chat'}
+          >
             <MessageSquare className="h-5 w-5" />
             <span className="text-xs">Chat</span>
           </Button>
-          <Button variant="ghost" size="sm" className="flex flex-col space-y-1"
-                  onClick={() => window.location.href = '/profile'}>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center gap-1"
+            onClick={() => window.location.href = '/community'}
+          >
+            <Users className="h-5 w-5" />
+            <span className="text-xs">Community</span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center gap-1"
+            onClick={() => window.location.href = '/profile'}
+          >
             <User className="h-5 w-5" />
             <span className="text-xs">Profile</span>
           </Button>
         </div>
-      </nav>
+      </div>
     </div>
   );
 }
