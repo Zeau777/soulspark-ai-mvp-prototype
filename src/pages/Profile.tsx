@@ -6,6 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
+import NotificationSettings from '@/components/NotificationSettings';
 import { 
   ArrowLeft, 
   User, 
@@ -399,6 +400,9 @@ export default function Profile() {
           </TabsContent>
 
           <TabsContent value="settings" className="space-y-6">
+            {/* Notification Settings */}
+            <NotificationSettings />
+
             <Card className="shadow-spiritual">
               <CardHeader>
                 <div className="flex items-center space-x-2">
@@ -423,9 +427,6 @@ export default function Profile() {
                 <div className="space-y-2">
                   <Button variant="outline" className="w-full">
                     Edit Profile
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Notification Preferences
                   </Button>
                   <Button variant="outline" className="w-full">
                     Retake SoulScan Quiz

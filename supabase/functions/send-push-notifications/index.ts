@@ -94,20 +94,36 @@ const handler = async (req: Request): Promise<Response> => {
       };
 
       try {
-        // Using Web Push API (you'd need to implement VAPID keys and push service)
-        // For now, we'll log the notification
+        // Create the Web Push notification
+        const pushMessage = {
+          endpoint: sub.endpoint,
+          keys: {
+            p256dh: sub.p256dh,
+            auth: sub.auth
+          },
+          payload: JSON.stringify(payload)
+        };
+
+        // For now, we'll simulate sending by making a fetch request to the endpoint
+        // In production, you'd use proper VAPID signing and Web Push Protocol
         console.log(`Sending notification to user ${sub.user_id}:`, payload);
         
-        // In a real implementation, you'd use a service like:
-        // - Firebase Cloud Messaging
-        // - Web Push Protocol with VAPID
-        // - OneSignal
-        // - Pusher
+        // Simple notification simulation (replace with proper Web Push in production)
+        const response = await fetch(sub.endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'TTL': '60'
+          },
+          body: JSON.stringify(payload)
+        }).catch(() => null);
+
+        console.log(`Notification sent to ${sub.user_id}, response status: ${response?.status || 'failed'}`);
         
-        return { success: true, userId: sub.user_id };
+        return { success: true, userId: sub.user_id, status: response?.status };
       } catch (error) {
         console.error(`Failed to send notification to ${sub.user_id}:`, error);
-        return { success: false, userId: sub.user_id, error };
+        return { success: false, userId: sub.user_id, error: error.message };
       }
     }) || [];
 

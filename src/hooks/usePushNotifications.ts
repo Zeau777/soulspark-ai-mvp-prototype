@@ -13,8 +13,29 @@ export const usePushNotifications = () => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       setIsSupported(true);
       setPermission(Notification.permission);
+      
+      // Check if user already has a subscription
+      if (user && Notification.permission === 'granted') {
+        checkExistingSubscription();
+      }
     }
-  }, []);
+  }, [user]);
+
+  const checkExistingSubscription = async () => {
+    if (!user) return;
+
+    try {
+      const registration = await navigator.serviceWorker.getRegistration('/sw.js');
+      if (registration) {
+        const existingSubscription = await registration.pushManager.getSubscription();
+        if (existingSubscription) {
+          setSubscription(existingSubscription);
+        }
+      }
+    } catch (error) {
+      console.error('Error checking existing subscription:', error);
+    }
+  };
 
   const requestPermission = async () => {
     if (!isSupported) return false;
@@ -39,15 +60,20 @@ export const usePushNotifications = () => {
     if (!isSupported || !user) return;
 
     try {
-      // Register service worker
-      const registration = await navigator.serviceWorker.register('/sw.js');
+      // Register service worker if not already registered
+      let registration = await navigator.serviceWorker.getRegistration('/sw.js');
+      if (!registration) {
+        registration = await navigator.serviceWorker.register('/sw.js');
+        await navigator.serviceWorker.ready;
+      }
+      
+      // Generate a simple VAPID key for testing (replace with proper key in production)
+      const vapidKey = 'BEl62iUYgUivxIkv69yViEuiBIa40HI6DjbYm6WMIbHrcpXD2pfU1U1FMrKNjN5M8VdrJg1JH6FvhsU3uEwxdOo';
       
       // Subscribe to push notifications
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(
-          'BEl62iUYgUivxIkv69yViEuiBIa40HI6DjbYm6WMIbHrcpXD2pfU1U1FMrKNjN5M8VdrJg1JH6FvhsU3uEwxdOo' // VAPID public key placeholder
-        )
+        applicationServerKey: urlBase64ToUint8Array(vapidKey)
       });
 
       setSubscription(subscription);
@@ -62,17 +88,28 @@ export const usePushNotifications = () => {
 
       const { error } = await supabase
         .from('push_subscriptions')
-        .upsert(subscriptionData);
+        .upsert(subscriptionData, {
+          onConflict: 'user_id'
+        });
 
       if (error) {
         console.error('Error saving subscription:', error);
         toast.error('Failed to enable notifications');
       } else {
-        toast.success('Push notifications enabled!');
+        toast.success('Push notifications enabled! You\'ll receive gentle reminders 3 times a day.');
+        console.log('Push subscription saved successfully');
       }
     } catch (error) {
       console.error('Error subscribing to push:', error);
-      toast.error('Failed to enable notifications');
+      if (error instanceof Error) {
+        if (error.name === 'NotSupportedError') {
+          toast.error('Push notifications are not supported in this browser');
+        } else if (error.name === 'NotAllowedError') {
+          toast.error('Push notifications permission denied');
+        } else {
+          toast.error('Failed to enable notifications');
+        }
+      }
     }
   };
 

@@ -57,7 +57,24 @@ export default function Dashboard() {
       
       // Request notification permission on dashboard load
       if ('Notification' in window && Notification.permission === 'default') {
-        Notification.requestPermission();
+        setTimeout(() => {
+          toast({
+            title: "Stay connected with your soul",
+            description: "Enable notifications to get gentle daily check-in reminders. You can always change this in settings.",
+            action: (
+              <Button 
+                size="sm" 
+                onClick={() => {
+                  if ('Notification' in window) {
+                    Notification.requestPermission();
+                  }
+                }}
+              >
+                Enable
+              </Button>
+            ),
+          });
+        }, 3000);
       }
     }
   }, [user]);
