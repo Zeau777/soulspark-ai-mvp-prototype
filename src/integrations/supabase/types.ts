@@ -661,6 +661,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      cleanup_push_subscriptions: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       get_daily_soul_drop: {
         Args: { p_user_id: string }
         Returns: {
@@ -669,6 +673,10 @@ export type Database = {
           content: string
           content_type: Database["public"]["Enums"]["content_type"]
         }[]
+      }
+      test_user_notification: {
+        Args: { p_user_id: string }
+        Returns: undefined
       }
       update_user_engagement: {
         Args: { p_user_id: string; p_action_type: string; p_xp_earned?: number }
