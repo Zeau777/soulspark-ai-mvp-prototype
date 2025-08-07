@@ -46,10 +46,6 @@ const HeroSection = () => {
           
           <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Our proprietary SoulMatch AI™ delivers personalized spiritual guidance that grows with you, like a trusted mentor who truly understands your heart, your struggles, and your walk with God.</p>
           
-          <div className="bg-accent/10 border border-accent/20 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
-            <h3 className="text-lg font-semibold text-foreground mb-3">Why Gen Z wants this:</h3>
-            <p className="text-muted-foreground">They are not just seeking answers. They want faith-filled emotional support that meets them where they are and helps them grow spiritually, mentally, and emotionally without judgment or clichés.</p>
-          </div>
 
           {/* Guarantee Statement */}
           <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
