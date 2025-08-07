@@ -118,8 +118,8 @@ export default function Chat() {
           messages: [...currentConversation.messages, newUserMessage]
         });
 
-        // Generate AI response (simple pre-scripted for now)
-        const aiResponse = generateAIResponse(userMessage);
+        // Generate AI response using OpenAI
+        const aiResponse = await generateAIResponse(userMessage);
 
         // Add AI response
         const { data: aiMessageData } = await supabase
@@ -160,81 +160,49 @@ export default function Chat() {
     }
   };
 
-  const generateAIResponse = (userMessage: string): string => {
-    const lowerMessage = userMessage.toLowerCase();
-    
-    // Emotional support keywords
-    if (lowerMessage.includes('anxious') || lowerMessage.includes('worry') || lowerMessage.includes('stress') || lowerMessage.includes('nervous') || lowerMessage.includes('panic')) {
-      return "I hear you, and I want you to know that your feelings are valid. When anxiety visits, remember that you are not alone. Take three deep breaths with me: breathe in peace, hold it, and release the worry. God sees you in this moment and loves you completely. Would you like to try a short breathing exercise together, or would you prefer to talk more about what's on your heart?";
+  const generateAIResponse = async (userMessage: string): Promise<string> => {
+    try {
+      // Get user profile for context
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', user?.id)
+        .single();
+
+      // Get recent messages for context
+      const recentMessages = currentConversation?.messages.slice(-6) || [];
+      
+      const userContext = {
+        recentMessages: recentMessages.map(msg => ({
+          content: msg.content,
+          is_ai: msg.is_ai_response
+        })),
+        userProfile: profile ? {
+          displayName: profile.display_name,
+          currentStreak: profile.current_streak,
+          totalXp: profile.total_xp
+        } : null
+      };
+
+      const { data, error } = await supabase.functions.invoke('soul-care-chat', {
+        body: {
+          message: userMessage,
+          userContext
+        }
+      });
+
+      if (error) {
+        console.error('Error calling soul-care-chat function:', error);
+        throw error;
+      }
+
+      return data.response;
+    } catch (error) {
+      console.error('Error generating AI response:', error);
+      
+      // Fallback to compassionate default response
+      return "I'm here for you, though I'm having trouble connecting right now. Your feelings are valid and you're not alone. Take a deep breath and know that this moment will pass. Is there something specific I can help you process?";
     }
-    
-    if (lowerMessage.includes('lost') || lowerMessage.includes('direction') || lowerMessage.includes('purpose') || lowerMessage.includes('confused') || lowerMessage.includes('uncertain')) {
-      return "Feeling lost is part of the human journey, and it takes courage to acknowledge it. You are exactly where you need to be, even if the path ahead seems unclear. Sometimes God uses these seasons of uncertainty to prepare us for something beautiful. Your worth isn't defined by having all the answers. Would you like to explore what gives you hope, or shall we pray together for clarity?";
-    }
-    
-    if (lowerMessage.includes('tired') || lowerMessage.includes('exhausted') || lowerMessage.includes('energy') || lowerMessage.includes('weary') || lowerMessage.includes('drained')) {
-      return "Rest is not a luxury; it's a necessity for your soul. Even Jesus withdrew to quiet places to restore His spirit. Your exhaustion is real, and it's okay to acknowledge your limits. Consider this an invitation to be gentle with yourself today. What would it look like to give yourself permission to rest? Sometimes the most spiritual thing we can do is simply pause and receive love.";
-    }
-    
-    if (lowerMessage.includes('grateful') || lowerMessage.includes('thankful') || lowerMessage.includes('blessing') || lowerMessage.includes('appreciate') || lowerMessage.includes('blessed')) {
-      return "What a beautiful heart you have! Gratitude is like sunlight for the soul - it illuminates the goodness that's already present. Your thankfulness is a prayer in itself, and it blesses not just you but everyone around you. This grateful spirit you're cultivating is a gift that keeps giving. What specific moment today filled your heart with this gratitude?";
-    }
-    
-    if (lowerMessage.includes('pray') || lowerMessage.includes('prayer') || lowerMessage.includes('praying')) {
-      return "Prayer is simply having a conversation with Love itself. There's no wrong way to pray - whether it's words, silence, tears, or even doubts. Your heart is heard before you even speak. Would you like to share what's on your heart, or shall we sit in quiet prayer together? Remember, sometimes the most powerful prayers are the ones where we simply show up as we are.";
-    }
-    
-    // Sadness and grief
-    if (lowerMessage.includes('sad') || lowerMessage.includes('depressed') || lowerMessage.includes('grief') || lowerMessage.includes('mourning') || lowerMessage.includes('hurt')) {
-      return "Your pain is real and your heart matters. It's okay to sit with sadness - it doesn't mean you lack faith, it means you're human. Even Jesus wept. Allow yourself to feel what you're feeling while knowing that this season, though difficult, will not last forever. You are held in love even in your darkest moments. What would bring you the smallest bit of comfort right now?";
-    }
-    
-    // Anger and frustration
-    if (lowerMessage.includes('angry') || lowerMessage.includes('frustrated') || lowerMessage.includes('mad') || lowerMessage.includes('upset') || lowerMessage.includes('irritated')) {
-      return "Your anger tells me something important is happening in your heart. Anger often masks other feelings like hurt, fear, or feeling unheard. It's okay to feel this way - even righteous anger exists. Let's breathe together and see what's underneath this feeling. What has stirred your heart so deeply? Your emotions are welcome here, and so are you.";
-    }
-    
-    // Fear and doubt
-    if (lowerMessage.includes('afraid') || lowerMessage.includes('scared') || lowerMessage.includes('fear') || lowerMessage.includes('doubt') || lowerMessage.includes('worried')) {
-      return "Fear whispers lies, but love speaks truth. What you're feeling is understandable - uncertainty can be frightening. But remember, courage isn't the absence of fear; it's moving forward despite it. You don't have to see the whole staircase to take the next step. What small step of faith feels possible today? I'm here to walk with you.";
-    }
-    
-    // Hope and encouragement
-    if (lowerMessage.includes('hope') || lowerMessage.includes('encourage') || lowerMessage.includes('strength') || lowerMessage.includes('motivation') || lowerMessage.includes('inspire')) {
-      return "Hope is like a sunrise - even in our darkest nights, it promises a new day. Your desire for hope tells me your spirit is alive and reaching for light. That reaching itself is beautiful. Sometimes hope starts small, like a mustard seed, but it grows. What tiny seed of hope can you plant in your heart today? Let's nurture it together.";
-    }
-    
-    // Relationships
-    if (lowerMessage.includes('relationship') || lowerMessage.includes('marriage') || lowerMessage.includes('family') || lowerMessage.includes('friend') || lowerMessage.includes('conflict')) {
-      return "Relationships are where our hearts learn to love and be loved. They can be our greatest joys and our deepest challenges. Every relationship is an opportunity to practice grace, forgiveness, and understanding. What's stirring in your heart about your relationships? Sometimes the most healing thing we can do is simply be heard and understood.";
-    }
-    
-    // Forgiveness
-    if (lowerMessage.includes('forgive') || lowerMessage.includes('forgiveness') || lowerMessage.includes('guilt') || lowerMessage.includes('shame') || lowerMessage.includes('sorry')) {
-      return "Forgiveness is one of the most powerful gifts we can give ourselves and others. It doesn't excuse what happened, but it frees your heart from carrying that weight. Whether you need to forgive yourself or someone else, remember that forgiveness is a journey, not a destination. Grace covers what guilt cannot fix. What would it feel like to release this burden?";
-    }
-    
-    // Faith and spiritual questions
-    if (lowerMessage.includes('faith') || lowerMessage.includes('god') || lowerMessage.includes('jesus') || lowerMessage.includes('believe') || lowerMessage.includes('spiritual')) {
-      return "Your spiritual journey is uniquely yours, and every question, doubt, and wonder is part of that sacred path. Faith isn't about having all the answers - it's about staying open to love, mystery, and growth. God meets us exactly where we are, not where we think we should be. What's stirring in your heart about faith today?";
-    }
-    
-    // Greetings and general conversation
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey') || lowerMessage.includes('good morning') || lowerMessage.includes('good evening')) {
-      return "Hello, beautiful soul! I'm so glad you're here. This is a safe space where your heart can be heard and your spirit can find rest. What's on your heart today? Whether it's joy to celebrate or burdens to share, I'm here to listen with love and walk alongside you.";
-    }
-    
-    // Default responses array for variety
-    const defaultResponses = [
-      "Thank you for sharing with me. Your words matter, and so do you. I'm here to listen and walk alongside you in whatever you're experiencing. What would be most helpful for you right now?",
-      "I can sense there's something meaningful you want to express. Every soul journey has its unique path, and yours matters deeply. How are you feeling in this moment?",
-      "Your heart is welcome here, just as it is. Sometimes the most powerful conversations begin with simply being present together. What's stirring within you today?",
-      "I'm honored that you've chosen to share this space with me. Whatever you're experiencing - joy, struggle, questions, or peace - it all has a place here. What feels most important to talk about?",
-      "There's something beautiful about this moment of connection. Your thoughts and feelings are important, and I'm here to truly listen. What would you like to explore together?"
-    ];
-    
-    // Return a random default response for variety
-    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
   };
 
   const quickResponses = [
