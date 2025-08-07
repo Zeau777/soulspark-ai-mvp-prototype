@@ -28,11 +28,15 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <h1 className="text-4xl font-bold text-foreground mb-6 leading-tight lg:text-5xl md:text-5xl">
+          <h1 className="text-4xl font-bold text-foreground mb-4 leading-tight lg:text-5xl md:text-5xl">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">SoulMatch AI™ Powered</span>
             <br />
             <span className="text-foreground">Faith-Centered Soul Care.</span>
           </h1>
+
+          <p className="text-lg font-medium text-primary mb-6">
+            Designed for a Purpose-Driven Generation
+          </p>
 
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed md:text-lg">Experience the world's first faith-centered behavioral AI trained on Scripture, ancient wisdom, and psychological frameworks. Our proprietary SoulMatch AI™ creates hyper-personalized spiritual guidance that evolves with you—like having a personal spiritual director who knows your heart, mind, and faith journey.</p>
 
