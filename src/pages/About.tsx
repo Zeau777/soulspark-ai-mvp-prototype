@@ -8,9 +8,9 @@ const About = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             About <span className="text-gradient">SoulSpark AI</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            SoulSpark AI exists to ignite a global movement of emotionally resilient, purpose-driven young people by pioneering AI-powered, faith-centered soul care.
-          </p>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">SoulSpark AI is an AI-powered soul-care platform making it easy and personal for Gen Z and Millennials to access faith-centered, emotionally intelligent support for their mental, emotional, and spiritual wellbeing.
+Through partnerships with B2B organizations like employee resource groups, colleges, and professional sports teams — and a fast-growing direct-to-user platform — SoulSpark is closing the spiritual and emotional care gap for the next generation.
+It’s one of the biggest overlooked opportunities in faithtech and mental wellness — and every user engagement fuels real-world impact, like feeding a child in need.</p>
         </div>
       </section>
 
@@ -21,9 +21,7 @@ const About = () => {
             <Target className="h-8 w-8 text-primary" />
             <h2 className="text-3xl font-bold">Our Mission</h2>
           </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Our mission is to help Gen Z and Millennials heal emotionally, grow spiritually, and reconnect with their God-given identity — one soul, one spark, and one meal at a time.
-          </p>
+          <p className="text-lg text-muted-foreground leading-relaxed">SoulSpark AI exists to ignite a global movement of emotionally resilient, purpose-driven young people by pioneering AI-powered, faith-centered soul care.</p>
         </div>
       </section>
 
