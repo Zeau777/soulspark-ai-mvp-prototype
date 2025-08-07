@@ -254,12 +254,20 @@ export default function AdminDashboard() {
               <h1 className="text-2xl font-bold">Admin Dashboard</h1>
               <p className="text-muted-foreground">{organization?.name}</p>
             </div>
-            <Button 
-              variant="outline"
-              onClick={() => window.location.href = '/dashboard'}
-            >
-              Back to App
-            </Button>
+            <div className="flex space-x-2">
+              <Button 
+                variant="outline"
+                onClick={() => window.location.href = '/analytics'}
+              >
+                Platform Analytics
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={() => window.location.href = '/dashboard'}
+              >
+                Back to App
+              </Button>
+            </div>
           </div>
         </div>
       </header>
