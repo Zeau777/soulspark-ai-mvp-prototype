@@ -5,8 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useToast } from "@/components/ui/use-toast";
-import { Heart, Sparkles, Loader2 } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useToast } from "@/hooks/use-toast";
+import { Heart, Sparkles, Loader2, Twitter, Instagram, Youtube, Share2, Tiktok } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 // Types
@@ -25,6 +26,7 @@ export default function ForYou() {
   const [page, setPage] = useState(0);
   const [drops, setDrops] = useState<RankedDrop[]>([]);
   const [hasMore, setHasMore] = useState(true);
+  const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
 
   const [profile, setProfile] = useState<Tables<'profiles'> | null>(null);
   const [soulProfile, setSoulProfile] = useState<Tables<'soul_profiles'> | null>(null);
@@ -127,6 +129,26 @@ export default function ForYou() {
     };
   }, [profile, soulProfile]);
 
+  const refreshLikesFor = async (ids: string[], reset = false) => {
+    if (!user || ids.length === 0) return;
+    const { data, error } = await supabase
+      .from('user_engagement')
+      .select('content_id')
+      .eq('action_type', 'souldrop_like')
+      .in('content_id', ids);
+    if (error) {
+      console.error('Failed to fetch likes', error);
+      return;
+    }
+    setLikedIds(prev => {
+      const next = reset ? new Set<string>() : new Set(prev);
+      (data ?? []).forEach((row: any) => {
+        if (row.content_id) next.add(String(row.content_id));
+      });
+      return next;
+    });
+  };
+
   const fetchPage = async (pageIndex: number) => {
     if (!user) return;
     if (!hasMore && pageIndex > 0) return;
@@ -151,6 +173,9 @@ export default function ForYou() {
       const ranked = (data ?? []).map(d => ({ ...d, _score: scoreDrop(d) }))
         .sort((a, b) => (b._score ?? 0) - (a._score ?? 0));
 
+      const ids = (data ?? []).map((d: any) => String(d.id));
+      refreshLikesFor(ids, pageIndex === 0);
+
       setDrops(prev => pageIndex === 0 ? ranked : [...prev, ...ranked]);
       setPage(pageIndex);
       if (!data || data.length < PAGE_SIZE) setHasMore(false);
@@ -167,18 +192,54 @@ export default function ForYou() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id, profile?.organization_id, soulProfile?.emotional_state, profile?.role]);
 
-  const likeDrop = async (drop: Tables<'soul_drops'>) => {
+  const toggleLike = async (drop: Tables<'soul_drops'>) => {
     if (!user) return;
-    const { error } = await supabase.from('user_engagement').insert({
-      user_id: user.id,
-      action_type: 'souldrop_like',
-      content_id: drop.id,
-      metadata: { source: 'for_you', content_type: drop.content_type },
+    const id = String(drop.id);
+    const isLiked = likedIds.has(id);
+
+    // Optimistic UI update
+    setLikedIds(prev => {
+      const next = new Set(prev);
+      if (isLiked) next.delete(id); else next.add(id);
+      return next;
     });
-    if (error) {
-      toast({ title: 'Could not like', description: error.message, variant: 'destructive' });
+    setDrops(prev => prev.map(d =>
+      d.id === drop.id
+        ? ({ ...d, likes_count: (((d as any).likes_count ?? 0) + (isLiked ? -1 : 1)) } as any)
+        : d
+    ));
+
+    if (isLiked) {
+      // Unlike
+      const { error } = await supabase
+        .from('user_engagement')
+        .delete()
+        .eq('action_type', 'souldrop_like')
+        .eq('content_id', drop.id);
+      if (error) {
+        // Revert
+        setLikedIds(prev => new Set(prev).add(id));
+        setDrops(prev => prev.map(d => d.id === drop.id ? ({ ...d, likes_count: (((d as any).likes_count ?? 0) + 1) } as any) : d));
+        toast({ title: 'Could not unlike', description: error.message, variant: 'destructive' });
+      }
     } else {
-      toast({ title: 'Saved to your preferences', description: 'We will show you more like this.' });
+      // Like
+      const { error } = await supabase.from('user_engagement').insert({
+        user_id: user.id,
+        action_type: 'souldrop_like',
+        content_id: drop.id,
+        metadata: { source: 'for_you', content_type: drop.content_type },
+      });
+      if (error) {
+        // Revert
+        setLikedIds(prev => {
+          const next = new Set(prev);
+          next.delete(id);
+          return next;
+        });
+        setDrops(prev => prev.map(d => d.id === drop.id ? ({ ...d, likes_count: Math.max(((d as any).likes_count ?? 1) - 1, 0) } as any) : d));
+        toast({ title: 'Could not like', description: error.message, variant: 'destructive' });
+      }
     }
   };
 
@@ -197,6 +258,35 @@ export default function ForYou() {
     }
   };
 
+  const shareGeneric = async (drop: Tables<'soul_drops'>) => {
+    const url = window.location.origin + '/for-you';
+    const shareText = `${drop.title}\n\n${drop.content}\n\n— via SoulSpark AI`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: drop.title, text: shareText, url });
+        return;
+      } catch (_) { /* user canceled */ }
+    }
+    try {
+      await navigator.clipboard.writeText(`${shareText} ${url}`);
+      toast({ title: 'Copied to clipboard', description: 'Paste into your app to share.' });
+    } catch (e: any) {
+      toast({ title: 'Share not available', description: e.message, variant: 'destructive' });
+    }
+  };
+
+  const shareTo = async (platform: 'twitter' | 'tiktok' | 'instagram' | 'youtube', drop: Tables<'soul_drops'>) => {
+    const url = window.location.origin + '/for-you';
+    const text = `${drop.title}\n\n${drop.content}\n\n— via SoulSpark AI`;
+    if (platform === 'twitter') {
+      const intent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+      window.open(intent, '_blank');
+      return;
+    }
+    // TikTok, Instagram, YouTube: rely on Web Share API or clipboard fallback
+    await shareGeneric(drop);
+  };
+
   const renderCard = (d: RankedDrop) => (
     <Card key={d.id} className="border-border bg-card">
       <CardHeader>
@@ -211,12 +301,34 @@ export default function ForYou() {
       <CardContent>
         <p className="text-muted-foreground whitespace-pre-wrap">{d.content}</p>
         <div className="mt-4 flex items-center gap-2">
-          <Button size="sm" variant="secondary" onClick={() => likeDrop(d)}>
-            <Heart className="mr-2 h-4 w-4" /> Like
+          <Button size="sm" variant="secondary" onClick={() => toggleLike(d)}>
+            <Heart className="mr-2 h-4 w-4" /> {likedIds.has(String(d.id)) ? 'Liked' : 'Like'}
           </Button>
+          <span className="text-xs text-muted-foreground ml-1">{(d as any).likes_count ?? 0} likes</span>
           <Button size="sm" variant="outline" onClick={() => moreLikeThis(d)}>
             <Sparkles className="mr-2 h-4 w-4" /> More like this
           </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="sm" variant="outline">
+                <Share2 className="mr-2 h-4 w-4" /> Share
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem onClick={() => shareTo('twitter', d)}>
+                <Twitter className="mr-2 h-4 w-4" /> Share to Twitter
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => shareTo('tiktok', d)}>
+                <Share2 className="mr-2 h-4 w-4" /> Share to TikTok
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => shareTo('instagram', d)}>
+                <Instagram className="mr-2 h-4 w-4" /> Share to Instagram
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => shareTo('youtube', d)}>
+                <Youtube className="mr-2 h-4 w-4" /> Share to YouTube
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </CardContent>
     </Card>

@@ -497,6 +497,7 @@ export type Database = {
           created_by: string | null
           id: string
           is_active: boolean | null
+          likes_count: number
           metadata: Json | null
           organization_id: string | null
           target_moods: Database["public"]["Enums"]["mood_type"][] | null
@@ -510,6 +511,7 @@ export type Database = {
           created_by?: string | null
           id?: string
           is_active?: boolean | null
+          likes_count?: number
           metadata?: Json | null
           organization_id?: string | null
           target_moods?: Database["public"]["Enums"]["mood_type"][] | null
@@ -523,6 +525,7 @@ export type Database = {
           created_by?: string | null
           id?: string
           is_active?: boolean | null
+          likes_count?: number
           metadata?: Json | null
           organization_id?: string | null
           target_moods?: Database["public"]["Enums"]["mood_type"][] | null
