@@ -503,6 +503,7 @@ export type Database = {
           target_moods: Database["public"]["Enums"]["mood_type"][] | null
           target_roles: Database["public"]["Enums"]["user_role"][] | null
           title: string
+          updated_at: string
         }
         Insert: {
           content: string
@@ -517,6 +518,7 @@ export type Database = {
           target_moods?: Database["public"]["Enums"]["mood_type"][] | null
           target_roles?: Database["public"]["Enums"]["user_role"][] | null
           title: string
+          updated_at?: string
         }
         Update: {
           content?: string
@@ -531,6 +533,7 @@ export type Database = {
           target_moods?: Database["public"]["Enums"]["mood_type"][] | null
           target_roles?: Database["public"]["Enums"]["user_role"][] | null
           title?: string
+          updated_at?: string
         }
         Relationships: [
           {
