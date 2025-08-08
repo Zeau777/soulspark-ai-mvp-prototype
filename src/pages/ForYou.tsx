@@ -7,8 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import { Heart, Sparkles, Loader2, Twitter, Instagram, Youtube, Share2 } from "lucide-react";
+import { Heart, Sparkles, Loader2, Twitter, Instagram, Youtube, Share2, Volume2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { speakText } from "@/utils/tts";
 
 // Types
 interface RankedDrop extends Tables<'soul_drops'> {
@@ -26,11 +27,12 @@ export default function ForYou() {
   const [page, setPage] = useState(0);
   const [drops, setDrops] = useState<RankedDrop[]>([]);
   const [hasMore, setHasMore] = useState(true);
-  const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
-  const [preferredTags, setPreferredTags] = useState<Set<string>>(new Set());
+const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
+const [preferredTags, setPreferredTags] = useState<Set<string>>(new Set());
+const [speakingId, setSpeakingId] = useState<string | null>(null);
 
-  const [profile, setProfile] = useState<Tables<'profiles'> | null>(null);
-  const [soulProfile, setSoulProfile] = useState<Tables<'soul_profiles'> | null>(null);
+const [profile, setProfile] = useState<Tables<'profiles'> | null>(null);
+const [soulProfile, setSoulProfile] = useState<Tables<'soul_profiles'> | null>(null);
 
   // Simple SEO handling
   useEffect(() => {
@@ -303,7 +305,18 @@ export default function ForYou() {
     await shareGeneric(drop);
   };
 
-  const renderCard = (d: RankedDrop) => (
+const handleListen = async (drop: RankedDrop) => {
+  try {
+    setSpeakingId(String(drop.id));
+    await speakText(`${drop.title}. ${drop.content}`);
+  } catch (e: any) {
+    toast({ title: 'Playback failed', description: e?.message || 'Could not play audio', variant: 'destructive' });
+  } finally {
+    setSpeakingId(null);
+  }
+};
+
+const renderCard = (d: RankedDrop) => (
     <Card key={d.id} className="border-border bg-card">
       <CardHeader>
         <div className="flex items-center gap-2">
@@ -316,14 +329,22 @@ export default function ForYou() {
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground whitespace-pre-wrap">{d.content}</p>
-        <div className="mt-4 flex items-center gap-2">
-          <Button size="sm" variant="secondary" onClick={() => toggleLike(d)}>
-            <Heart className="mr-2 h-4 w-4" /> {likedIds.has(String(d.id)) ? 'Liked' : 'Like'}
-          </Button>
-          <span className="text-xs text-muted-foreground ml-1">{(d as any).likes_count ?? 0} likes</span>
-          <Button size="sm" variant="outline" onClick={() => moreLikeThis(d)}>
-            <Sparkles className="mr-2 h-4 w-4" /> More like this
-          </Button>
+<div className="mt-4 flex items-center gap-2">
+  <Button size="sm" variant="secondary" onClick={() => toggleLike(d)}>
+    <Heart className="mr-2 h-4 w-4" /> {likedIds.has(String(d.id)) ? 'Liked' : 'Like'}
+  </Button>
+  <span className="text-xs text-muted-foreground ml-1">{(d as any).likes_count ?? 0} likes</span>
+  <Button size="sm" variant="outline" onClick={() => handleListen(d)} disabled={speakingId === String(d.id)}>
+    {speakingId === String(d.id) ? (
+      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+    ) : (
+      <Volume2 className="mr-2 h-4 w-4" />
+    )}
+    Listen
+  </Button>
+  <Button size="sm" variant="outline" onClick={() => moreLikeThis(d)}>
+    <Sparkles className="mr-2 h-4 w-4" /> More like this
+  </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button size="sm" variant="outline">
