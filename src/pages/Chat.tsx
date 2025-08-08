@@ -4,9 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
-import { ArrowLeft, Send, Bot, User, Heart, Sparkles } from 'lucide-react';
+import { ArrowLeft, Send, Bot, User, Heart, Sparkles, Volume2, Square } from 'lucide-react';
+import { speakText, stopSpeech } from '@/utils/tts';
+import VoiceChat from '@/components/chat/VoiceChat';
 
 interface Message {
   id: string;
@@ -26,6 +29,8 @@ export default function Chat() {
   const [currentConversation, setCurrentConversation] = useState<Conversation | null>(null);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [voiceId, setVoiceId] = useState<string>('9BWtsMINqrJLrRacOk9x');
+  const [playingId, setPlayingId] = useState<string | null>(null);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -218,22 +223,53 @@ export default function Chat() {
     <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-accent/10 flex flex-col">
       {/* Header */}
       <header className="bg-background/80 backdrop-blur-sm border-b p-4">
-        <div className="flex items-center space-x-3">
-          <Button 
-            variant="ghost" 
-            size="sm"
-            onClick={() => window.history.back()}
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-          <div className="flex items-center space-x-2">
-            <div className="p-2 bg-gradient-to-r from-primary to-accent rounded-full">
-              <Bot className="h-5 w-5 text-primary-foreground" />
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center space-x-3">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => window.history.back()}
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-gradient-to-r from-primary to-accent rounded-full">
+                <Bot className="h-5 w-5 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="font-semibold">Soul-Care Coach</h1>
+                <p className="text-sm text-muted-foreground">Always here to listen</p>
+              </div>
             </div>
-            <div>
-              <h1 className="font-semibold">Soul-Care Coach</h1>
-              <p className="text-sm text-muted-foreground">Always here to listen</p>
-            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Select value={voiceId} onValueChange={setVoiceId}>
+              <SelectTrigger className="w-[220px]">
+                <SelectValue placeholder="Select voice" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="9BWtsMINqrJLrRacOk9x">Aria</SelectItem>
+                <SelectItem value="CwhRBWXzGAHq8TQ4Fs17">Roger</SelectItem>
+                <SelectItem value="EXAVITQu4vr4xnSDxMaL">Sarah</SelectItem>
+                <SelectItem value="FGY2WhTYpPnrIDTdsKH5">Laura</SelectItem>
+                <SelectItem value="IKne3meq5aSn9XLyUdCD">Charlie</SelectItem>
+                <SelectItem value="JBFqnCBsd6RMkjVDRZzb">George</SelectItem>
+                <SelectItem value="N2lVS1w4EtoT3dr4eOWO">Callum</SelectItem>
+                <SelectItem value="SAz9YHcvj6GT2YYXdXww">River</SelectItem>
+                <SelectItem value="TX3LPaxmHKxFdv7VOQHJ">Liam</SelectItem>
+                <SelectItem value="XB0fDUnXU5powFXDhCwa">Charlotte</SelectItem>
+                <SelectItem value="Xb7hH8MSUJpSbSDYk0k2">Alice</SelectItem>
+                <SelectItem value="XrExE9yKIg1WjnnlVkGX">Matilda</SelectItem>
+                <SelectItem value="bIHbv24MWmeRgasZH58o">Will</SelectItem>
+                <SelectItem value="cgSgspJ2msm6clMCkdW9">Jessica</SelectItem>
+                <SelectItem value="cjVigY5qzO86Huf0OWal">Eric</SelectItem>
+                <SelectItem value="iP95p4xoKVk53GoZ742B">Chris</SelectItem>
+                <SelectItem value="nPczCjzI2devNBz1zQrb">Brian</SelectItem>
+                <SelectItem value="onwK4e9ZLuTAKqWW03F9">Daniel</SelectItem>
+                <SelectItem value="pFZP5JQG7iQjIQuC4Bku">Lily</SelectItem>
+                <SelectItem value="pqHfZKP75CvOlQylNhV4">Bill</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </header>
@@ -295,11 +331,35 @@ export default function Chat() {
                           )}
                           <div className="flex-1">
                             <p className="text-sm leading-relaxed">{msg.content}</p>
-                            <p className={`text-xs mt-2 ${
-                              msg.is_ai_response ? 'text-muted-foreground' : 'text-primary-foreground/70'
-                            }`}>
-                              {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                            </p>
+                            <div className="mt-2 flex items-center gap-3">
+                              <p className={`text-xs ${
+                                msg.is_ai_response ? 'text-muted-foreground' : 'text-primary-foreground/70'
+                              }`}>
+                                {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                              </p>
+                              {msg.is_ai_response && (
+                                <div className="ml-auto">
+                                  {playingId === msg.id ? (
+                                    <Button size="sm" variant="outline" onClick={() => { stopSpeech(); setPlayingId(null); }}>
+                                      <Square className="h-4 w-4 mr-1" /> Stop
+                                    </Button>
+                                  ) : (
+                                    <Button size="sm" variant="outline" onClick={async () => {
+                                      try {
+                                        setPlayingId(msg.id);
+                                        await speakText(msg.content, { voiceId });
+                                      } catch (e) {
+                                        console.error(e);
+                                      } finally {
+                                        setPlayingId(null);
+                                      }
+                                    }}>
+                                      <Volume2 className="h-4 w-4 mr-1" /> Listen
+                                    </Button>
+                                  )}
+                                </div>
+                              )}
+                            </div>
                           </div>
                           {!msg.is_ai_response && (
                             <User className="h-5 w-5 text-primary-foreground mt-0.5" />
@@ -370,6 +430,7 @@ export default function Chat() {
             </div>
           )}
         </div>
+        <VoiceChat />
       </div>
     </div>
   );
