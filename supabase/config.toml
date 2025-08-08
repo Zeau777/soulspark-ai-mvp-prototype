@@ -1,1 +1,7 @@
 project_id = "yhrqfmvnxpnhsciczeav"
+
+[functions.openai-tts]
+verify_jwt = false
+
+[functions.openai-realtime-session]
+verify_jwt = false

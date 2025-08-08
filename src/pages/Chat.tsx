@@ -9,7 +9,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, Send, Bot, User, Heart, Sparkles, Volume2, Square } from 'lucide-react';
 import { speakText, stopSpeech } from '@/utils/tts';
-import VoiceChat from '@/components/chat/VoiceChat';
+import VoiceInterface from "@/components/voice/VoiceInterface";
 
 interface Message {
   id: string;
@@ -29,7 +29,7 @@ export default function Chat() {
   const [currentConversation, setCurrentConversation] = useState<Conversation | null>(null);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [voiceId, setVoiceId] = useState<string>('9BWtsMINqrJLrRacOk9x');
+  const [voiceId, setVoiceId] = useState<string>("alloy");
   const [playingId, setPlayingId] = useState<string | null>(null);
   const { user } = useAuth();
 
@@ -248,26 +248,14 @@ export default function Chat() {
                 <SelectValue placeholder="Select voice" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="9BWtsMINqrJLrRacOk9x">Aria</SelectItem>
-                <SelectItem value="CwhRBWXzGAHq8TQ4Fs17">Roger</SelectItem>
-                <SelectItem value="EXAVITQu4vr4xnSDxMaL">Sarah</SelectItem>
-                <SelectItem value="FGY2WhTYpPnrIDTdsKH5">Laura</SelectItem>
-                <SelectItem value="IKne3meq5aSn9XLyUdCD">Charlie</SelectItem>
-                <SelectItem value="JBFqnCBsd6RMkjVDRZzb">George</SelectItem>
-                <SelectItem value="N2lVS1w4EtoT3dr4eOWO">Callum</SelectItem>
-                <SelectItem value="SAz9YHcvj6GT2YYXdXww">River</SelectItem>
-                <SelectItem value="TX3LPaxmHKxFdv7VOQHJ">Liam</SelectItem>
-                <SelectItem value="XB0fDUnXU5powFXDhCwa">Charlotte</SelectItem>
-                <SelectItem value="Xb7hH8MSUJpSbSDYk0k2">Alice</SelectItem>
-                <SelectItem value="XrExE9yKIg1WjnnlVkGX">Matilda</SelectItem>
-                <SelectItem value="bIHbv24MWmeRgasZH58o">Will</SelectItem>
-                <SelectItem value="cgSgspJ2msm6clMCkdW9">Jessica</SelectItem>
-                <SelectItem value="cjVigY5qzO86Huf0OWal">Eric</SelectItem>
-                <SelectItem value="iP95p4xoKVk53GoZ742B">Chris</SelectItem>
-                <SelectItem value="nPczCjzI2devNBz1zQrb">Brian</SelectItem>
-                <SelectItem value="onwK4e9ZLuTAKqWW03F9">Daniel</SelectItem>
-                <SelectItem value="pFZP5JQG7iQjIQuC4Bku">Lily</SelectItem>
-                <SelectItem value="pqHfZKP75CvOlQylNhV4">Bill</SelectItem>
+                <SelectItem value="alloy">Alloy</SelectItem>
+                <SelectItem value="ash">Ash</SelectItem>
+                <SelectItem value="ballad">Ballad</SelectItem>
+                <SelectItem value="coral">Coral</SelectItem>
+                <SelectItem value="echo">Echo</SelectItem>
+                <SelectItem value="sage">Sage</SelectItem>
+                <SelectItem value="shimmer">Shimmer</SelectItem>
+                <SelectItem value="verse">Verse</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -347,7 +335,7 @@ export default function Chat() {
                                     <Button size="sm" variant="outline" onClick={async () => {
                                       try {
                                         setPlayingId(msg.id);
-                                        await speakText(msg.content, { voiceId });
+                                        await speakText(msg.content, { voice: voiceId });
                                       } catch (e) {
                                         console.error(e);
                                       } finally {
@@ -430,7 +418,7 @@ export default function Chat() {
             </div>
           )}
         </div>
-        <VoiceChat />
+        <VoiceInterface onSpeakingChange={() => {}} />
       </div>
     </div>
   );

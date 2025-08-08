@@ -12,7 +12,7 @@ function base64ToBlob(base64: string, contentType = "audio/mpeg") {
   return new Blob([byteArray], { type: contentType });
 }
 
-export async function speakText(text: string, opts?: { voiceId?: string; modelId?: string }) {
+export async function speakText(text: string, opts?: { voice?: string; voiceId?: string; modelId?: string }) {
   if (!text) return;
 
   // Stop any currently playing audio
@@ -21,11 +21,10 @@ export async function speakText(text: string, opts?: { voiceId?: string; modelId
     currentAudio = null;
   }
 
-  const { data, error } = await supabase.functions.invoke("elevenlabs-tts", {
+  const { data, error } = await supabase.functions.invoke("openai-tts", {
     body: {
       text,
-      voiceId: opts?.voiceId,
-      modelId: opts?.modelId,
+      voice: opts?.voice || "alloy",
     },
   });
 
