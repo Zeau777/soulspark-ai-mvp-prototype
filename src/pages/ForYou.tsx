@@ -27,6 +27,7 @@ export default function ForYou() {
   const [drops, setDrops] = useState<RankedDrop[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
+  const [preferredTags, setPreferredTags] = useState<Set<string>>(new Set());
 
   const [profile, setProfile] = useState<Tables<'profiles'> | null>(null);
   const [soulProfile, setSoulProfile] = useState<Tables<'soul_profiles'> | null>(null);
@@ -104,6 +105,7 @@ export default function ForYou() {
       ...(soulProfile?.check_in_keywords ?? []),
       ...((soulProfile?.personal_goals ?? []) as string[]),
     ].filter(Boolean) as string[]);
+    const preferred = preferredTags;
 
     return (d: Tables<'soul_drops'>): number => {
       let s = 0;
@@ -117,17 +119,21 @@ export default function ForYou() {
       const tags: string[] = (d.metadata as any)?.tags ?? [];
       if (Array.isArray(tags)) {
         let hits = 0;
+        let prefHits = 0;
         for (const t of tags) {
-          if (keywords.has(String(t).toLowerCase())) hits++;
+          const tLower = String(t).toLowerCase();
+          if (keywords.has(tLower)) hits++;
+          if (preferred?.has(tLower)) prefHits++;
         }
         s += Math.min(3, hits); // cap tag boost
+        s += Math.min(2, prefHits) * 2; // extra boost for session preferences
       }
 
       // Freshness boost
       s += 0.5 * (new Date(d.created_at).getTime() / 1e13);
       return s;
     };
-  }, [profile, soulProfile]);
+  }, [profile, soulProfile, preferredTags]);
 
   const refreshLikesFor = async (ids: string[], reset = false) => {
     if (!user || ids.length === 0) return;
@@ -245,16 +251,26 @@ export default function ForYou() {
 
   const moreLikeThis = async (drop: Tables<'soul_drops'>) => {
     if (!user) return;
+    const tags: string[] = Array.isArray((drop.metadata as any)?.tags) ? (drop.metadata as any).tags : [];
+    const tagsLower = tags.map(t => String(t).toLowerCase());
     const { error } = await supabase.from('user_engagement').insert({
       user_id: user.id,
       action_type: 'souldrop_more_like_this',
       content_id: drop.id,
-      metadata: { tags: (drop.metadata as any)?.tags ?? [], source: 'for_you' },
+      metadata: { tags, source: 'for_you' },
     });
     if (error) {
       toast({ title: 'Action failed', description: error.message, variant: 'destructive' });
     } else {
-      toast({ title: 'Noted', description: 'Tuning your feed…' });
+      setPreferredTags(prev => {
+        const next = new Set(prev);
+        tagsLower.forEach(t => next.add(t));
+        return next;
+      });
+      setHasMore(true);
+      setDrops([]);
+      await fetchPage(0);
+      toast({ title: 'Got it', description: 'We’ll show you more like this.' });
     }
   };
 
