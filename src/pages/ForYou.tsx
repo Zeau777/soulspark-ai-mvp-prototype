@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import { Heart, Sparkles, Loader2, Twitter, Instagram, Youtube, Share2, Tiktok } from "lucide-react";
+import { Heart, Sparkles, Loader2, Twitter, Instagram, Youtube, Share2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 // Types
