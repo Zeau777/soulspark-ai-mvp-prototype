@@ -17,7 +17,8 @@ import {
   Gift,
   TrendingUp,
   User,
-  Users
+  Users,
+  Sparkles
 } from 'lucide-react';
 
 interface Profile {
@@ -347,7 +348,7 @@ export default function Dashboard() {
         </Card>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="shadow-spiritual cursor-pointer hover:shadow-glow transition-all" 
                 onClick={() => navigate('/chat')}>
             <CardHeader>
@@ -387,6 +388,24 @@ export default function Dashboard() {
               </Button>
             </CardContent>
           </Card>
+
+          <Card className="shadow-spiritual cursor-pointer hover:shadow-glow transition-all"
+                onClick={() => navigate('/for-you')}>
+            <CardHeader>
+              <div className="flex items-center space-x-2">
+                <Sparkles className="h-5 w-5 text-primary" />
+                <CardTitle>For You Feed</CardTitle>
+              </div>
+              <CardDescription>
+                Endless personalized SoulDrops curated for you
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="spiritual" className="w-full">
+                Open Feed
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
@@ -401,6 +420,15 @@ export default function Dashboard() {
           >
             <Flame className="h-5 w-5" />
             <span className="text-xs">Home</span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center gap-1"
+            onClick={() => navigate('/for-you')}
+          >
+            <Sparkles className="h-5 w-5" />
+            <span className="text-xs">For You</span>
           </Button>
           <Button
             variant="ghost"
