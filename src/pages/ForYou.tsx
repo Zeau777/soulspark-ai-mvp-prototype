@@ -329,11 +329,11 @@ const renderCard = (d: RankedDrop) => (
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground whitespace-pre-wrap">{d.content}</p>
-<div className="mt-4 flex items-center gap-2">
+<div className="mt-4 flex flex-wrap items-center gap-2 sm:flex-nowrap">
   <Button size="sm" variant="secondary" onClick={() => toggleLike(d)}>
     <Heart className="mr-2 h-4 w-4" /> {likedIds.has(String(d.id)) ? 'Liked' : 'Like'}
   </Button>
-  <span className="text-xs text-muted-foreground ml-1">{(d as any).likes_count ?? 0} likes</span>
+  <span className="hidden sm:inline text-xs text-muted-foreground ml-1">{(d as any).likes_count ?? 0} likes</span>
   <Button size="sm" variant="outline" onClick={() => handleListen(d)} disabled={speakingId === String(d.id)}>
     {speakingId === String(d.id) ? (
       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
