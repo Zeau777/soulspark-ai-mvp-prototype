@@ -668,6 +668,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
+      current_user_email: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
       get_daily_soul_drop: {
         Args: { p_user_id: string }
         Returns: {
