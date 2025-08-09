@@ -4,7 +4,9 @@ import { useAuth } from './useAuth';
 import { toast } from 'sonner';
 
 export const usePushNotifications = () => {
-  const [isSupported, setIsSupported] = useState(false);
+  const [isSupported, setIsSupported] = useState<boolean>(() =>
+    typeof window !== 'undefined' && 'serviceWorker' in navigator && 'Notification' in window
+  );
   const [subscription, setSubscription] = useState<PushSubscription | null>(null);
   const [permission, setPermission] = useState<NotificationPermission>('default');
   const { user } = useAuth();

@@ -51,9 +51,7 @@ interface Post {
   image_url: string | null;
   post_type: 'win' | 'prayer_request' | 'testimony' | 'reflection';
   created_at: string;
-  profiles: {
-    display_name: string;
-  };
+  authorDisplayName: string;
   reactions: Array<{
     reaction_type: string;
     user_id: string;
@@ -86,7 +84,7 @@ const Community = () => {
         .from('spark_circles')
         .select(`
           *,
-          circle_memberships(
+          circle_memberships!circle_id(
             user_id,
             role
           )
@@ -100,7 +98,7 @@ const Community = () => {
         .from('challenges')
         .select(`
           *,
-          challenge_participations(user_id, progress)
+          challenge_participations!challenge_id(user_id, progress)
         `)
         .eq('is_public', true)
         .order('created_at', { ascending: false });
@@ -112,8 +110,7 @@ const Community = () => {
         .from('posts')
         .select(`
           *,
-          profiles(display_name),
-          post_reactions(reaction_type, user_id)
+          post_reactions!post_id(reaction_type, user_id)
         `)
         .eq('visibility', 'public')
         .order('created_at', { ascending: false })
@@ -139,9 +136,7 @@ const Community = () => {
       const transformedPosts = (postsData || []).map(post => ({
         ...post,
         post_type: post.post_type as 'win' | 'prayer_request' | 'testimony' | 'reflection',
-        profiles: (typeof post.profiles === 'object' && post.profiles && 'display_name' in post.profiles) ? 
-          post.profiles as { display_name: string } : 
-          { display_name: 'Anonymous' },
+        authorDisplayName: 'Anonymous',
         reactions: post.post_reactions || []
       }));
 
@@ -289,7 +284,7 @@ const Community = () => {
                 <Card key={post.id} className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <p className="font-medium">{post.profiles.display_name}</p>
+                      <p className="font-medium">{post.authorDisplayName}</p>
                       <Badge variant="secondary" className="text-xs">
                         {post.post_type.replace('_', ' ')}
                       </Badge>
