@@ -10,14 +10,16 @@ export const usePushNotifications = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
+    if ('serviceWorker' in navigator && 'Notification' in window) {
       setIsSupported(true);
       setPermission(Notification.permission);
-      
+
       // Check if user already has a subscription
       if (user && Notification.permission === 'granted') {
         checkExistingSubscription();
       }
+    } else {
+      setIsSupported(false);
     }
   }, [user]);
 
@@ -25,9 +27,13 @@ export const usePushNotifications = () => {
     if (!user) return;
 
     try {
-      const registration = await navigator.serviceWorker.getRegistration('/sw.js');
-      if (registration) {
-        const existingSubscription = await registration.pushManager.getSubscription();
+      const registration = await navigator.serviceWorker.ready;
+      // Some browsers may not expose PushManager
+      // Guard before attempting to read existing subscription
+      // @ts-ignore - pushManager may be undefined in some engines
+      const pushMgr = (registration as any).pushManager;
+      if (registration && pushMgr) {
+        const existingSubscription = await pushMgr.getSubscription();
         if (existingSubscription) {
           setSubscription(existingSubscription);
         }
@@ -61,13 +67,19 @@ export const usePushNotifications = () => {
 
     try {
       // Register service worker if not already registered
-      let registration = await navigator.serviceWorker.getRegistration('/sw.js');
+      let registration = await navigator.serviceWorker.getRegistration();
       if (!registration) {
-        registration = await navigator.serviceWorker.register('/sw.js');
-        await navigator.serviceWorker.ready;
+        registration = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+      }
+      await navigator.serviceWorker.ready;
+      
+      // Ensure Push API is available
+      if (!('PushManager' in window) || !registration.pushManager) {
+        toast.error('Web Push is not supported in this browser. Try Chrome, Edge, or Safari PWA.');
+        return;
       }
       
-      // Generate a simple VAPID key for testing (replace with proper key in production)
+      // VAPID key for testing (replace with proper key in production)
       const vapidKey = 'BEl62iUYgUivxIkv69yViEuiBIa40HI6DjbYm6WMIbHrcpXD2pfU1U1FMrKNjN5M8VdrJg1JH6FvhsU3uEwxdOo';
       
       // Subscribe to push notifications
