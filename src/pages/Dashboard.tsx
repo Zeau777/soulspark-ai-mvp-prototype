@@ -7,6 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { speakText } from '@/utils/tts';
 import { 
   Flame, 
   MessageSquare, 
@@ -18,7 +19,9 @@ import {
   TrendingUp,
   User,
   Users,
-  Sparkles
+  Sparkles,
+  Volume2,
+  Loader2
 } from 'lucide-react';
 
 interface Profile {
@@ -50,7 +53,9 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const { user, signOut } = useAuth();
   const { toast } = useToast();
-  const navigate = useNavigate();
+const navigate = useNavigate();
+const [likedToday, setLikedToday] = useState(false);
+const [speaking, setSpeaking] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -118,6 +123,62 @@ export default function Dashboard() {
       console.error('Error fetching dashboard data:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Listen and Like for Today's SoulDrop
+  useEffect(() => {
+    const refreshLikeToday = async () => {
+      if (!soulDrop) return;
+      const { data } = await supabase
+        .from('user_engagement')
+        .select('content_id')
+        .eq('action_type', 'souldrop_like')
+        .eq('content_id', soulDrop.id);
+      setLikedToday(!!data && data.length > 0);
+    };
+    if (user && soulDrop?.id) {
+      refreshLikeToday();
+    }
+  }, [user?.id, soulDrop?.id]);
+
+  const toggleLikeToday = async () => {
+    if (!user || !soulDrop) return;
+    const isLiked = likedToday;
+    setLikedToday(!isLiked);
+    if (isLiked) {
+      const { error } = await supabase
+        .from('user_engagement')
+        .delete()
+        .eq('action_type', 'souldrop_like')
+        .eq('content_id', soulDrop.id);
+      if (error) {
+        setLikedToday(true);
+        toast({ title: 'Could not unlike', description: error.message, variant: 'destructive' });
+      }
+    } else {
+      const { error } = await supabase.from('user_engagement').insert({
+        user_id: user.id,
+        action_type: 'souldrop_like',
+        content_id: soulDrop.id,
+        metadata: { source: 'dashboard', content_type: soulDrop.content_type },
+      });
+      if (error) {
+        setLikedToday(false);
+        toast({ title: 'Could not like', description: error.message, variant: 'destructive' });
+      }
+    }
+  };
+
+  const handleListenToday = async () => {
+    if (!soulDrop) return;
+    try {
+      setSpeaking(true);
+      await speakText(`${soulDrop.title}. ${soulDrop.content}`);
+    } catch (e: any) {
+      toast({ title: 'Playback failed', description: e?.message || 'Could not play audio', variant: 'destructive' });
+    } finally {
+      setSpeaking(false);
     }
   };
 
@@ -300,9 +361,18 @@ export default function Dashboard() {
               <p className="text-foreground leading-relaxed mb-4">
                 {soulDrop.content}
               </p>
-              <Button variant="outline" size="sm">
-                Save to Fuel Moments
-              </Button>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="outline" size="sm" onClick={handleListenToday} disabled={speaking}>
+                  {speaking ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Volume2 className="mr-2 h-4 w-4" />}
+                  Listen
+                </Button>
+                <Button variant="secondary" size="sm" onClick={toggleLikeToday}>
+                  <Heart className="mr-2 h-4 w-4" /> {likedToday ? 'Liked' : 'Like'}
+                </Button>
+                <Button variant="outline" size="sm">
+                  Save to Fuel Moments
+                </Button>
+              </div>
             </CardContent>
           </Card>
         )}

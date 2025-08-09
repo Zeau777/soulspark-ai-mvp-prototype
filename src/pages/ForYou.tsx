@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import { Heart, Sparkles, Loader2, Twitter, Instagram, Youtube, Share2, Volume2 } from "lucide-react";
+import { Heart, Sparkles, Loader2, Instagram, Youtube, Share2, Volume2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { speakText } from "@/utils/tts";
 
@@ -293,11 +293,11 @@ const [soulProfile, setSoulProfile] = useState<Tables<'soul_profiles'> | null>(n
     }
   };
 
-  const shareTo = async (platform: 'twitter' | 'tiktok' | 'instagram' | 'youtube', drop: Tables<'soul_drops'>) => {
+  const shareTo = async (platform: 'x' | 'tiktok' | 'instagram' | 'youtube', drop: Tables<'soul_drops'>) => {
     const url = window.location.origin + '/for-you';
     const text = `${drop.title}\n\n${drop.content}\n\n— via SoulSpark AI`;
-    if (platform === 'twitter') {
-      const intent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    if (platform === 'x') {
+      const intent = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
       window.open(intent, '_blank');
       return;
     }
@@ -352,8 +352,8 @@ const renderCard = (d: RankedDrop) => (
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
-              <DropdownMenuItem onClick={() => shareTo('twitter', d)}>
-                <Twitter className="mr-2 h-4 w-4" /> Share to Twitter
+              <DropdownMenuItem onClick={() => shareTo('x', d)}>
+                <Share2 className="mr-2 h-4 w-4" /> Share to X
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => shareTo('tiktok', d)}>
                 <Share2 className="mr-2 h-4 w-4" /> Share to TikTok
