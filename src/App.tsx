@@ -16,6 +16,7 @@ import Community from "./pages/Community";
 import AdminDashboard from "./pages/AdminDashboard";
 import PlatformAnalytics from "./pages/PlatformAnalytics";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -61,6 +62,7 @@ const App = () => (
             <Route path="/auth" element={<PublicRoute><Auth /></PublicRoute>} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
             
             {/* Protected routes */}
           <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
