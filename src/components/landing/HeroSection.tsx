@@ -52,7 +52,7 @@ const HeroSection = () => {
                 <Brain className="h-8 w-8 text-primary" />
               </div>
               <h3 className="font-semibold text-lg mb-2">SoulMatch AI™ Engine</h3>
-              <p className="text-muted-foreground">Proprietary algorithm that dynamically adapts spiritual content based on your faith level, mood, and growth patterns.</p>
+              <p className="text-muted-foreground">Proprietary algorithm that dynamically adapts content based on your faith level, mood, and growth patterns.</p>
             </div>
             
             <div className="text-center">
@@ -68,7 +68,7 @@ const HeroSection = () => {
                 <Zap className="h-8 w-8 text-primary" />
               </div>
               <h3 className="font-semibold text-lg mb-2">Viral Impact Gamification</h3>
-              <p className="text-muted-foreground">Leaderboards, impact badges, and shareable spiritual growth moments that create real-world change.</p>
+              <p className="text-muted-foreground">Leaderboards, impact badges, and shareable growth moments that create real-world change.</p>
             </div>
           </div>
 
