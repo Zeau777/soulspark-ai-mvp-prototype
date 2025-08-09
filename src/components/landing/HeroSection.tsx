@@ -25,8 +25,9 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <h1 className="text-4xl font-bold text-foreground mb-4 leading-tight lg:text-5xl md:text-5xl">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">The AI Operating System for Soul-Centered Workplaces, Campuses, and Locker Rooms.</span>
+          <h1 className="text-3xl font-bold text-foreground mb-4 leading-tight lg:text-4xl md:text-4xl">
+            <span className="text-[hsl(var(--brand-orange))]">The AI Operating System for </span>
+            <span className="text-foreground">Soul-Centered Workplaces, Campuses, and Locker Rooms.</span>
           </h1>
 
           <p className="text-lg font-medium text-primary mb-6">
