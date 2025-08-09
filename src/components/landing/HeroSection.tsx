@@ -26,9 +26,7 @@ const HeroSection = () => {
           </div>
 
           <h1 className="text-4xl font-bold text-foreground mb-4 leading-tight lg:text-5xl md:text-5xl">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">SoulMatch AI™ Powered</span>
-            <br />
-            <span className="text-foreground">Faith-Centered Soul Care.</span>
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">The AI Operating System for Soul-Centered Workplaces, Campuses, and Locker Rooms.</span>
           </h1>
 
           <p className="text-lg font-medium text-primary mb-6">
