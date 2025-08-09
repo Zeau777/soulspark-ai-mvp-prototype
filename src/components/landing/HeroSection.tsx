@@ -101,7 +101,7 @@ const HeroSection = () => {
                 <Brain className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Dynamic Persona-Shaping AI</h4>
-                  <p className="text-sm text-muted-foreground">Personal AI soul-care coach that evolves with your spiritual journey.</p>
+                  <p className="text-sm text-muted-foreground">Personal AI soul-care coach that evolves with your journey.</p>
                 </div>
               </div>
             </div>
