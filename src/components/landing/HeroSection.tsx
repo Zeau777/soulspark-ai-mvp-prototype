@@ -43,12 +43,6 @@ const HeroSection = () => {
           <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Meet SoulSpark AI—the first AI-powered soul-care platform built for the soul. It blends timeless principles, proven psychology, and modern insights to help Gen Z and Millennials boost their mental, spiritual, and emotional well-being—judgment-free, in just 60 seconds a day.</p>
           
 
-          {/* Guarantee Statement */}
-          <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
-            <p className="text-lg font-semibold text-foreground">
-              Purpose. Peace. Clarity. Guaranteed in 90 days — or your money back.
-            </p>
-          </div>
 
 
           {/* Proprietary Edge Features */}
