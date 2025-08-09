@@ -31,9 +31,7 @@ const HeroSection = () => {
             <span className="text-foreground"> Workplaces, Campuses, and Locker Rooms.</span>
           </h1>
 
-          <p className="text-lg font-medium text-primary mb-6">
-            Designed for a Purpose-Driven Generation
-          </p>
+          <p className="text-lg font-medium text-primary mb-6">SoulSpark AI — 60 Seconds a Day to Unlock Your Best Self!</p>
 
           {/* CTA Button - Moved up for mobile visibility */}
           <div className="flex justify-center mb-8">
