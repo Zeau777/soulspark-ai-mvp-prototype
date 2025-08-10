@@ -17,6 +17,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import PlatformAnalytics from "./pages/PlatformAnalytics";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import Partners from "./pages/Partners";
+import PartnerAdminPreview from "./pages/PartnerAdminPreview";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -63,6 +65,8 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/partners" element={<Partners />} />
+            <Route path="/partner-preview" element={<PartnerAdminPreview />} />
             
             {/* Protected routes */}
           <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />

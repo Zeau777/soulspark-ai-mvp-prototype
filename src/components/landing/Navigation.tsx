@@ -32,7 +32,7 @@ const Navigation = () => {
               <a href="#testimonials" className="text-foreground hover:text-primary transition-colors font-medium">
                 Stories
               </a>
-              <a href="#for-organizations" className="text-foreground hover:text-primary transition-colors font-medium">
+              <a href="/partners" className="text-foreground hover:text-primary transition-colors font-medium">
                 For Organizations
               </a>
             </div>
@@ -86,7 +86,7 @@ const Navigation = () => {
                 Stories
               </a>
               <a
-                href="#for-organizations"
+                href="/partners"
                 className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
                 onClick={() => setIsOpen(false)}
               >
