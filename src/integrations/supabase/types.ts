@@ -189,6 +189,144 @@ export type Database = {
         }
         Relationships: []
       }
+      impact_action_mappings: {
+        Row: {
+          action_type: string
+          active: boolean
+          created_at: string
+          credit: number
+          notes: string | null
+          unit: string
+          updated_at: string
+        }
+        Insert: {
+          action_type: string
+          active?: boolean
+          created_at?: string
+          credit?: number
+          notes?: string | null
+          unit?: string
+          updated_at?: string
+        }
+        Update: {
+          action_type?: string
+          active?: boolean
+          created_at?: string
+          credit?: number
+          notes?: string | null
+          unit?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      impact_batches: {
+        Row: {
+          created_at: string
+          external_id: string | null
+          id: string
+          notes: string | null
+          partner: string
+          period_end: string
+          period_start: string
+          status: string
+          total_amount_cents: number
+          total_credits: number
+          total_meals: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          external_id?: string | null
+          id?: string
+          notes?: string | null
+          partner: string
+          period_end: string
+          period_start: string
+          status?: string
+          total_amount_cents?: number
+          total_credits?: number
+          total_meals?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          external_id?: string | null
+          id?: string
+          notes?: string | null
+          partner?: string
+          period_end?: string
+          period_start?: string
+          status?: string
+          total_amount_cents?: number
+          total_credits?: number
+          total_meals?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      impact_credits: {
+        Row: {
+          action_type: string
+          batched_id: string | null
+          created_at: string
+          credits: number
+          engagement_id: string | null
+          id: string
+          metadata: Json
+          user_id: string
+        }
+        Insert: {
+          action_type: string
+          batched_id?: string | null
+          created_at?: string
+          credits: number
+          engagement_id?: string | null
+          id?: string
+          metadata?: Json
+          user_id: string
+        }
+        Update: {
+          action_type?: string
+          batched_id?: string | null
+          created_at?: string
+          credits?: number
+          engagement_id?: string | null
+          id?: string
+          metadata?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
+      impact_settings: {
+        Row: {
+          created_at: string
+          donation_rate_cents_per_meal: number
+          goal_meals_per_year: number
+          id: string
+          is_active: boolean
+          partner: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          donation_rate_cents_per_meal?: number
+          goal_meals_per_year?: number
+          id?: string
+          is_active?: boolean
+          partner?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          donation_rate_cents_per_meal?: number
+          goal_meals_per_year?: number
+          id?: string
+          is_active?: boolean
+          partner?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           content: string
@@ -638,6 +776,7 @@ export type Database = {
           content_id: string | null
           created_at: string
           id: string
+          impact_processed_at: string | null
           metadata: Json | null
           user_id: string
           xp_earned: number | null
@@ -647,6 +786,7 @@ export type Database = {
           content_id?: string | null
           created_at?: string
           id?: string
+          impact_processed_at?: string | null
           metadata?: Json | null
           user_id: string
           xp_earned?: number | null
@@ -656,6 +796,7 @@ export type Database = {
           content_id?: string | null
           created_at?: string
           id?: string
+          impact_processed_at?: string | null
           metadata?: Json | null
           user_id?: string
           xp_earned?: number | null
