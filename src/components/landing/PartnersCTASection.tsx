@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Building2, Users, GraduationCap } from "lucide-react";
+import { Building2, GraduationCap, Trophy } from "lucide-react";
 const PartnersCTASection = () => {
   const navigate = useNavigate();
   return <section id="for-organizations" className="py-16 md:py-24 bg-muted/30">
@@ -14,29 +14,29 @@ const PartnersCTASection = () => {
         <div className="grid gap-6 md:grid-cols-3">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Building2 className="h-5 w-5" /> DEI Teams</CardTitle>
-              <CardDescription>Culture, belonging, outcomes</CardDescription>
+              <CardTitle className="flex items-center gap-2"><Building2 className="h-5 w-5" /> Workplaces</CardTitle>
+              <CardDescription>Well-being, culture, retention</CardDescription>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground">
-              Personal check-ins and measurable impact for healthier teams.
+              Reduce burnout and turnover with proactive check-ins, team pulse, and measurable impact on culture.
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Users className="h-5 w-5" /> Coaches</CardTitle>
-              <CardDescription>Scale your impact</CardDescription>
+              <CardTitle className="flex items-center gap-2"><GraduationCap className="h-5 w-5" /> Campuses</CardTitle>
+              <CardDescription>Student success & safety</CardDescription>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground">
-              Automate nudges and track engagement to support more people.
+              Boost retention with timely nudges, crisis routing, and belonging-building communities.
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><GraduationCap className="h-5 w-5" /> Colleges</CardTitle>
-              <CardDescription>Student well-being</CardDescription>
+              <CardTitle className="flex items-center gap-2"><Trophy className="h-5 w-5" /> Sports Teams</CardTitle>
+              <CardDescription>Performance and mental fitness</CardDescription>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground">
-              Improve retention with timely support and community.
+              Daily mindset cues, recovery reflections, and confidential support to sustain peak performance.
             </CardContent>
           </Card>
         </div>
