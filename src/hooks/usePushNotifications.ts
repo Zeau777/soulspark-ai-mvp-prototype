@@ -14,13 +14,8 @@ export const usePushNotifications = () => {
   const isSecure = typeof window !== 'undefined' && (window as any).isSecureContext === true;
   const openEnableInNewTab = () => {
     if (typeof window === 'undefined') return;
-    try {
-      const url = new URL(window.location.href);
-      url.searchParams.set('enablePush', '1');
-      window.open(url.toString(), '_blank', 'noopener,noreferrer');
-    } catch (e) {
-      window.open('/', '_blank', 'noopener,noreferrer');
-    }
+    const url = `${window.location.origin}/profile?enablePush=1`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   useEffect(() => {
@@ -35,7 +30,25 @@ export const usePushNotifications = () => {
     } else {
       setIsSupported(false);
     }
-  }, [user]);
+
+    // If opened via ?enablePush=1, auto-trigger the permission flow and then clean the URL
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('enablePush') === '1') {
+        if (isSecure && isTopLevel) {
+          setTimeout(() => {
+            requestPermission();
+          }, 0);
+        }
+        params.delete('enablePush');
+        const newUrl =
+          window.location.pathname + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+        window.history.replaceState({}, '', newUrl);
+      }
+    } catch (_) {
+      // no-op
+    }
+  }, [user, isSecure, isTopLevel]);
 
   const checkExistingSubscription = async () => {
     if (!user) return;

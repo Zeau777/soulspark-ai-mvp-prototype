@@ -52,6 +52,14 @@ export default function Profile() {
   const [weeklyStats, setWeeklyStats] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const { user, signOut } = useAuth();
+  const [activeTab, setActiveTab] = useState<'overview'|'journey'|'insights'|'settings'>('overview');
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('enablePush') === '1') {
+      setActiveTab('settings');
+    }
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -231,7 +239,7 @@ export default function Profile() {
           </CardContent>
         </Card>
 
-        <Tabs defaultValue="overview" className="w-full">
+        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'overview'|'journey'|'insights'|'settings')} className="w-full">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="journey">Journey</TabsTrigger>
