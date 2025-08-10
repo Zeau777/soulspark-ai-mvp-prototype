@@ -9,6 +9,8 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLe
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, BarChart, Bar } from "recharts";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import InviteLinksPreview from "@/components/partner-admin/InviteLinksPreview";
+import CohortManagementPreview from "@/components/partner-admin/CohortManagementPreview";
 
 const setMeta = (title: string, description: string, canonicalPath: string) => {
   document.title = title;
@@ -304,6 +306,12 @@ export default function PartnerAdminPreview() {
             </CardContent>
           </Card>
         </div>
+      </section>
+
+      {/* Invite Links & Cohort Management */}
+      <section className="max-w-6xl mx-auto px-4 pb-24 grid gap-6 md:grid-cols-2">
+        <InviteLinksPreview />
+        <CohortManagementPreview />
       </section>
     </main>
   );
