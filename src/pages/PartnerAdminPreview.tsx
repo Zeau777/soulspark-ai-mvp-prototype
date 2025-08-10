@@ -45,6 +45,7 @@ export default function PartnerAdminPreview() {
 
   const { toast } = useToast();
   const [liveMealsYTD, setLiveMealsYTD] = useState<number | null>(null);
+  const [impactMonthly, setImpactMonthly] = useState<Array<{ label: string; meals: number }>>([]);
 
   useEffect(() => {
     const load = async () => {
@@ -68,6 +69,33 @@ export default function PartnerAdminPreview() {
       }
     };
     load();
+  }, []);
+
+  useEffect(() => {
+    const loadMonthly = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('impact_batches')
+          .select('total_meals, period_start')
+          .order('period_start', { ascending: false })
+          .limit(12);
+        if (error) {
+          console.warn('impact batches fetch failed', error);
+          return;
+        }
+        const arr = (data || [])
+          .reverse()
+          .map((row: any) => {
+            const d = new Date(row.period_start);
+            const label = d.toLocaleString(undefined, { month: 'short' });
+            return { label, meals: Number(row.total_meals || 0) };
+          });
+        setImpactMonthly(arr);
+      } catch (e) {
+        console.warn('impact monthly error', e);
+      }
+    };
+    loadMonthly();
   }, []);
   // Sample preview data (read-only)
   const pulseDaily = [
@@ -100,6 +128,12 @@ export default function PartnerAdminPreview() {
     { name: "W2", active: 66 },
     { name: "W3", active: 71 },
     { name: "W4", active: 74 },
+  ];
+  const impactMonthlyPreview = [
+    { label: "Apr", meals: 2400 },
+    { label: "May", meals: 2600 },
+    { label: "Jun", meals: 2800 },
+    { label: "Jul", meals: 3000 },
   ];
   const totalMeals = groupUsage.reduce((sum, g) => sum + g.meals, 0);
 
@@ -327,6 +361,27 @@ export default function PartnerAdminPreview() {
                 />
               </div>
               <p className="mt-3 text-xs text-muted-foreground">{liveMealsYTD == null ? 'Preview shown. Sign in as org admin to see live impact.' : 'Live organization impact.'}</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Monthly Impact Trend</CardTitle>
+              <CardDescription>Meals donated per month</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ChartContainer
+                config={{ meals: { label: "Meals", color: "hsl(var(--primary))" } }}
+                className="h-36 w-full"
+              >
+                <BarChart data={impactMonthly.length ? impactMonthly : impactMonthlyPreview} margin={{ left: 12, right: 12 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="label" tickLine={false} axisLine={false} />
+                  <YAxis width={28} tickLine={false} axisLine={false} />
+                  <Bar dataKey="meals" fill="var(--color-meals)" radius={[6, 6, 0, 0]} />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                </BarChart>
+              </ChartContainer>
             </CardContent>
           </Card>
 
