@@ -66,10 +66,10 @@ export default function Partners() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2"><GraduationCap className="h-5 w-5" /> Colleges</CardTitle>
-            <CardDescription>Student well-being and belonging</CardDescription>
+            <CardDescription>Student success, retention, and belonging</CardDescription>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            Improve retention with timely nudges and community-driven support.
+            Boost retention with timely nudges, early support routing, and belonging-building communities.
           </CardContent>
         </Card>
       </section>
