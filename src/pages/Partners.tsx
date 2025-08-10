@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Building2, Users, GraduationCap, Shield, BarChart3 } from "lucide-react";
-
 const setMeta = (title: string, description: string, canonicalPath: string) => {
   document.title = title;
   const desc = document.querySelector('meta[name="description"]');
-  if (desc) desc.setAttribute('content', description);
-  else {
+  if (desc) desc.setAttribute('content', description);else {
     const m = document.createElement('meta');
     m.setAttribute('name', 'description');
     m.setAttribute('content', description);
@@ -22,28 +20,17 @@ const setMeta = (title: string, description: string, canonicalPath: string) => {
   }
   canonical.href = `${window.location.origin}${canonicalPath}`;
 };
-
 export default function Partners() {
   const navigate = useNavigate();
-
   useEffect(() => {
-    setMeta(
-      "SoulSpark AI Partners — DEI, Coaches, Colleges",
-      "Partner with SoulSpark AI. Purpose-driven tools for DEI teams, coaches, and colleges.",
-      "/partners"
-    );
+    setMeta("SoulSpark AI Partners — DEI, Coaches, Colleges", "Partner with SoulSpark AI. Purpose-driven tools for DEI teams, coaches, and colleges.", "/partners");
   }, []);
-
-  return (
-    <main className="min-h-screen bg-background">
+  return <main className="min-h-screen bg-background">
       <header className="max-w-6xl mx-auto px-4 pt-14 pb-8">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
           Partner with SoulSpark AI
         </h1>
-        <p className="mt-3 text-muted-foreground max-w-2xl">
-          Designed for DEI leaders, coaching organizations, and colleges to foster well-being,
-          belonging, and measurable impact across your community.
-        </p>
+        <p className="mt-3 text-muted-foreground max-w-2xl">Designed for HR leaders, sports organizations, and colleges to foster well-being, belonging, and measurable impact across your community.</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button variant="spiritual" onClick={() => navigate('/auth#signup')}>
             Partner Sign Up
@@ -116,6 +103,5 @@ export default function Partners() {
           </CardContent>
         </Card>
       </section>
-    </main>
-  );
+    </main>;
 }
