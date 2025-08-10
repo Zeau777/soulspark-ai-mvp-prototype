@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Building2, Users, GraduationCap, Shield, BarChart3 } from "lucide-react";
+import { Building2, Trophy, GraduationCap, Shield, BarChart3 } from "lucide-react";
 const setMeta = (title: string, description: string, canonicalPath: string) => {
   document.title = title;
   const desc = document.querySelector('meta[name="description"]');
@@ -23,14 +23,14 @@ const setMeta = (title: string, description: string, canonicalPath: string) => {
 export default function Partners() {
   const navigate = useNavigate();
   useEffect(() => {
-    setMeta("SoulSpark AI Partners — DEI, Coaches, Colleges", "Partner with SoulSpark AI. Purpose-driven tools for DEI teams, coaches, and colleges.", "/partners");
+    setMeta("SoulSpark AI Partners — Companies, Sports Teams, Colleges", "Partner with SoulSpark AI. Purpose-driven tools for companies, sports teams, and colleges.", "/partners");
   }, []);
   return <main className="min-h-screen bg-background">
       <header className="max-w-6xl mx-auto px-4 pt-14 pb-8">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
           Partner with SoulSpark AI
         </h1>
-        <p className="mt-3 text-muted-foreground max-w-2xl">Designed for HR leaders, sports organizations, and colleges to foster well-being, belonging, and measurable impact across your community.</p>
+        <p className="mt-3 text-muted-foreground max-w-2xl">Designed for companies, sports organizations, and colleges to foster well-being, belonging, and measurable impact across your community.</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button variant="spiritual" onClick={() => navigate('/auth#signup')}>
             Partner Sign Up
@@ -47,20 +47,20 @@ export default function Partners() {
       <section className="max-w-6xl mx-auto px-4 pb-16 grid gap-6 md:grid-cols-3">
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Building2 className="h-5 w-5" /> DEI Teams</CardTitle>
-            <CardDescription>Strengthen culture and track outcomes</CardDescription>
+            <CardTitle className="flex items-center gap-2"><Building2 className="h-5 w-5" /> Companies</CardTitle>
+            <CardDescription>Culture, retention, and well-being</CardDescription>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            Personalized check-ins, challenges, and insights to build resilient, inclusive teams.
+            Personalized check-ins, team pulse, and insights to reduce burnout, improve retention, and measurably strengthen culture.
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Users className="h-5 w-5" /> Coaches</CardTitle>
-            <CardDescription>Scale impact with AI-assisted care</CardDescription>
+            <CardTitle className="flex items-center gap-2"><Trophy className="h-5 w-5" /> Sports Teams</CardTitle>
+            <CardDescription>Performance and mental fitness</CardDescription>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            Automate nudges, track engagement, and deliver soul-care at scale.
+            Daily mindset cues, recovery reflections, and confidential support to sustain peak performance across your season.
           </CardContent>
         </Card>
         <Card>
