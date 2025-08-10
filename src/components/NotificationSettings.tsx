@@ -9,7 +9,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Bell, BellOff } from 'lucide-react';
 
 const NotificationSettings = () => {
-  const { isSupported, permission, subscription, requestPermission, unsubscribe } = usePushNotifications();
+  const { isSupported, permission, subscription, requestPermission, unsubscribe, openEnableInNewTab } = usePushNotifications();
   const { user } = useAuth();
 
   if (!isSupported) {
@@ -21,9 +21,17 @@ const NotificationSettings = () => {
             Push Notifications
           </CardTitle>
           <CardDescription>
-            Push notifications are not supported in your browser
+            Push notifications can't be enabled in this view.
           </CardDescription>
         </CardHeader>
+        <CardContent className="space-y-3">
+          <p className="text-sm text-muted-foreground">
+            To enable reminders, open the app in a new tab and finish setup.
+          </p>
+          <Button onClick={() => openEnableInNewTab()} variant="outline" className="w-full">
+            Open in new tab to enable
+          </Button>
+        </CardContent>
       </Card>
     );
   }

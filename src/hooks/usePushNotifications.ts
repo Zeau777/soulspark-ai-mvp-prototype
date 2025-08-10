@@ -10,6 +10,18 @@ export const usePushNotifications = () => {
   const [subscription, setSubscription] = useState<PushSubscription | null>(null);
   const [permission, setPermission] = useState<NotificationPermission>('default');
   const { user } = useAuth();
+  const isTopLevel = typeof window !== 'undefined' && window.top === window.self;
+  const isSecure = typeof window !== 'undefined' && (window as any).isSecureContext === true;
+  const openEnableInNewTab = () => {
+    if (typeof window === 'undefined') return;
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('enablePush', '1');
+      window.open(url.toString(), '_blank', 'noopener,noreferrer');
+    } catch (e) {
+      window.open('/', '_blank', 'noopener,noreferrer');
+    }
+  };
 
   useEffect(() => {
     if ('serviceWorker' in navigator && 'Notification' in window) {
@@ -46,9 +58,24 @@ export const usePushNotifications = () => {
   };
 
   const requestPermission = async () => {
-    if (!isSupported) return false;
+    if (!isSupported) {
+      toast.error('Notifications are not available in this view.');
+      if (!isTopLevel || !isSecure) openEnableInNewTab();
+      return false;
+    }
 
     try {
+      if (!isSecure) {
+        toast.error('Notifications require a secure (HTTPS) context.');
+        openEnableInNewTab();
+        return false;
+      }
+      if (!isTopLevel) {
+        toast.message('Opening a new tab to enable notifications...');
+        openEnableInNewTab();
+        return false;
+      }
+
       const permission = await Notification.requestPermission();
       setPermission(permission);
       
@@ -75,12 +102,17 @@ export const usePushNotifications = () => {
       }
       await navigator.serviceWorker.ready;
       
-      // Ensure Push API is available
-      if (!('PushManager' in window) || !registration.pushManager) {
-        toast.error('Web Push is not supported in this browser. Try Chrome, Edge, or Safari PWA.');
+      // Ensure proper context and Push API availability
+      if (!isSecure || !isTopLevel) {
+        toast.error('Push cannot be enabled inside an embedded or insecure view. Opening a new tab to finish setup...');
+        openEnableInNewTab();
         return;
       }
-      
+      if (!('PushManager' in window) || !registration.pushManager) {
+        toast.error('Web Push is unavailable here. Opening a new tab to finish setup...');
+        openEnableInNewTab();
+        return;
+      }
       // VAPID key for testing (replace with proper key in production)
       const vapidKey = 'BEl62iUYgUivxIkv69yViEuiBIa40HI6DjbYm6WMIbHrcpXD2pfU1U1FMrKNjN5M8VdrJg1JH6FvhsU3uEwxdOo';
       
@@ -157,7 +189,11 @@ export const usePushNotifications = () => {
     permission,
     subscription,
     requestPermission,
-    unsubscribe
+    unsubscribe,
+    // Helpful context for UI handling
+    isTopLevel,
+    isSecure,
+    openEnableInNewTab,
   };
 };
 

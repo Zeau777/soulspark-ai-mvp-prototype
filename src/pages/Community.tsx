@@ -77,10 +77,11 @@ const Community = () => {
 
   const fetchCommunityData = async () => {
     if (!user) return;
+    setLoading(true);
 
+    // Fetch Spark Circles
     try {
-      // Fetch Spark Circles
-      const { data: circlesData, error: circlesError } = await supabase
+      const { data: circlesData } = await supabase
         .from('spark_circles')
         .select(`
           *,
@@ -91,10 +92,21 @@ const Community = () => {
         `)
         .order('created_at', { ascending: false });
 
-      if (circlesError) throw circlesError;
+      const transformedCircles = (circlesData || []).map(circle => ({
+        ...circle,
+        memberships: (circle.circle_memberships || []).map(m => ({
+          ...m,
+          profiles: { display_name: 'Member' }
+        }))
+      }));
+      setCircles(transformedCircles);
+    } catch (err) {
+      console.error('Circles load error:', err);
+    }
 
-      // Fetch Challenges
-      const { data: challengesData, error: challengesError } = await supabase
+    // Fetch Challenges
+    try {
+      const { data: challengesData } = await supabase
         .from('challenges')
         .select(`
           *,
@@ -103,10 +115,19 @@ const Community = () => {
         .eq('is_public', true)
         .order('created_at', { ascending: false });
 
-      if (challengesError) throw challengesError;
+      const transformedChallenges = (challengesData || []).map(challenge => ({
+        ...challenge,
+        type: challenge.type as 'ai_led' | 'peer_led',
+        participations: challenge.challenge_participations || []
+      }));
+      setChallenges(transformedChallenges);
+    } catch (err) {
+      console.error('Challenges load error:', err);
+    }
 
-      // Fetch Posts (Feed)
-      const { data: postsData, error: postsError } = await supabase
+    // Fetch Posts (Feed)
+    try {
+      const { data: postsData } = await supabase
         .from('posts')
         .select(`
           *,
@@ -116,36 +137,15 @@ const Community = () => {
         .order('created_at', { ascending: false })
         .limit(20);
 
-      if (postsError) throw postsError;
-
-      // Transform data to match interface expectations
-      const transformedCircles = (circlesData || []).map(circle => ({
-        ...circle,
-        memberships: (circle.circle_memberships || []).map(m => ({
-          ...m,
-          profiles: { display_name: 'Member' }
-        }))
-      }));
-      
-      const transformedChallenges = (challengesData || []).map(challenge => ({
-        ...challenge,
-        type: challenge.type as 'ai_led' | 'peer_led',
-        participations: challenge.challenge_participations || []
-      }));
-      
       const transformedPosts = (postsData || []).map(post => ({
         ...post,
         post_type: post.post_type as 'win' | 'prayer_request' | 'testimony' | 'reflection',
         authorDisplayName: 'Anonymous',
         reactions: post.post_reactions || []
       }));
-
-      setCircles(transformedCircles);
-      setChallenges(transformedChallenges);
       setPosts(transformedPosts);
-    } catch (error) {
-      console.error('Error fetching community data:', error);
-      toast.error('Failed to load community data');
+    } catch (err) {
+      console.error('Posts load error:', err);
     } finally {
       setLoading(false);
     }
