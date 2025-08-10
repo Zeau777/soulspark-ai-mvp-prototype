@@ -54,9 +54,10 @@ export default function Profile() {
   const { user, signOut } = useAuth();
   const [activeTab, setActiveTab] = useState<'overview'|'journey'|'insights'|'settings'>('overview');
 
-  useEffect(() => {
+useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('enablePush') === '1') {
+    const hash = window.location.hash;
+    if (params.get('enablePush') === '1' || hash.includes('settings')) {
       setActiveTab('settings');
     }
   }, []);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -11,6 +11,21 @@ import { Bell, BellOff } from 'lucide-react';
 const NotificationSettings = () => {
   const { isSupported, permission, subscription, requestPermission, unsubscribe, openEnableInNewTab } = usePushNotifications();
   const { user } = useAuth();
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('enablePush') === '1') {
+        if (permission === 'default') {
+          const btn = document.getElementById('enable-push-btn');
+          btn?.focus();
+        }
+        params.delete('enablePush');
+        const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+        window.history.replaceState({}, '', newUrl);
+      }
+    } catch (_) {}
+  }, [permission]);
 
   if (!isSupported) {
     return (
@@ -75,8 +90,10 @@ const NotificationSettings = () => {
           </div>
         )}
 
-        {permission === 'default' && (
+{permission === 'default' && (
           <Button 
+            id="enable-push-btn"
+            autoFocus
             onClick={requestPermission}
             variant="outline" 
             className="w-full"
