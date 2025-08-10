@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import InviteLinksPreview from "@/components/partner-admin/InviteLinksPreview";
 import CohortManagementPreview from "@/components/partner-admin/CohortManagementPreview";
+import { supabase } from "@/integrations/supabase/client";
 
 const setMeta = (title: string, description: string, canonicalPath: string) => {
   document.title = title;
@@ -43,7 +44,31 @@ export default function PartnerAdminPreview() {
   }, []);
 
   const { toast } = useToast();
+  const [liveMealsYTD, setLiveMealsYTD] = useState<number | null>(null);
 
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const now = new Date();
+        const start = new Date(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0));
+        const { data, error } = await supabase
+          .from('impact_credits')
+          .select('credits, created_at')
+          .gte('created_at', start.toISOString())
+          .limit(100000);
+        if (error) {
+          console.warn('impact credits fetch failed', error);
+          return;
+        }
+        const totalCredits = (data || []).reduce((s: number, r: any) => s + Number(r.credits || 0), 0);
+        const meals = Math.floor(totalCredits);
+        setLiveMealsYTD(meals);
+      } catch (e) {
+        console.warn('impact credits error', e);
+      }
+    };
+    load();
+  }, []);
   // Sample preview data (read-only)
   const pulseDaily = [
     { label: "Mon", stress: 32, engagement: 68, burnout: 12 },
@@ -276,6 +301,32 @@ export default function PartnerAdminPreview() {
                   </BarChart>
                 </ChartContainer>
               </div>
+            </CardContent>
+          </Card>
+
+          {/* Impact Engine Progress (live if signed in as org admin) */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex flex-wrap items-center gap-2">
+                <Utensils className="h-5 w-5" /> Impact Engine — No Kid Hungry
+              </CardTitle>
+              <CardDescription>Progress to 1,000,000 meals this year</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-end justify-between">
+                <div>
+                  <div className="text-3xl font-semibold text-foreground">{(liveMealsYTD ?? 125432).toLocaleString()} meals YTD</div>
+                  <p className="text-sm text-muted-foreground">Goal: 1,000,000</p>
+                </div>
+                <div className="text-sm text-muted-foreground">{Math.min(100, Math.round(((liveMealsYTD ?? 125432)/1000000)*100))}%</div>
+              </div>
+              <div className="mt-3 h-3 w-full rounded-full bg-muted">
+                <div
+                  className="h-3 rounded-full bg-primary"
+                  style={{ width: `${Math.min(100, Math.round(((liveMealsYTD ?? 125432)/1000000)*100))}%` }}
+                />
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">{liveMealsYTD == null ? 'Preview shown. Sign in as org admin to see live impact.' : 'Live organization impact.'}</p>
             </CardContent>
           </Card>
 
