@@ -40,7 +40,7 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Meet SoulSpark AI—the first AI-powered soul-care platform built for the soul. It blends timeless principles, proven psychology, and modern insights to help Gen Z and Millennials boost their mental, spiritual, and emotional well-being—judgment-free, in just 60 seconds a day.</p>
+          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">We care for our bodies. We upgrade our tech. But what about our souls? SoulSpark AI is the first AI-powered platform built to supercharge your inner life. Just 60 seconds a day. Backed by timeless truths, proven science, and the latest insights—always accessible, always judgment-free.</p>
           
 
 
