@@ -27,8 +27,8 @@ const HeroSection = () => {
 
           <h1 className="text-3xl font-bold text-foreground mb-4 leading-tight lg:text-4xl md:text-4xl">
             <span className="text-[hsl(var(--brand-orange))]">The AI Operating System for </span>
-            <span className="text-[hsl(var(--brand-orange))]">Soul-Centered</span>
-            <span className="text-foreground"> Workplaces, Campuses, and Locker Rooms.</span>
+            <span className="text-[hsl(var(--brand-orange))]">Purpose-Driven</span>
+            <span className="text-foreground"> Workplaces, Campuses, and Teams.</span>
           </h1>
 
           <p className="text-lg font-medium text-primary mb-6">SoulSpark AI — 60 Seconds a Day to Unlock Your Best Self!</p>
