@@ -2,20 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Building2, Users, GraduationCap } from "lucide-react";
-
 const PartnersCTASection = () => {
   const navigate = useNavigate();
-
-  return (
-    <section id="for-organizations" className="py-16 md:py-24 bg-muted/30">
+  return <section id="for-organizations" className="py-16 md:py-24 bg-muted/30">
       <div className="max-w-6xl mx-auto px-4">
         <header className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
-            For Organizations: DEI Leaders, Coaches, and Colleges
-          </h2>
-          <p className="mt-3 text-muted-foreground max-w-2xl">
-            Empower your community with AI-guided soul-care, nudges, and analytics. Get started in minutes.
-          </p>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">For Organizations: Workplaces, Campuses, and Sports Teams.</h2>
+          <p className="mt-3 text-muted-foreground max-w-2xl">Give your people more than tools—give them hope. SoulSpark AI walks with your employees, students, or athletes through life’s challenges, building resilience, connection, and purpose.</p>
         </header>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -63,8 +56,6 @@ const PartnersCTASection = () => {
           </Button>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default PartnersCTASection;
