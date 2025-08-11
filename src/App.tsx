@@ -19,6 +19,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Partners from "./pages/Partners";
 import PartnerAdminPreview from "./pages/PartnerAdminPreview";
+import PrayerRooms from "./pages/PrayerRooms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
