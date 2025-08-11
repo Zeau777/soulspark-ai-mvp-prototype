@@ -69,12 +69,13 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Trigger the push notification function
+    // Trigger the push notification function with type per time of day
+    const type = hour === 8 ? 'check_in' : hour === 14 ? 'coach' : 'journal';
     const { data: notificationResult, error: notificationError } = await supabase.functions.invoke(
       'send-push-notifications',
       {
         body: {
-          type: 'check_in',
+          type,
           userIds: usersToNotify.map(u => u.user_id)
         }
       }

@@ -37,25 +37,44 @@ const handler = async (req: Request): Promise<Response> => {
     let title = '';
     let body = '';
     let tag = '';
+    let url = '/dashboard';
 
-    // Define notification content based on time and type
+    // Define notification content based on type and time of day
     const now = new Date();
     const hour = now.getHours();
 
-    if (type === 'check_in') {
-      if (hour >= 6 && hour < 12) {
-        title = '🌅 Morning SoulSpark';
-        body = 'Start your day with intention. How is your heart feeling this morning?';
-        tag = 'morning_checkin';
-      } else if (hour >= 12 && hour < 18) {
-        title = '☀️ Afternoon Pause';
-        body = 'Take a moment to breathe. How has your spirit been today?';
-        tag = 'afternoon_checkin';
-      } else {
-        title = '🌙 Evening Reflection';
-        body = 'Rest and reflect. What is your soul grateful for today?';
-        tag = 'evening_checkin';
-      }
+    switch (type) {
+      case 'coach':
+        title = '💬 Mid‑day Soul-Care Coach';
+        body = 'Take a reflection break. Ask your Soul-Care Coach anything.';
+        tag = 'midday_coach';
+        url = '/chat?utm=push_midday_coach';
+        break;
+      case 'journal':
+        title = '📝 Evening Journal';
+        body = 'Unwind with a guided reflection. Capture today’s gratitude and growth.';
+        tag = 'evening_journal';
+        url = '/journal?utm=push_evening_journal';
+        break;
+      case 'check_in':
+      default:
+        if (hour >= 6 && hour < 12) {
+          title = '🌅 Morning Soul Check‑in';
+          body = 'Start with intention. How is your heart this morning? + a Spark prompt.';
+          tag = 'morning_checkin';
+          url = '/dashboard?utm=push_morning_checkin';
+        } else if (hour >= 12 && hour < 18) {
+          title = '☀️ Afternoon Pause';
+          body = 'Take a breath and reflect. How has your spirit been today?';
+          tag = 'afternoon_checkin';
+          url = '/chat?utm=push_afternoon_reflection';
+        } else {
+          title = '🌙 Evening Reflection';
+          body = 'Rest and reflect. What is your soul grateful for today?';
+          tag = 'evening_checkin';
+          url = '/journal?utm=push_evening_reflection';
+        }
+        break;
     }
 
     // Get push subscriptions for active users
@@ -88,8 +107,8 @@ const handler = async (req: Request): Promise<Response> => {
         badge: '/favicon.ico',
         tag,
         data: {
-          url: '/dashboard',
-          type: 'check_in'
+          url,
+          type
         }
       };
 
