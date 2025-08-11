@@ -40,7 +40,7 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Gen Z and Millennials are upgrading everything—our skills, our devices, our hustle. But what about our inner life? SoulSpark AI is the first platform to supercharge your mental, emotional, and purpose-driven well-being in just 60 seconds a day. Powered by timeless wisdom, proven science, and human-centered AI —always accessible, always judgment-free.</p>
+          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Gen Z and Millennials are upgrading everything, from our skills to our devices to our hustle. But what about our inner life? SoulSpark AI is the first platform designed to supercharge your mental, emotional, and purpose-driven well-being in just 60 seconds a day. It is powered by timeless wisdom, proven science, and human-centered AI, and is always accessible and always judgment-free.</p>
           
 
 
