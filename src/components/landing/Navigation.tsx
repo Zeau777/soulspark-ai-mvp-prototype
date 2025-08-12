@@ -32,6 +32,9 @@ const Navigation = () => {
               <a href="#testimonials" className="text-foreground hover:text-primary transition-colors font-medium">
                 Stories
               </a>
+              <a href="/pricing" className="text-foreground hover:text-primary transition-colors font-medium">
+                Pricing
+              </a>
               <a href="/partners" className="text-foreground hover:text-primary transition-colors font-medium">
                 For Organizations
               </a>
@@ -63,44 +66,51 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border/40">
-              <a
-                href="/about"
-                className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </a>
-              <a
-                href="#how-it-works"
-                className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                How It Works
-              </a>
-              <a
-                href="#testimonials"
-                className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                Stories
-              </a>
-              <a
-                href="/partners"
-                className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                For Organizations
-              </a>
-              <div className="flex flex-col space-y-2 px-3 pt-4">
-                <Button variant="ghost" size="sm" className="w-full" onClick={() => navigate('/auth')}>
-                  Sign In
-                </Button>
-                <Button variant="spiritual" size="sm" className="w-full" onClick={() => navigate('/auth')}>
-                  Join Now
-                </Button>
-              </div>
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border/40">
+            <a
+              href="/about"
+              className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              About
+            </a>
+            <a
+              href="#how-it-works"
+              className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              How It Works
+            </a>
+            <a
+              href="#testimonials"
+              className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Stories
+            </a>
+            <a
+              href="/pricing"
+              className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Pricing
+            </a>
+            <a
+              href="/partners"
+              className="block px-3 py-2 text-foreground hover:text-primary transition-colors font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              For Organizations
+            </a>
+            <div className="flex flex-col space-y-2 px-3 pt-4">
+              <Button variant="ghost" size="sm" className="w-full" onClick={() => navigate('/auth')}>
+                Sign In
+              </Button>
+              <Button variant="spiritual" size="sm" className="w-full" onClick={() => navigate('/auth')}>
+                Join Now
+              </Button>
             </div>
+          </div>
           </div>
         )}
       </div>

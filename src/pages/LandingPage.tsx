@@ -5,6 +5,7 @@ import PartnersCTASection from "@/components/landing/PartnersCTASection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import CTASection from "@/components/landing/CTASection";
 import Footer from "@/components/landing/Footer";
+import PricingSection from "@/components/landing/PricingSection";
 
 const LandingPage = () => {
   return (
@@ -14,6 +15,7 @@ const LandingPage = () => {
       <HowItWorksSection />
       <PartnersCTASection />
       <TestimonialsSection />
+      <PricingSection id="pricing" />
       <CTASection />
       <Footer />
     </div>

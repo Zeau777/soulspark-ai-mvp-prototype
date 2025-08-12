@@ -18,6 +18,7 @@ import PlatformAnalytics from "./pages/PlatformAnalytics";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Partners from "./pages/Partners";
+import Pricing from "./pages/Pricing";
 import PartnerAdminPreview from "./pages/PartnerAdminPreview";
 import PrayerRooms from "./pages/PrayerRooms";
 import Journal from "./pages/Journal";
@@ -68,6 +69,7 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/partners" element={<Partners />} />
+            <Route path="/pricing" element={<Pricing />} />
             <Route path="/partner-preview" element={<PartnerAdminPreview />} />
             
             {/* Protected routes */}
