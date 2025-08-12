@@ -145,7 +145,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                     "Student community features",
                   ].map(item)}
                 </ul>
-                <Button className="w-full" variant="default">Contact Campus Team</Button>
+                <Button className="w-full" variant="default" onClick={() => navigate('/partners?plan=colleges#partner-plans')}>Contact Campus Team</Button>
               </CardContent>
             </Card>
           </article>
@@ -168,7 +168,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                     "Engagement analytics",
                   ].map(item)}
                 </ul>
-                <Button className="w-full" variant="outline">Talk to Sports Team</Button>
+                <Button className="w-full" variant="outline" onClick={() => navigate('/partners?plan=sports#partner-plans')}>Talk to Sports Team</Button>
               </CardContent>
             </Card>
           </article>
