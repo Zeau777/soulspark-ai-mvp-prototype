@@ -211,9 +211,7 @@ const CTASection = () => {
             Already have a partnership guide and ready to talk? Our team is here to help you get started.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline" size="lg" onClick={() => navigate('/auth')}>
-              Schedule a Call
-            </Button>
+            
             <Button variant="ghost" size="lg" onClick={() => window.open('mailto:partners@mysoulsparkai.com', '_blank')}>
               Email Us Directly
             </Button>
