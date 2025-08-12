@@ -24,6 +24,7 @@ import PrayerRooms from "./pages/PrayerRooms";
 import Journal from "./pages/Journal";
 import NotFound from "./pages/NotFound";
 import { useOrgLink } from "@/hooks/useOrgLink";
+import OrgAccessBanner from "@/components/OrgAccessBanner";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,7 @@ const App = () => (
       <AuthProvider>
         <BrowserRouter>
           <OrgLinkHandler />
+          <OrgAccessBanner />
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<PublicRoute><Index /></PublicRoute>} />

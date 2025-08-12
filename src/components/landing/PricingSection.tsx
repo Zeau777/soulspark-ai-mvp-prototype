@@ -151,8 +151,10 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                     "Student community features",
                   ].map(item)}
                 </ul>
-                <Button asChild className="w-full" variant="default">
-                  <a href="mailto:partners@mysoulsparkai.com?subject=College%20Partnership%20Inquiry">Contact Campus Team</a>
+                <Button className="w-full" variant="default" onClick={() => {
+                  window.location.href = 'mailto:partners@mysoulsparkai.com?subject=College%20Partnership%20Inquiry';
+                }}>
+                  Contact Campus Team
                 </Button>
               </CardContent>
             </Card>
@@ -176,8 +178,10 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                     "Engagement analytics",
                   ].map(item)}
                 </ul>
-                <Button asChild className="w-full" variant="outline">
-                  <a href="mailto:partners@mysoulsparkai.com?subject=Sports%20Partnership%20Inquiry">Talk to Sports Team</a>
+                <Button className="w-full" variant="outline" onClick={() => {
+                  window.location.href = 'mailto:partners@mysoulsparkai.com?subject=Sports%20Partnership%20Inquiry';
+                }}>
+                  Talk to Sports Team
                 </Button>
               </CardContent>
             </Card>
