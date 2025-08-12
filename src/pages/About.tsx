@@ -1,8 +1,6 @@
 import { Users, Target, Eye, BookOpen, Heart } from "lucide-react";
-
 const About = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
@@ -10,7 +8,9 @@ const About = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             About <span className="text-gradient">SoulSpark AI</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">SoulSpark AI is an AI-powered soul-care platform that makes it easy and personal for Gen Z and Millennials to access faith-centered, emotionally intelligent support for their mental, emotional, and spiritual wellbeing. It partners with B2B organizations such as employee resource groups, colleges, and professional sports teams, while also growing rapidly as a direct-to-user platform. SoulSpark is closing the spiritual and emotional care gap for the next generation. This is one of the most overlooked opportunities in faithtech and mental wellness, and every user engagement fuels real-world impact by helping feed a child in need.</p>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">SoulSpark AI is a next-generation, AI-powered soul-care platform designed to make personal, meaningful support available anytime to Gen Z and Millennials. It helps them strengthen their mental, emotional, and inner wellbeing through accessible, personalized guidance that blends timeless wisdom with modern science.
+
+We partner with forward-thinking organizations—ranging from companies and employee resource groups to colleges and professional sports teams—while also growing as a direct-to-user platform. SoulSpark is bridging one of the most overlooked gaps in mental and emotional care for the next generation. And every interaction on the platform creates real-world change by helping provide meals to children in need.</p>
         </div>
       </section>
 
@@ -64,8 +64,6 @@ const About = () => {
           </p>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default About;
