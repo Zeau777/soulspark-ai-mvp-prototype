@@ -16,7 +16,7 @@ const Navigation = () => {
             <img 
               src="/lovable-uploads/7dc06000-59f3-4a4f-85de-22d7a9410636.png" 
               alt="SoulSpark AI" 
-              className="h-8 w-auto"
+              className="h-10 md:h-12 w-auto"
             />
           </div>
 
