@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import { Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -73,7 +73,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                   {features.starter.map(item)}
                 </ul>
                 <Button asChild className="w-full" variant="spiritual">
-                  <Link to="/partners?plan=starter#partner-plans">Choose Starter</Link>
+                  <a href="/partners?plan=starter#partner-plans">Choose Starter</a>
                 </Button>
               </CardContent>
             </Card>
@@ -101,7 +101,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                   {features.growth.map(item)}
                 </ul>
                 <Button asChild className="w-full" variant="default">
-                  <Link to="/partners?plan=growth#partner-plans">Choose Growth</Link>
+                  <a href="/partners?plan=growth#partner-plans">Choose Growth</a>
                 </Button>
               </CardContent>
             </Card>
@@ -124,7 +124,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                   {features.enterprise.map(item)}
                 </ul>
                 <Button asChild className="w-full" variant="outline">
-                  <Link to="/partners?plan=enterprise#partner-plans">Choose Enterprise</Link>
+                  <a href="/partners?plan=enterprise#partner-plans">Choose Enterprise</a>
                 </Button>
               </CardContent>
             </Card>
