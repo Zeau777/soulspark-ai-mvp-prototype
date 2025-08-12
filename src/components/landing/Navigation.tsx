@@ -10,13 +10,13 @@ const Navigation = () => {
   return (
     <nav className="bg-background/95 backdrop-blur-sm border-b border-border/40 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center">
             <img 
               src="/lovable-uploads/7dc06000-59f3-4a4f-85de-22d7a9410636.png" 
               alt="SoulSpark AI" 
-              className="h-10 md:h-12 w-auto"
+              className="h-12 md:h-16 w-auto"
             />
           </div>
 
