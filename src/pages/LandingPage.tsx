@@ -15,9 +15,9 @@ const LandingPage = () => {
       <HeroSection />
       <HowItWorksSection />
       <PartnersCTASection />
-      <TestimonialsSection />
       <PricingSection id="pricing" />
       <CTASection />
+      <TestimonialsSection />
       <Footer />
     </div>
   );
