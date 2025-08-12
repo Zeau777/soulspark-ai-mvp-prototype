@@ -17,17 +17,7 @@ const Footer = () => {
           </div>
 
           {/* Product links */}
-          <div>
-            <h3 className="font-semibold text-foreground mb-4">Product</h3>
-            <ul className="space-y-3 text-sm">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">How It Works</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">SoulScan Quiz</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Daily SoulDrops</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">AI Soul-Care Coach</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Impact Tracker</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Pricing</a></li>
-            </ul>
-          </div>
+          
 
           {/* Community & Support */}
           <div>
