@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Building2, GraduationCap, Trophy } from "lucide-react";
 const PartnersCTASection = () => {
   const navigate = useNavigate();
-  return <section id="for-organizations" className="py-16 md:py-24 bg-muted/30">
+  return <section id="for-organizations" className="pt-16 md:pt-24 pb-8 md:pb-12 bg-muted/30">
       <div className="max-w-6xl mx-auto px-4">
         <header className="mb-8">
           <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">For Organizations: Workplaces, Campuses, and Sports Teams.</h2>

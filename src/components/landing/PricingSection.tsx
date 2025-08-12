@@ -37,7 +37,7 @@ const item = (text: string) => (
 
 const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true }) => {
   return (
-    <section id={id} className="w-full py-16 md:py-24 bg-background">
+    <section id={id} className="w-full pt-8 md:pt-16 pb-16 md:pb-24 bg-background">
       <div className="container">
         {showHeader && (
           <header className="mx-auto max-w-3xl text-center mb-12 md:mb-16">
