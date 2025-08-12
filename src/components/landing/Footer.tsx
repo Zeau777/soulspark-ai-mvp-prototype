@@ -12,7 +12,7 @@ const Footer = () => {
             <p className="text-muted-foreground leading-relaxed mb-6 max-w-md text-sm">Gen Z and Millennials are facing record stress, burnout, and disconnection—hurting engagement and retention. SoulSpark AI delivers personalized, 24/7 soul-care that boosts mental, emotional, and inner wellbeing. Organizations see stronger culture, higher performance, and real-world impact—every check-in funds a meal for a child in need. It’s more than a perk; it’s a culture shift.</p>
             <div className="flex items-center text-sm text-muted-foreground">
               <Heart className="h-4 w-4 text-primary mr-2" />
-              <span>Made with love for your emotional and spiritual journey.</span>
+              <span>Purpose-built for holistic wellbeing at work, school, and beyond.</span>
             </div>
           </div>
 
