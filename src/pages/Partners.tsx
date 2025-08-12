@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Building2, Trophy, GraduationCap, Shield, BarChart3 } from "lucide-react";
+import PricingSection from "@/components/landing/PricingSection";
 const setMeta = (title: string, description: string, canonicalPath: string) => {
   document.title = title;
   const desc = document.querySelector('meta[name="description"]');
@@ -22,9 +23,22 @@ const setMeta = (title: string, description: string, canonicalPath: string) => {
 };
 export default function Partners() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const planParam = params.get('plan');
+  const plan = planParam === 'starter' || planParam === 'growth' || planParam === 'enterprise' ? planParam : undefined;
+
   useEffect(() => {
     setMeta("SoulSpark AI Partners — Companies, Sports Teams, Colleges", "Partner with SoulSpark AI. Purpose-driven tools for companies, sports teams, and colleges.", "/partners");
   }, []);
+
+  useEffect(() => {
+    if (plan) {
+      const el = document.getElementById('partner-plans');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [plan]);
+
   return <main className="min-h-screen bg-background">
       <header className="max-w-6xl mx-auto px-4 pt-14 pb-8">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
@@ -102,6 +116,10 @@ export default function Partners() {
             Create your partner account and explore the Admin preview in minutes.
           </CardContent>
         </Card>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 pb-24">
+        <PricingSection id="partner-plans" showHeader={true} selectedPlan={plan} />
       </section>
     </main>;
 }

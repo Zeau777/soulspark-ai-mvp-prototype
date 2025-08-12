@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import { Button } from "@/components/ui/button";
 interface PricingSectionProps {
   id?: string;
   showHeader?: boolean;
+  selectedPlan?: 'starter' | 'growth' | 'enterprise';
 }
 
 const features = {
@@ -35,7 +37,8 @@ const item = (text: string) => (
   </li>
 );
 
-const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true }) => {
+const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, selectedPlan }) => {
+  const navigate = useNavigate();
   return (
     <section id={id} className="w-full pt-8 md:pt-16 pb-16 md:pb-24 bg-background">
       <div className="container">
@@ -55,7 +58,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true }
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {/* Starter */}
           <article className="relative">
-            <Card className="h-full border-border/60">
+            <Card className={`h-full ${selectedPlan === 'starter' ? 'border-accent ring-2 ring-accent/40 shadow-spiritual' : 'border-border/60'}`}>
               <CardHeader>
                 <CardTitle className="text-xl">Starter</CardTitle>
                 <p className="text-sm text-muted-foreground">Small to mid-size companies</p>
@@ -69,7 +72,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true }
                 <ul className="space-y-3 text-sm">
                   {features.starter.map(item)}
                 </ul>
-                <Button className="w-full" variant="spiritual">Get Started</Button>
+                <Button className="w-full" variant="spiritual" onClick={() => navigate('/partners?plan=starter#partner-plans')}>Choose Starter</Button>
               </CardContent>
             </Card>
           </article>
@@ -81,7 +84,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true }
                 Most Popular
               </span>
             </div>
-            <Card className="h-full border-accent shadow-spiritual">
+            <Card className={`h-full ${selectedPlan === 'growth' ? 'border-accent ring-2 ring-accent/40 shadow-spiritual' : 'border-accent shadow-spiritual'}`}>
               <CardHeader>
                 <CardTitle className="text-xl">Growth</CardTitle>
                 <p className="text-sm text-muted-foreground">Growing organizations</p>
@@ -95,14 +98,14 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true }
                 <ul className="space-y-3 text-sm">
                   {features.growth.map(item)}
                 </ul>
-                <Button className="w-full" variant="default">Choose Growth</Button>
+                <Button className="w-full" variant="default" onClick={() => navigate('/partners?plan=growth#partner-plans')}>Choose Growth</Button>
               </CardContent>
             </Card>
           </article>
 
           {/* Enterprise */}
           <article className="relative">
-            <Card className="h-full border-border/60">
+            <Card className={`h-full ${selectedPlan === 'enterprise' ? 'border-accent ring-2 ring-accent/40 shadow-spiritual' : 'border-border/60'}`}>
               <CardHeader>
                 <CardTitle className="text-xl">Enterprise</CardTitle>
                 <p className="text-sm text-muted-foreground">Large companies & global teams</p>
@@ -116,7 +119,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true }
                 <ul className="space-y-3 text-sm">
                   {features.enterprise.map(item)}
                 </ul>
-                <Button className="w-full" variant="outline">Talk to Sales</Button>
+                <Button className="w-full" variant="outline" onClick={() => navigate('/partners?plan=enterprise#partner-plans')}>Choose Enterprise</Button>
               </CardContent>
             </Card>
           </article>
