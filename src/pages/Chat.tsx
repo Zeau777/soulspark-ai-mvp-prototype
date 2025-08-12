@@ -10,8 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, Send, Bot, User, Heart, Sparkles, Volume2, Square } from 'lucide-react';
 import { speakText, stopSpeech } from '@/utils/tts';
 import VoiceInterface from "@/components/voice/VoiceInterface";
-import { useUserProfile } from '@/hooks/useUserProfile';
-
+import { useAccess } from '@/hooks/useAccess';
 interface Message {
   id: string;
   content: string;
@@ -33,14 +32,12 @@ export default function Chat() {
   const [voiceId, setVoiceId] = useState<string>("alloy");
   const [playingId, setPlayingId] = useState<string | null>(null);
 const { user } = useAuth();
-const { profile, loading: profileLoading } = useUserProfile(user?.id);
+const { fullAccess, loading: accessLoading } = useAccess();
 
 useEffect(() => {
-  if (!user) return;
-  if (profileLoading) return;
-  if (!profile?.organization_id) return;
+  if (!user || !fullAccess) return;
   fetchConversations();
-}, [user, profileLoading, profile?.organization_id]);
+}, [user, fullAccess]);
 
   const fetchConversations = async () => {
     if (!user) return;
@@ -222,7 +219,7 @@ useEffect(() => {
     "I'm tired"
   ];
 
-if (profileLoading) {
+if (accessLoading) {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <Card className="max-w-md w-full text-center">
@@ -230,23 +227,23 @@ if (profileLoading) {
           <CardTitle>Loading</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground">Preparing your accessplease wait...</p>
+          <p className="text-muted-foreground">Preparing your access—please wait...</p>
         </CardContent>
       </Card>
     </div>
   );
 }
 
-if (!profile?.organization_id) {
+if (!fullAccess) {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <Card className="max-w-md w-full text-center">
         <CardHeader>
-          <CardTitle>Soul-Care Coach is a Premium Feature</CardTitle>
+          <CardTitle>Soul-Care Coach is Restricted</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground mb-4">
-            This feature is available through organization accounts. Use your organizations invite link to get access.
+            Full access is available for organization members or legacy subscribers. Use your organization&rsquo;s invite link to get access.
           </p>
           <Button variant="spiritual" onClick={() => (window.location.href = '/partners')}>
             See Organization Plans
@@ -256,7 +253,6 @@ if (!profile?.organization_id) {
     </div>
   );
 }
-
 return (
     <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-accent/10 flex flex-col">
       {/* Header */}

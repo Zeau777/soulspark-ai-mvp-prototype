@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Users, Plus, Calendar, Heart, MessageCircle, Target, Award } from 'lucide-react';
 import { toast } from 'sonner';
 import { useUserProfile } from '@/hooks/useUserProfile';
+import { useAccess } from '@/hooks/useAccess';
 
 interface SparkCircle {
   id: string;
@@ -61,7 +62,8 @@ interface Post {
 
 const Community = () => {
   const { user } = useAuth();
-  const { profile, loading: profileLoading } = useUserProfile(user?.id);
+const { profile, loading: profileLoading } = useUserProfile(user?.id);
+  const { fullAccess } = useAccess();
   const [circles, setCircles] = useState<SparkCircle[]>([]);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -76,9 +78,8 @@ const Community = () => {
 useEffect(() => {
   if (!user) return;
   if (profileLoading) return;
-  if (!profile?.organization_id) { setLoading(false); return; }
   fetchCommunityData();
-}, [user, profileLoading, profile?.organization_id]);
+}, [user, profileLoading]);
 
   const fetchCommunityData = async () => {
     if (!user) return;
@@ -158,6 +159,10 @@ useEffect(() => {
 
   const createCircle = async () => {
     if (!user || !newCircleName.trim()) return;
+    if (!fullAccess) {
+      toast.error('Join via your organization to create circles');
+      return;
+    }
 
     try {
       const { data, error } = await supabase
@@ -193,6 +198,10 @@ useEffect(() => {
 
   const joinCircle = async (circleId: string) => {
     if (!user) return;
+    if (!fullAccess) {
+      toast.error('Join via your organization to participate in circles');
+      return;
+    }
 
     try {
       await supabase
@@ -213,6 +222,10 @@ useEffect(() => {
 
   const createPost = async () => {
     if (!user || !newPostContent.trim()) return;
+    if (!fullAccess) {
+      toast.error('Join via your organization to post');
+      return;
+    }
 
     try {
       await supabase
@@ -255,26 +268,6 @@ if (profileLoading || loading) {
   return (
     <div className="container mx-auto p-6 space-y-6">
       <div className="text-center">Loading community...</div>
-    </div>
-  );
-}
-
-if (!profile?.organization_id) {
-  return (
-    <div className="container mx-auto p-6">
-      <Card className="max-w-2xl mx-auto text-center">
-        <CardHeader>
-          <CardTitle className="text-2xl">Community is a Premium Feature</CardTitle>
-          <CardDescription>
-            Access is available through organization accounts. Use your organizations invite link to join.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Button variant="spiritual" onClick={() => (window.location.href = '/partners')}>
-            See Organization Plans
-          </Button>
-        </CardContent>
-      </Card>
     </div>
   );
 }

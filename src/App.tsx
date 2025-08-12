@@ -23,6 +23,7 @@ import PartnerAdminPreview from "./pages/PartnerAdminPreview";
 import PrayerRooms from "./pages/PrayerRooms";
 import Journal from "./pages/Journal";
 import NotFound from "./pages/NotFound";
+import { useOrgLink } from "@/hooks/useOrgLink";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,11 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
   return user ? <Navigate to="/dashboard" replace /> : <>{children}</>;
 }
 
+function OrgLinkHandler() {
+  useOrgLink();
+  return null;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -61,6 +67,7 @@ const App = () => (
       <Sonner />
       <AuthProvider>
         <BrowserRouter>
+          <OrgLinkHandler />
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<PublicRoute><Index /></PublicRoute>} />

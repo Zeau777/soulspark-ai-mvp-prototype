@@ -327,6 +327,27 @@ export type Database = {
         }
         Relationships: []
       }
+      legacy_subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          notes: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          notes?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          notes?: string | null
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           content: string
