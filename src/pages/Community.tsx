@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Users, Plus, Calendar, Heart, MessageCircle, Target, Award } from 'lucide-react';
 import { toast } from 'sonner';
+import { useUserProfile } from '@/hooks/useUserProfile';
 
 interface SparkCircle {
   id: string;
@@ -60,6 +61,7 @@ interface Post {
 
 const Community = () => {
   const { user } = useAuth();
+  const { profile, loading: profileLoading } = useUserProfile(user?.id);
   const [circles, setCircles] = useState<SparkCircle[]>([]);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -71,9 +73,12 @@ const Community = () => {
   const [newPostContent, setNewPostContent] = useState('');
   const [newPostType, setNewPostType] = useState<'win' | 'prayer_request' | 'testimony' | 'reflection'>('win');
 
-  useEffect(() => {
-    fetchCommunityData();
-  }, [user]);
+useEffect(() => {
+  if (!user) return;
+  if (profileLoading) return;
+  if (!profile?.organization_id) { setLoading(false); return; }
+  fetchCommunityData();
+}, [user, profileLoading, profile?.organization_id]);
 
   const fetchCommunityData = async () => {
     if (!user) return;
@@ -246,13 +251,33 @@ const Community = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="container mx-auto p-6 space-y-6">
-        <div className="text-center">Loading community...</div>
-      </div>
-    );
-  }
+if (profileLoading || loading) {
+  return (
+    <div className="container mx-auto p-6 space-y-6">
+      <div className="text-center">Loading community...</div>
+    </div>
+  );
+}
+
+if (!profile?.organization_id) {
+  return (
+    <div className="container mx-auto p-6">
+      <Card className="max-w-2xl mx-auto text-center">
+        <CardHeader>
+          <CardTitle className="text-2xl">Community is a Premium Feature</CardTitle>
+          <CardDescription>
+            Access is available through organization accounts. Use your organizations invite link to join.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button variant="spiritual" onClick={() => (window.location.href = '/partners')}>
+            See Organization Plans
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
 
   return (
     <div className="container mx-auto p-6 space-y-6">

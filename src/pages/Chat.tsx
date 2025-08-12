@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, Send, Bot, User, Heart, Sparkles, Volume2, Square } from 'lucide-react';
 import { speakText, stopSpeech } from '@/utils/tts';
 import VoiceInterface from "@/components/voice/VoiceInterface";
+import { useUserProfile } from '@/hooks/useUserProfile';
 
 interface Message {
   id: string;
@@ -31,13 +32,15 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [voiceId, setVoiceId] = useState<string>("alloy");
   const [playingId, setPlayingId] = useState<string | null>(null);
-  const { user } = useAuth();
+const { user } = useAuth();
+const { profile, loading: profileLoading } = useUserProfile(user?.id);
 
-  useEffect(() => {
-    if (user) {
-      fetchConversations();
-    }
-  }, [user]);
+useEffect(() => {
+  if (!user) return;
+  if (profileLoading) return;
+  if (!profile?.organization_id) return;
+  fetchConversations();
+}, [user, profileLoading, profile?.organization_id]);
 
   const fetchConversations = async () => {
     if (!user) return;
@@ -219,7 +222,42 @@ export default function Chat() {
     "I'm tired"
   ];
 
+if (profileLoading) {
   return (
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <Card className="max-w-md w-full text-center">
+        <CardHeader>
+          <CardTitle>Loading</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground">Preparing your accessplease wait...</p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+if (!profile?.organization_id) {
+  return (
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <Card className="max-w-md w-full text-center">
+        <CardHeader>
+          <CardTitle>Soul-Care Coach is a Premium Feature</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground mb-4">
+            This feature is available through organization accounts. Use your organizations invite link to get access.
+          </p>
+          <Button variant="spiritual" onClick={() => (window.location.href = '/partners')}>
+            See Organization Plans
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+return (
     <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-accent/10 flex flex-col">
       {/* Header */}
       <header className="bg-background/80 backdrop-blur-sm border-b p-4">
