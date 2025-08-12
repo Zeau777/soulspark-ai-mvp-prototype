@@ -15,7 +15,7 @@ const Navigation = () => {
           <div className="flex items-center">
             <img 
               src="/lovable-uploads/7dc06000-59f3-4a4f-85de-22d7a9410636.png" 
-              alt="SoulSpark AI" 
+              alt="SoulSpark AI logo"
               className="h-12 md:h-16 w-auto"
             />
           </div>

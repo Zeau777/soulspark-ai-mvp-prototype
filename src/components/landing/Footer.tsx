@@ -6,10 +6,10 @@ const Footer = () => {
           {/* Brand section */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
-              <img src="/lovable-uploads/7dc06000-59f3-4a4f-85de-22d7a9410636.png" alt="SoulSpark AI" className="h-8 w-auto mr-3" />
+              <img src="/lovable-uploads/7dc06000-59f3-4a4f-85de-22d7a9410636.png" alt="SoulSpark AI" className="h-12 md:h-16 w-auto mr-3" />
             </div>
-            <h4 className="font-semibold text-foreground mb-2 text-sm">Why Organizations Want SoulSpark AI</h4>
-            <p className="text-muted-foreground leading-relaxed mb-6 max-w-md text-sm">Gen Z and Millennials are burned out, disconnected, and craving meaning. SoulSpark AI provides personalized, faith-centered support that addresses their emotional and spiritual needs. It boosts engagement, retention, and well-being — all while creating real-world impact by feeding a child with every check-in. It's soul care that transforms culture.</p>
+            <h4 className="font-semibold text-foreground mb-2 text-sm">Why Organizations Choose SoulSpark AI</h4>
+            <p className="text-muted-foreground leading-relaxed mb-6 max-w-md text-sm">Gen Z and Millennials are facing record stress, burnout, and disconnection—hurting engagement and retention. SoulSpark AI delivers personalized, 24/7 soul-care that boosts mental, emotional, and inner wellbeing. Organizations see stronger culture, higher performance, and real-world impact—every check-in funds a meal for a child in need. It’s more than a perk; it’s a culture shift.</p>
             <div className="flex items-center text-sm text-muted-foreground">
               <Heart className="h-4 w-4 text-primary mr-2" />
               <span>Made with love for your emotional and spiritual journey.</span>
