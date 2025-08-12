@@ -20,17 +20,7 @@ const Footer = () => {
           
 
           {/* Community & Support */}
-          <div>
-            <h3 className="font-semibold text-foreground mb-4">Community</h3>
-            <ul className="space-y-3 text-sm">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">For Students</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">For Employees</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">For Athletes</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Partner Organizations</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Success Stories</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Support Center</a></li>
-            </ul>
-          </div>
+          
         </div>
 
         {/* Contact info */}
