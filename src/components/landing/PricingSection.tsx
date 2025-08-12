@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -38,7 +38,7 @@ const item = (text: string) => (
 );
 
 const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, selectedPlan }) => {
-  const navigate = useNavigate();
+  
   return (
     <section id={id} className="w-full pt-8 md:pt-16 pb-16 md:pb-24 bg-background">
       <div className="container">
@@ -72,7 +72,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                 <ul className="space-y-3 text-sm">
                   {features.starter.map(item)}
                 </ul>
-                <Button className="w-full" variant="spiritual" onClick={() => navigate('/partners?plan=starter#partner-plans')}>Choose Starter</Button>
+                <Button asChild className="w-full" variant="spiritual">
+                  <Link to="/partners?plan=starter#partner-plans">Choose Starter</Link>
+                </Button>
               </CardContent>
             </Card>
           </article>
@@ -98,7 +100,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                 <ul className="space-y-3 text-sm">
                   {features.growth.map(item)}
                 </ul>
-                <Button className="w-full" variant="default" onClick={() => navigate('/partners?plan=growth#partner-plans')}>Choose Growth</Button>
+                <Button asChild className="w-full" variant="default">
+                  <Link to="/partners?plan=growth#partner-plans">Choose Growth</Link>
+                </Button>
               </CardContent>
             </Card>
           </article>
@@ -119,7 +123,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                 <ul className="space-y-3 text-sm">
                   {features.enterprise.map(item)}
                 </ul>
-                <Button className="w-full" variant="outline" onClick={() => navigate('/partners?plan=enterprise#partner-plans')}>Choose Enterprise</Button>
+                <Button asChild className="w-full" variant="outline">
+                  <Link to="/partners?plan=enterprise#partner-plans">Choose Enterprise</Link>
+                </Button>
               </CardContent>
             </Card>
           </article>
@@ -145,7 +151,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                     "Student community features",
                   ].map(item)}
                 </ul>
-                <Button className="w-full" variant="default" onClick={() => navigate('/partners?plan=colleges#partner-plans')}>Contact Campus Team</Button>
+                <Button asChild className="w-full" variant="default">
+                  <a href="mailto:partners@mysoulsparkai.com?subject=College%20Partnership%20Inquiry">Contact Campus Team</a>
+                </Button>
               </CardContent>
             </Card>
           </article>
@@ -168,7 +176,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ id, showHeader = true, 
                     "Engagement analytics",
                   ].map(item)}
                 </ul>
-                <Button className="w-full" variant="outline" onClick={() => navigate('/partners?plan=sports#partner-plans')}>Talk to Sports Team</Button>
+                <Button asChild className="w-full" variant="outline">
+                  <a href="mailto:partners@mysoulsparkai.com?subject=Sports%20Partnership%20Inquiry">Talk to Sports Team</a>
+                </Button>
               </CardContent>
             </Card>
           </article>
