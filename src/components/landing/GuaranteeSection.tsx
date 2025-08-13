@@ -1,5 +1,6 @@
-import { Check, TrendingUp, Users, Leaf, MessageCircle, TrendingDown } from "lucide-react";
+import { Check, TrendingUp, Users, Leaf, MessageCircle, TrendingDown, Quote } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import sarahPhoto from "@/assets/sarah-hr-director.jpg";
 
 const GuaranteeSection = () => {
   const benefits = [
@@ -59,13 +60,37 @@ const GuaranteeSection = () => {
             </div>
           </div>
 
-          <div className="text-center bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6">
-            <p className="text-foreground font-medium mb-2">
-              If you don't see these results, we'll work with you until you do—or give you a full refund.
-            </p>
-            <p className="text-primary font-semibold">
-              Because your people matter, and so do results.
-            </p>
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div className="text-center lg:text-left bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6">
+              <p className="text-foreground font-medium mb-2">
+                If you don't see these results, we'll work with you until you do—or give you a full refund.
+              </p>
+              <p className="text-primary font-semibold">
+                Because your people matter, and so do results.
+              </p>
+            </div>
+
+            <Card className="p-6 bg-gradient-to-br from-background to-primary/5 border-primary/20">
+              <div className="flex items-start space-x-4">
+                <Quote className="w-8 h-8 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <p className="text-foreground mb-4 italic leading-relaxed">
+                    "Within 60 days of rolling out SoulSpark AI, our engagement scores jumped by 28%, and employees were actually excited to check in daily. The 90-Day Guarantee gave us confidence, but the results spoke for themselves."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img 
+                      src={sarahPhoto} 
+                      alt="Sarah M., HR Director" 
+                      className="w-12 h-12 rounded-full object-cover border-2 border-primary/20"
+                    />
+                    <div>
+                      <p className="font-semibold text-foreground">Sarah M.</p>
+                      <p className="text-sm text-muted-foreground">HR Director, Beta Test Partner</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
         </Card>
       </div>
