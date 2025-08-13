@@ -2,6 +2,7 @@ import Navigation from "@/components/landing/Navigation";
 import HeroSection from "@/components/landing/HeroSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import PartnersCTASection from "@/components/landing/PartnersCTASection";
+import GuaranteeSection from "@/components/landing/GuaranteeSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import CTASection from "@/components/landing/CTASection";
 
@@ -15,6 +16,7 @@ const LandingPage = () => {
       <HeroSection />
       <HowItWorksSection />
       <PartnersCTASection />
+      <GuaranteeSection />
       <PricingSection id="pricing" />
       <CTASection />
       <TestimonialsSection />
