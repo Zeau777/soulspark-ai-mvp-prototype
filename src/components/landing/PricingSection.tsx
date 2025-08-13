@@ -42,7 +42,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                   <span className="text-3xl font-semibold">$6</span>
                   <span className="text-muted-foreground">/ seat / month</span>
                 </div>
-                <p className="text-xs text-muted-foreground">50–250 seats</p>
+                <p className="text-xs text-muted-foreground">5–250 seats</p>
               </CardHeader>
               <CardContent className="space-y-6">
                 <ul className="space-y-3 text-sm">
