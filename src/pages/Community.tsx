@@ -217,6 +217,7 @@ useEffect(() => {
         });
 
       fetchCommunityData();
+      setHasInteracted(true);
       toast.success('Joined circle!');
     } catch (error) {
       console.error('Error joining circle:', error);
@@ -243,6 +244,7 @@ useEffect(() => {
 
       setNewPostContent('');
       fetchCommunityData();
+      setHasInteracted(true);
       toast.success('Post shared!');
     } catch (error) {
       console.error('Error creating post:', error);
@@ -502,6 +504,16 @@ if (profileLoading || loading) {
           </Card>
         </TabsContent>
       </Tabs>
+      
+      {/* Community Feedback */}
+      {hasInteracted && (
+        <div className="mt-6 p-4 bg-muted/50 rounded-lg">
+          <QuickFeedback
+            featureType="community"
+            onDetailedFeedback={() => setFeedbackModalOpen(true)}
+          />
+        </div>
+      )}
       
       {/* Feedback Modal */}
       <FeedbackModal

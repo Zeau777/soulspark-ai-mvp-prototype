@@ -23,6 +23,8 @@ import {
   Volume2,
   Loader2
 } from 'lucide-react';
+import QuickFeedback from "@/components/feedback/QuickFeedback";
+import FeedbackModal from "@/components/feedback/FeedbackModal";
 
 interface Profile {
   id: string;
@@ -56,6 +58,7 @@ export default function Dashboard() {
 const navigate = useNavigate();
 const [likedToday, setLikedToday] = useState(false);
 const [speaking, setSpeaking] = useState(false);
+const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -361,7 +364,7 @@ const [speaking, setSpeaking] = useState(false);
               <p className="text-foreground leading-relaxed mb-4">
                 {soulDrop.content}
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-4">
                 <Button variant="outline" size="sm" onClick={handleListenToday} disabled={speaking}>
                   {speaking ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Volume2 className="mr-2 h-4 w-4" />}
                   Listen
@@ -373,6 +376,13 @@ const [speaking, setSpeaking] = useState(false);
                   Save to Fuel Moments
                 </Button>
               </div>
+              
+              {/* SoulDrop Feedback */}
+              <QuickFeedback
+                featureType="souldrop"
+                contentId={soulDrop.id}
+                onDetailedFeedback={() => setFeedbackModalOpen(true)}
+              />
             </CardContent>
           </Card>
         )}
@@ -478,6 +488,15 @@ const [speaking, setSpeaking] = useState(false);
           </Card>
         </div>
       </div>
+
+      {/* Feedback Modal */}
+      <FeedbackModal
+        isOpen={feedbackModalOpen}
+        onClose={() => setFeedbackModalOpen(false)}
+        featureType="souldrop"
+        contentId={soulDrop?.id}
+        onFeedbackSubmitted={() => {}}
+      />
 
       {/* Fixed bottom navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4">

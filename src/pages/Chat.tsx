@@ -429,7 +429,7 @@ return (
               </ScrollArea>
 
               {/* Message Input */}
-              <div className="border-t bg-background/80 backdrop-blur-sm p-4">
+              <div className="border-t bg-background/80 backdrop-blur-sm p-4 pb-20">
                 <div className="max-w-3xl mx-auto">
                   <div className="flex space-x-2">
                     <Input
