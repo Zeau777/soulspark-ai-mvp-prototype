@@ -11,6 +11,8 @@ import { ArrowLeft, Send, Bot, User, Heart, Sparkles, Volume2, Square } from 'lu
 import { speakText, stopSpeech } from '@/utils/tts';
 import VoiceInterface from "@/components/voice/VoiceInterface";
 import { useAccess } from '@/hooks/useAccess';
+import QuickFeedback from "@/components/feedback/QuickFeedback";
+import FeedbackModal from "@/components/feedback/FeedbackModal";
 interface Message {
   id: string;
   content: string;
@@ -33,6 +35,8 @@ export default function Chat() {
   const [playingId, setPlayingId] = useState<string | null>(null);
 const { user } = useAuth();
 const { fullAccess, loading: accessLoading } = useAccess();
+const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+const [showSessionFeedback, setShowSessionFeedback] = useState(false);
 
 useEffect(() => {
   if (!user || !fullAccess) return;
@@ -57,7 +61,12 @@ useEffect(() => {
       .eq('user_id', user.id)
       .order('updated_at', { ascending: false });
 
-    if (data) {
+  if (data) {
+      // Show feedback for previous conversation if it had messages
+      if (currentConversation && currentConversation.messages.length > 0 && !showSessionFeedback) {
+        setShowSessionFeedback(true);
+      }
+      
       setConversations(data as Conversation[]);
       if (data.length > 0 && !currentConversation) {
         setCurrentConversation(data[0] as Conversation);
@@ -335,6 +344,17 @@ return (
                     </Card>
                   )}
                   
+                  {/* Session Feedback */}
+                  {showSessionFeedback && currentConversation.messages.length > 0 && (
+                    <div className="mt-6 p-4 bg-muted/50 rounded-lg">
+                      <QuickFeedback
+                        featureType="chat"
+                        contentId={currentConversation.id}
+                        onDetailedFeedback={() => setFeedbackModalOpen(true)}
+                      />
+                    </div>
+                  )}
+                  
                   {currentConversation.messages.map((msg) => (
                     <div
                       key={msg.id}
@@ -454,6 +474,15 @@ return (
         </div>
         <VoiceInterface onSpeakingChange={() => {}} />
       </div>
+      
+      {/* Feedback Modal */}
+      <FeedbackModal
+        isOpen={feedbackModalOpen}
+        onClose={() => setFeedbackModalOpen(false)}
+        featureType="chat"
+        contentId={currentConversation?.id}
+        onFeedbackSubmitted={() => setShowSessionFeedback(false)}
+      />
     </div>
   );
 }

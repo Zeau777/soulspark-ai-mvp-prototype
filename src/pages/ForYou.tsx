@@ -10,6 +10,8 @@ import { useToast } from "@/hooks/use-toast";
 import { Heart, Sparkles, Loader2, Instagram, Youtube, Share2, Volume2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { speakText } from "@/utils/tts";
+import QuickFeedback from "@/components/feedback/QuickFeedback";
+import FeedbackModal from "@/components/feedback/FeedbackModal";
 
 // Types
 interface RankedDrop extends Tables<'soul_drops'> {
@@ -33,6 +35,8 @@ const [speakingId, setSpeakingId] = useState<string | null>(null);
 
 const [profile, setProfile] = useState<Tables<'profiles'> | null>(null);
 const [soulProfile, setSoulProfile] = useState<Tables<'soul_profiles'> | null>(null);
+const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+const [selectedDropId, setSelectedDropId] = useState<string | null>(null);
 
   // Simple SEO handling
   useEffect(() => {
@@ -367,6 +371,17 @@ const renderCard = (d: RankedDrop) => (
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+        
+        {/* Quick Feedback */}
+        <QuickFeedback
+          featureType="souldrop"
+          contentId={d.id}
+          onDetailedFeedback={() => {
+            setSelectedDropId(d.id);
+            setFeedbackModalOpen(true);
+          }}
+          className="mt-3 pt-3 border-t border-border/50"
+        />
       </CardContent>
     </Card>
   );
@@ -416,6 +431,17 @@ const renderCard = (d: RankedDrop) => (
             )}
           </div>
         )}
+        
+        {/* Feedback Modal */}
+        <FeedbackModal
+          isOpen={feedbackModalOpen}
+          onClose={() => {
+            setFeedbackModalOpen(false);
+            setSelectedDropId(null);
+          }}
+          featureType="souldrop"
+          contentId={selectedDropId || undefined}
+        />
       </main>
     </div>
   );

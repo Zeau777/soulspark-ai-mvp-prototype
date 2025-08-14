@@ -189,6 +189,45 @@ export type Database = {
         }
         Relationships: []
       }
+      feedback: {
+        Row: {
+          content_id: string | null
+          created_at: string
+          feature_type: string
+          feedback_category: string | null
+          feedback_text: string | null
+          id: string
+          metadata: Json | null
+          rating: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content_id?: string | null
+          created_at?: string
+          feature_type: string
+          feedback_category?: string | null
+          feedback_text?: string | null
+          id?: string
+          metadata?: Json | null
+          rating: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content_id?: string | null
+          created_at?: string
+          feature_type?: string
+          feedback_category?: string | null
+          feedback_text?: string | null
+          id?: string
+          metadata?: Json | null
+          rating?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       impact_action_mappings: {
         Row: {
           action_type: string

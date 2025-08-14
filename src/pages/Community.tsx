@@ -14,6 +14,8 @@ import { Users, Plus, Calendar, Heart, MessageCircle, Target, Award } from 'luci
 import { toast } from 'sonner';
 import { useUserProfile } from '@/hooks/useUserProfile';
 import { useAccess } from '@/hooks/useAccess';
+import QuickFeedback from "@/components/feedback/QuickFeedback";
+import FeedbackModal from "@/components/feedback/FeedbackModal";
 
 interface SparkCircle {
   id: string;
@@ -74,6 +76,8 @@ const { profile, loading: profileLoading } = useUserProfile(user?.id);
   const [newCircleDesc, setNewCircleDesc] = useState('');
   const [newPostContent, setNewPostContent] = useState('');
   const [newPostType, setNewPostType] = useState<'win' | 'prayer_request' | 'testimony' | 'reflection'>('win');
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
 useEffect(() => {
   if (!user) return;
@@ -259,6 +263,7 @@ useEffect(() => {
         });
 
       fetchCommunityData();
+      setHasInteracted(true);
     } catch (error) {
       console.error('Error reacting to post:', error);
     }
@@ -331,6 +336,16 @@ if (profileLoading || loading) {
                   </div>
                 </Card>
               ))}
+              
+              {/* Community Feedback */}
+              {hasInteracted && posts.length > 0 && (
+                <Card className="p-4 bg-muted/30">
+                  <QuickFeedback
+                    featureType="community"
+                    onDetailedFeedback={() => setFeedbackModalOpen(true)}
+                  />
+                </Card>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
@@ -487,6 +502,13 @@ if (profileLoading || loading) {
           </Card>
         </TabsContent>
       </Tabs>
+      
+      {/* Feedback Modal */}
+      <FeedbackModal
+        isOpen={feedbackModalOpen}
+        onClose={() => setFeedbackModalOpen(false)}
+        featureType="community"
+      />
     </div>
   );
 };
