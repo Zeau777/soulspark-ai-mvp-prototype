@@ -54,7 +54,7 @@ const PartnershipLeads = () => {
     try {
       const { data, error } = await supabase
         .from('partnership_leads')
-        .select('*')
+        .select('id, first_name, last_name, email, organization_name, role, partnership_type, wants_demo, created_at')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
