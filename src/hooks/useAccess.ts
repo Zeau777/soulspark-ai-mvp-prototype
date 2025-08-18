@@ -19,7 +19,7 @@ export function useAccess() {
       try {
         const { data, error } = await supabase
           .from("legacy_subscribers")
-          .select("email")
+          .select("id")
           .eq("email", user.email)
           .maybeSingle();
         if (error) throw error;
