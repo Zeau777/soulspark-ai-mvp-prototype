@@ -7,16 +7,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { useOrgAdmin } from '@/hooks/useOrgAdmin';
 import { Flame, Loader2, Eye, EyeOff } from 'lucide-react';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [showSignInPassword, setShowSignInPassword] = useState(false);
   const [showSignUpPassword, setShowSignUpPassword] = useState(false);
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [tab, setTab] = useState<'signin' | 'signup'>('signin');
+  const { isOrgAdmin, loading: orgLoading } = useOrgAdmin();
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
     if (hash === 'signup' || hash === 'signin') {
@@ -41,7 +43,14 @@ export default function Auth() {
         variant: "destructive",
       });
     } else {
-      navigate('/');
+      // Wait a moment for org admin check, then redirect appropriately
+      setTimeout(() => {
+        if (isOrgAdmin) {
+          navigate('/admin');
+        } else {
+          navigate('/dashboard');
+        }
+      }, 100);
     }
     
     setLoading(false);
@@ -69,6 +78,8 @@ export default function Auth() {
         title: "Welcome to SoulSpark AI!",
         description: "Check your email to confirm your account, then sign in.",
       });
+      // For new signups, redirect to the landing page after showing the message
+      setTimeout(() => navigate('/'), 1000);
     }
     
     setLoading(false);

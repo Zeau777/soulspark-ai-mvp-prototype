@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/hooks/useAuth";
+import { useOrgAdmin } from "@/hooks/useOrgAdmin";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import About from "./pages/About";
@@ -44,8 +45,9 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
 function PublicRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
+  const { isOrgAdmin, loading: orgLoading } = useOrgAdmin();
   
-  if (loading) {
+  if (loading || orgLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-pulse">Loading...</div>
@@ -53,7 +55,11 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
     );
   }
   
-  return user ? <Navigate to="/dashboard" replace /> : <>{children}</>;
+  if (user) {
+    return <Navigate to={isOrgAdmin ? "/admin" : "/dashboard"} replace />;
+  }
+  
+  return <>{children}</>;
 }
 
 function OrgLinkHandler() {
