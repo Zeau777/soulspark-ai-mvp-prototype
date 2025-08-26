@@ -21,7 +21,8 @@ import {
   Users,
   Sparkles,
   Volume2,
-  Loader2
+  Loader2,
+  LogOut
 } from 'lucide-react';
 import QuickFeedback from "@/components/feedback/QuickFeedback";
 import FeedbackModal from "@/components/feedback/FeedbackModal";
@@ -284,17 +285,18 @@ const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
               <p className="text-sm text-muted-foreground">Welcome back, {profile?.display_name}</p>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" onClick={() => navigate('/chat')}>
-              <MessageSquare className="h-4 w-4 mr-2" />
-              Soul Coach
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <Button variant="ghost" size="sm" onClick={() => navigate('/chat')} className="p-2 md:px-3">
+              <MessageSquare className="h-4 w-4 md:mr-2" />
+              <span className="hidden md:inline">Soul Coach</span>
             </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate('/profile')}>
-              <User className="h-4 w-4 mr-2" />
-              Profile
+            <Button variant="ghost" size="sm" onClick={() => navigate('/profile')} className="p-2 md:px-3">
+              <User className="h-4 w-4 md:mr-2" />
+              <span className="hidden md:inline">Profile</span>
             </Button>
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              Sign Out
+            <Button variant="ghost" size="sm" onClick={signOut} className="p-2 md:px-3">
+              <LogOut className="h-4 w-4 md:mr-2" />
+              <span className="hidden md:inline">Sign Out</span>
             </Button>
           </div>
         </div>
