@@ -96,26 +96,8 @@ export default function Auth() {
             variant: "destructive",
           });
         } else {
-          console.log('Sign in successful, checking admin status...');
-          
-          // Wait for org admin check to complete before redirecting
-          const checkOrgAdmin = () => {
-            console.log('Checking org admin:', { orgLoading, isOrgAdmin });
-            if (!orgLoading) {
-              console.log('Org loading complete, isOrgAdmin:', isOrgAdmin);
-              if (isOrgAdmin) {
-                console.log('Redirecting to admin');
-                navigate('/admin');
-              } else {
-                console.log('Redirecting to dashboard');
-                navigate('/dashboard');
-              }
-            } else {
-              console.log('Still loading org data, retrying...');
-              setTimeout(checkOrgAdmin, 100);
-            }
-          };
-          setTimeout(checkOrgAdmin, 100);
+          // Redirect to role selection page for easy testing
+          navigate('/role-selection');
         }
       }
     } catch (error) {

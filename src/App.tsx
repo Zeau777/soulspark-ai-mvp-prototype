@@ -24,6 +24,7 @@ import Pricing from "./pages/Pricing";
 import PartnerAdminPreview from "./pages/PartnerAdminPreview";
 import PrayerRooms from "./pages/PrayerRooms";
 import Journal from "./pages/Journal";
+import RoleSelection from "./pages/RoleSelection";
 import NotFound from "./pages/NotFound";
 import { useOrgLink } from "@/hooks/useOrgLink";
 import OrgAccessBanner from "@/components/OrgAccessBanner";
@@ -88,6 +89,7 @@ const App = () => (
             <Route path="/partners" element={<Partners />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/partner-preview" element={<PartnerAdminPreview />} />
+            <Route path="/role-selection" element={<ProtectedRoute><RoleSelection /></ProtectedRoute>} />
             
             {/* Protected routes */}
           <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
