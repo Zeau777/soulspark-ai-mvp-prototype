@@ -285,7 +285,7 @@ if (profileLoading || loading) {
         <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
           SoulSpark Community
         </h1>
-        <p className="text-muted-foreground">Connect, grow, and inspire each other on your faith journey</p>
+        <p className="text-muted-foreground">Connect, grow, and inspire one another on your journey.</p>
       </div>
 
       <Tabs defaultValue="feed" className="w-full">
