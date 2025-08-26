@@ -18,6 +18,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import PlatformAnalytics from "./pages/PlatformAnalytics";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import CookiePolicy from "./pages/CookiePolicy";
 import Partners from "./pages/Partners";
 import Pricing from "./pages/Pricing";
 import PartnerAdminPreview from "./pages/PartnerAdminPreview";
@@ -83,6 +84,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/cookies" element={<CookiePolicy />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/partner-preview" element={<PartnerAdminPreview />} />

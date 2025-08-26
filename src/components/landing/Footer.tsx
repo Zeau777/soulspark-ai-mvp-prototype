@@ -45,7 +45,7 @@ const Footer = () => {
             <div className="flex space-x-6 text-sm">
               <a href="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
               <a href="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a>
+              <a href="/cookies" className="text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a>
             </div>
           </div>
           <div className="text-center">
