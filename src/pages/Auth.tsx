@@ -96,13 +96,19 @@ export default function Auth() {
             variant: "destructive",
           });
         } else {
-          setTimeout(() => {
-            if (isOrgAdmin) {
-              navigate('/admin');
+          // Wait for org admin check to complete before redirecting
+          const checkOrgAdmin = () => {
+            if (!orgLoading) {
+              if (isOrgAdmin) {
+                navigate('/admin');
+              } else {
+                navigate('/dashboard');
+              }
             } else {
-              navigate('/dashboard');
+              setTimeout(checkOrgAdmin, 100);
             }
-          }, 100);
+          };
+          setTimeout(checkOrgAdmin, 100);
         }
       }
     } catch (error) {
