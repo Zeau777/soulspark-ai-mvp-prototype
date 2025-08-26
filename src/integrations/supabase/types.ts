@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.12 (cd3cf9e)"
@@ -879,10 +879,10 @@ export type Database = {
       get_daily_soul_drop: {
         Args: { p_user_id: string }
         Returns: {
-          id: string
-          title: string
           content: string
           content_type: Database["public"]["Enums"]["content_type"]
+          id: string
+          title: string
         }[]
       }
       test_user_notification: {
@@ -890,7 +890,7 @@ export type Database = {
         Returns: undefined
       }
       update_user_engagement: {
-        Args: { p_user_id: string; p_action_type: string; p_xp_earned?: number }
+        Args: { p_action_type: string; p_user_id: string; p_xp_earned?: number }
         Returns: undefined
       }
     }
