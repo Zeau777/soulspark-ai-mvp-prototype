@@ -26,6 +26,8 @@ import {
 } from 'lucide-react';
 import QuickFeedback from "@/components/feedback/QuickFeedback";
 import FeedbackModal from "@/components/feedback/FeedbackModal";
+import HabitLoopFramework from "@/components/habits/HabitLoopFramework";
+import SmartNotificationSystem from "@/components/notifications/SmartNotificationSystem";
 
 interface Profile {
   id: string;
@@ -60,6 +62,7 @@ const navigate = useNavigate();
 const [likedToday, setLikedToday] = useState(false);
 const [speaking, setSpeaking] = useState(false);
 const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+const [activeTab, setActiveTab] = useState<'overview' | 'habits' | 'notifications'>('overview');
 
   useEffect(() => {
     if (user) {
@@ -303,8 +306,37 @@ const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
       </header>
 
       <div className="container mx-auto px-4 py-8 space-y-8">
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Tab Navigation */}
+        <div className="flex space-x-1 bg-muted p-1 rounded-lg">
+          <Button
+            variant={activeTab === 'overview' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setActiveTab('overview')}
+            className="flex-1"
+          >
+            Overview
+          </Button>
+          <Button
+            variant={activeTab === 'habits' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setActiveTab('habits')}
+            className="flex-1"
+          >
+            SoulSpark Loop
+          </Button>
+          <Button
+            variant={activeTab === 'notifications' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setActiveTab('notifications')}
+            className="flex-1"
+          >
+            Smart Reminders
+          </Button>
+        </div>
+        {activeTab === 'overview' && (
+          <>
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="shadow-spiritual">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Soul Streak</CardTitle>
@@ -489,6 +521,32 @@ const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
             </CardContent>
           </Card>
         </div>
+            </>
+          )}
+
+          {activeTab === 'habits' && (
+            <div className="space-y-6">
+              <div className="text-center">
+                <h2 className="text-2xl font-bold mb-2">Your SoulSpark Loop</h2>
+                <p className="text-muted-foreground">
+                  Build lasting habits that transform moments into meaning
+                </p>
+              </div>
+              <HabitLoopFramework />
+            </div>
+          )}
+
+          {activeTab === 'notifications' && (
+            <div className="space-y-6">
+              <div className="text-center">
+                <h2 className="text-2xl font-bold mb-2">Smart Soul-Care Reminders</h2>
+                <p className="text-muted-foreground">
+                  Contextual notifications that adapt to your rhythm and needs
+                </p>
+              </div>
+              <SmartNotificationSystem />
+            </div>
+          )}
       </div>
 
       {/* Feedback Modal */}

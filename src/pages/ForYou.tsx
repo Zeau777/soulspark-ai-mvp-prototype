@@ -12,6 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { speakText } from "@/utils/tts";
 import QuickFeedback from "@/components/feedback/QuickFeedback";
 import FeedbackModal from "@/components/feedback/FeedbackModal";
+import SoulDropCard from "@/components/souldrops/SoulDropCard";
 
 // Types
 interface RankedDrop extends Tables<'soul_drops'> {

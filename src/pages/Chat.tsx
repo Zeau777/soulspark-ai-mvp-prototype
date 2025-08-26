@@ -13,6 +13,7 @@ import VoiceInterface from "@/components/voice/VoiceInterface";
 import { useAccess } from '@/hooks/useAccess';
 import QuickFeedback from "@/components/feedback/QuickFeedback";
 import FeedbackModal from "@/components/feedback/FeedbackModal";
+import AdaptiveCoachInterface from "@/components/coach/AdaptiveCoachInterface";
 interface Message {
   id: string;
   content: string;
