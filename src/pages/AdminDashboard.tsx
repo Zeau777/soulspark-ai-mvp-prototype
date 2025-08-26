@@ -19,7 +19,11 @@ import {
   Upload,
   BarChart3,
   Settings,
-  Download
+  Download,
+  UserPlus,
+  UserMinus,
+  Mail,
+  X
 } from 'lucide-react';
 
 interface OrgStats {
@@ -58,6 +62,11 @@ export default function AdminDashboard() {
     targetMoods: [] as string[],
     targetRoles: [] as string[]
   });
+
+  // User management state
+  const [showAddUser, setShowAddUser] = useState(false);
+  const [newUserEmail, setNewUserEmail] = useState('');
+  const [newUserRole, setNewUserRole] = useState<'student' | 'employee' | 'athlete'>('student');
 
   useEffect(() => {
     if (user) {
@@ -191,6 +200,111 @@ export default function AdminDashboard() {
       toast({
         title: "Upload failed",
         description: "Failed to upload content. Please try again.",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleAddUser = async () => {
+    if (!newUserEmail || !organization) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email address",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      // Check if user exists in auth.users
+      const { data: existingAuth } = await supabase.auth.admin.listUsers();
+      const existingUser = existingAuth.users.find(u => u.email === newUserEmail);
+      
+      if (!existingUser) {
+        toast({
+          title: "User not found",
+          description: "This user must sign up first before being added to the organization",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Check if user already has a profile
+      const { data: existingProfile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', existingUser.id)
+        .maybeSingle();
+
+      if (existingProfile?.organization_id) {
+        toast({
+          title: "User already assigned",
+          description: "This user is already part of an organization",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Update or create profile with organization
+      if (existingProfile) {
+        await supabase
+          .from('profiles')
+          .update({
+            organization_id: organization.id,
+            role: newUserRole as any
+          })
+          .eq('user_id', existingUser.id);
+      } else {
+        await supabase
+          .from('profiles')
+          .insert({
+            user_id: existingUser.id,
+            organization_id: organization.id,
+            role: newUserRole as any,
+            display_name: existingUser.user_metadata?.full_name || existingUser.email
+          });
+      }
+
+      toast({
+        title: "User added successfully!",
+        description: `${newUserEmail} has been added to your organization`
+      });
+
+      // Reset form and refresh data
+      setNewUserEmail('');
+      setNewUserRole('student');
+      setShowAddUser(false);
+      await fetchDashboardData(organization.id);
+    } catch (error) {
+      console.error('Error adding user:', error);
+      toast({
+        title: "Failed to add user",
+        description: "An error occurred while adding the user",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleRemoveUser = async (userId: string, userDisplayName: string) => {
+    if (!organization) return;
+
+    try {
+      await supabase
+        .from('profiles')
+        .update({ organization_id: null, role: null })
+        .eq('user_id', userId);
+
+      toast({
+        title: "User removed successfully!",
+        description: `${userDisplayName} has been removed from your organization`
+      });
+
+      await fetchDashboardData(organization.id);
+    } catch (error) {
+      console.error('Error removing user:', error);
+      toast({
+        title: "Failed to remove user",
+        description: "An error occurred while removing the user",
         variant: "destructive"
       });
     }
@@ -385,14 +499,94 @@ export default function AdminDashboard() {
           <TabsContent value="users" className="space-y-6">
             <Card className="shadow-spiritual">
               <CardHeader>
-                <CardTitle>Organization Members</CardTitle>
-                <CardDescription>
-                  {users.length} total members
-                </CardDescription>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Organization Members</CardTitle>
+                    <CardDescription>
+                      {users.length} total members
+                    </CardDescription>
+                  </div>
+                  <Button 
+                    onClick={() => setShowAddUser(true)}
+                    className="flex items-center space-x-2"
+                    variant="spiritual"
+                  >
+                    <UserPlus className="h-4 w-4" />
+                    <span>Add User</span>
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent>
+                {showAddUser && (
+                  <Card className="mb-6 border-2 border-primary/20">
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg">Add New User</CardTitle>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setShowAddUser(false);
+                            setNewUserEmail('');
+                            setNewUserRole('student');
+                          }}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="userEmail">Email Address</Label>
+                          <Input
+                            id="userEmail"
+                            type="email"
+                            placeholder="user@example.com"
+                            value={newUserEmail}
+                            onChange={(e) => setNewUserEmail(e.target.value)}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="userRole">Role</Label>
+                          <Select value={newUserRole} onValueChange={(value) => setNewUserRole(value as 'student' | 'employee' | 'athlete')}>
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="student">Student</SelectItem>
+                              <SelectItem value="employee">Employee</SelectItem>
+                              <SelectItem value="athlete">Athlete</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      <div className="flex space-x-2">
+                        <Button 
+                          onClick={handleAddUser}
+                          disabled={!newUserEmail}
+                          className="flex items-center space-x-2"
+                        >
+                          <Mail className="h-4 w-4" />
+                          <span>Add User</span>
+                        </Button>
+                        <Button 
+                          variant="outline"
+                          onClick={() => {
+                            setShowAddUser(false);
+                            setNewUserEmail('');
+                            setNewUserRole('student');
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+                
                 <div className="space-y-4">
-                  {users.map((user) => (
+                  {users.length > 0 ? users.map((user) => (
                     <div key={user.id} className="flex items-center justify-between border-b pb-2">
                       <div>
                         <p className="font-medium">{user.display_name}</p>
@@ -405,14 +599,30 @@ export default function AdminDashboard() {
                           </span>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <p className="font-medium">{user.total_xp} XP</p>
-                        <p className="text-sm text-muted-foreground">
-                          Since {new Date(user.created_at).toLocaleDateString()}
-                        </p>
+                      <div className="flex items-center space-x-4">
+                        <div className="text-right">
+                          <p className="font-medium">{user.total_xp} XP</p>
+                          <p className="text-sm text-muted-foreground">
+                            Since {new Date(user.created_at).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleRemoveUser(user.id, user.display_name)}
+                          className="text-destructive hover:text-destructive"
+                        >
+                          <UserMinus className="h-4 w-4" />
+                        </Button>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-8">
+                      <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                      <p className="text-muted-foreground">No users in your organization yet</p>
+                      <p className="text-sm text-muted-foreground">Add users to get started</p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
