@@ -8,12 +8,15 @@ import { useToast } from '@/hooks/use-toast';
 import { useOrgAdmin } from '@/hooks/useOrgAdmin';
 import { Flame, Loader2, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import PricingPlanSelector from '@/components/partner-admin/PricingPlanSelector';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [authLoading, setAuthLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isOrgSignUp, setIsOrgSignUp] = useState(false);
+  const [selectedPricingPlan, setSelectedPricingPlan] = useState<any>(null);
   const { signIn, signUp } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -63,6 +66,7 @@ export default function Auth() {
     const password = formData.get('password') as string;
     const fullName = formData.get('fullName') as string;
     const organization = formData.get('organization') as string;
+    const adminEmail = formData.get('adminEmail') as string;
 
     try {
       if (isSignUp) {
@@ -73,6 +77,13 @@ export default function Auth() {
         
         const { error } = await signUp(email, password, metadata);
         
+        // Get user data after successful signup
+        let userData = null;
+        if (!error) {
+          const { data } = await supabase.auth.getUser();
+          userData = data.user;
+        }
+        
         if (error) {
           toast({
             title: "Sign up failed",
@@ -80,10 +91,38 @@ export default function Auth() {
             variant: "destructive",
           });
         } else {
-          toast({
-            title: "Welcome to SoulSpark AI!",
-            description: "Check your email to confirm your account, then sign in.",
-          });
+          // If this is an organization signup, create the organization
+          if (isOrgSignUp && organization && selectedPricingPlan && userData) {
+            try {
+              await supabase
+                .from('organizations')
+                .insert({
+                  name: organization,
+                  code: organization.toLowerCase().replace(/\s+/g, '-'),
+                  admin_email: adminEmail || email,
+                  pricing_plan: selectedPricingPlan.id,
+                  max_seats: selectedPricingPlan.maxSeats,
+                  current_seats: 0
+                });
+              
+              toast({
+                title: "Organization created successfully!",
+                description: "Check your email to confirm your account, then sign in to access your admin dashboard.",
+              });
+            } catch (orgError) {
+              console.error('Error creating organization:', orgError);
+              toast({
+                title: "Organization creation failed",
+                description: "User created but organization setup failed. Please contact support.",
+                variant: "destructive",
+              });
+            }
+          } else {
+            toast({
+              title: "Welcome to SoulSpark AI!",
+              description: "Check your email to confirm your account, then sign in.",
+            });
+          }
           setTimeout(() => navigate('/'), 1000);
         }
       } else {
@@ -174,80 +213,147 @@ export default function Auth() {
           </div>
 
           {/* Create Account / Sign In Button */}
-          <Button
-            onClick={() => setIsSignUp(!isSignUp)}
-            className="w-full bg-card hover:bg-muted text-foreground border border-border font-medium py-3 rounded-full"
-          >
-            {isSignUp ? 'Sign In' : 'Create account'}
-          </Button>
+          <div className="space-y-2">
+            <Button
+              onClick={() => {
+                setIsSignUp(!isSignUp);
+                setIsOrgSignUp(false);
+                setSelectedPricingPlan(null);
+              }}
+              className="w-full bg-card hover:bg-muted text-foreground border border-border font-medium py-3 rounded-full"
+            >
+              {isSignUp ? 'Sign In' : 'Create account'}
+            </Button>
+            
+            {!isSignUp && (
+              <Button
+                onClick={() => {
+                  setIsSignUp(true);
+                  setIsOrgSignUp(true);
+                }}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-full"
+              >
+                Create Organization Account
+              </Button>
+            )}
+          </div>
 
           {/* Email Form */}
           {isSignUp && (
-            <form onSubmit={handleEmailAuth} className="space-y-4 mt-6">
-              <div className="space-y-2">
-                <Label htmlFor="fullName" className="text-foreground">Full Name</Label>
-                <Input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  placeholder="Your full name"
-                  required
-                  className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-foreground">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="your@email.com"
-                  required
-                  className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="organization" className="text-foreground">Organization (Optional)</Label>
-                <Input
-                  id="organization"
-                  name="organization"
-                  type="text"
-                  placeholder="Your organization"
-                  className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-foreground">Password</Label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Create a password"
-                    required
-                    className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md pr-10"
+            <form onSubmit={handleEmailAuth} className="space-y-6 mt-6">
+              {/* Pricing Plan Selection for Organization Signup */}
+              {isOrgSignUp && (
+                <div className="space-y-4">
+                  <PricingPlanSelector
+                    selectedPlan={selectedPricingPlan?.id || null}
+                    onPlanSelect={setSelectedPricingPlan}
                   />
-                  <button
-                    type="button"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
-                  </button>
                 </div>
+              )}
+              
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="fullName" className="text-foreground">Full Name</Label>
+                  <Input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    placeholder="Your full name"
+                    required
+                    className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-foreground">Email</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="your@email.com"
+                    required
+                    className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
+                  />
+                </div>
+                
+                {isOrgSignUp && (
+                  <>
+                    <div className="space-y-2">
+                      <Label htmlFor="organization" className="text-foreground">Organization Name</Label>
+                      <Input
+                        id="organization"
+                        name="organization"
+                        type="text"
+                        placeholder="Your organization name"
+                        required
+                        className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="adminEmail" className="text-foreground">Admin Email (if different)</Label>
+                      <Input
+                        id="adminEmail"
+                        name="adminEmail"
+                        type="email"
+                        placeholder="Optional: Different admin email"
+                        className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
+                      />
+                    </div>
+                  </>
+                )}
+                
+                {!isOrgSignUp && (
+                  <div className="space-y-2">
+                    <Label htmlFor="organization" className="text-foreground">Organization (Optional)</Label>
+                    <Input
+                      id="organization"
+                      name="organization"
+                      type="text"
+                      placeholder="Your organization"
+                      className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
+                    />
+                  </div>
+                )}
+                
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-foreground">Password</Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Create a password"
+                      required
+                      className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md pr-10"
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+                
+                <Button
+                  type="submit"
+                  disabled={loading || (isOrgSignUp && !selectedPricingPlan)}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-full"
+                >
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  {isOrgSignUp ? 'Create Organization' : 'Create account'}
+                </Button>
+                
+                {isOrgSignUp && !selectedPricingPlan && (
+                  <p className="text-sm text-muted-foreground text-center">
+                    Please select a pricing plan to continue
+                  </p>
+                )}
               </div>
-              <Button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-full"
-              >
-                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Create account
-              </Button>
             </form>
           )}
         </div>

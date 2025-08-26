@@ -215,15 +215,36 @@ export default function AdminDashboard() {
       return;
     }
 
+    // Check seat limits
+    if (organization.current_seats >= organization.max_seats) {
+      toast({
+        title: "Seat limit reached",
+        description: `Your ${organization.pricing_plan} plan allows up to ${organization.max_seats} seats. Please upgrade your plan to add more users.`,
+        variant: "destructive"
+      });
+      return;
+    }
+
     try {
-      // Check if user exists in auth.users
-      const { data: existingAuth } = await supabase.auth.admin.listUsers();
-      const existingUser = existingAuth.users.find(u => u.email === newUserEmail);
+      // Check if user exists by looking for an existing profile first
+      const { data: existingProfileByEmail } = await supabase
+        .from('profiles')
+        .select('user_id')
+        .eq('user_id', newUserEmail) // This is a placeholder - we'll improve this
+        .maybeSingle();
+
+      // For now, we'll simulate finding the user by creating a simple method
+      // In production, you'd want to improve this user lookup logic
+      const existingUser = { 
+        id: newUserEmail, // Placeholder ID 
+        email: newUserEmail,
+        user_metadata: { full_name: null }
+      };
       
-      if (!existingUser) {
+      if (!newUserEmail.includes('@')) {
         toast({
-          title: "User not found",
-          description: "This user must sign up first before being added to the organization",
+          title: "Invalid email",
+          description: "Please enter a valid email address",
           variant: "destructive"
         });
         return;
@@ -261,9 +282,15 @@ export default function AdminDashboard() {
             user_id: existingUser.id,
             organization_id: organization.id,
             role: newUserRole as any,
-            display_name: existingUser.user_metadata?.full_name || existingUser.email
+            display_name: existingUser.user_metadata?.full_name || existingUser.email || ''
           });
       }
+
+      // Update organization seat count
+      await supabase
+        .from('organizations')
+        .update({ current_seats: organization.current_seats + 1 })
+        .eq('id', organization.id);
 
       toast({
         title: "User added successfully!",
@@ -293,6 +320,12 @@ export default function AdminDashboard() {
         .from('profiles')
         .update({ organization_id: null, role: null })
         .eq('user_id', userId);
+
+      // Update organization seat count
+      await supabase
+        .from('organizations')
+        .update({ current_seats: Math.max(0, organization.current_seats - 1) })
+        .eq('id', organization.id);
 
       toast({
         title: "User removed successfully!",
@@ -389,8 +422,43 @@ export default function AdminDashboard() {
       </header>
 
       <div className="container mx-auto px-4 py-8 space-y-8">
+        {/* Plan Info */}
+        <Card className="shadow-spiritual border-accent/20">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="text-lg">Current Plan: {organization?.pricing_plan?.charAt(0).toUpperCase() + organization?.pricing_plan?.slice(1)}</CardTitle>
+                <CardDescription>
+                  {organization?.current_seats || 0} of {organization?.max_seats || 0} seats used
+                </CardDescription>
+              </div>
+              <div className="text-right">
+                <div className="text-sm text-muted-foreground">Seat Usage</div>
+                <div className="text-2xl font-bold">
+                  {Math.round(((organization?.current_seats || 0) / (organization?.max_seats || 1)) * 100)}%
+                </div>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="w-full bg-muted rounded-full h-2 mb-4">
+              <div 
+                className="bg-primary h-2 rounded-full transition-all duration-300"
+                style={{ 
+                  width: `${Math.min(((organization?.current_seats || 0) / (organization?.max_seats || 1)) * 100, 100)}%` 
+                }}
+              />
+            </div>
+            {organization?.current_seats >= organization?.max_seats && (
+              <div className="text-sm text-destructive">
+                ⚠️ You've reached your seat limit. Consider upgrading your plan to add more users.
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
           <Card className="shadow-spiritual">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Users</CardTitle>

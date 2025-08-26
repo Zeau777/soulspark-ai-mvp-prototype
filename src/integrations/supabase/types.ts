@@ -430,8 +430,11 @@ export type Database = {
           admin_email: string
           code: string
           created_at: string
+          current_seats: number | null
           id: string
+          max_seats: number | null
           name: string
+          pricing_plan: string | null
           settings: Json | null
           type: string
           updated_at: string
@@ -440,8 +443,11 @@ export type Database = {
           admin_email: string
           code: string
           created_at?: string
+          current_seats?: number | null
           id?: string
+          max_seats?: number | null
           name: string
+          pricing_plan?: string | null
           settings?: Json | null
           type?: string
           updated_at?: string
@@ -450,8 +456,11 @@ export type Database = {
           admin_email?: string
           code?: string
           created_at?: string
+          current_seats?: number | null
           id?: string
+          max_seats?: number | null
           name?: string
+          pricing_plan?: string | null
           settings?: Json | null
           type?: string
           updated_at?: string
