@@ -117,20 +117,20 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
         {/* Hero Section */}
         <div className="text-center space-y-4">
           <div className="flex justify-center mb-6">
             <div className="p-3 bg-gradient-to-r from-primary to-accent rounded-full">
-              <Flame className="h-8 w-8 text-white" />
+              <Flame className="h-8 w-8 text-primary-foreground" />
             </div>
           </div>
-          <h1 className="text-5xl font-bold tracking-tight">
-            Happening now
+          <h1 className="text-4xl font-bold tracking-tight text-foreground">
+            The first AI platform for resilience, belonging, and growth at scale.
           </h1>
-          <h2 className="text-3xl font-semibold text-gray-300">
-            Join today.
+          <h2 className="text-lg font-medium text-muted-foreground">
+            Built for students, employees, and athletes to thrive — trusted by the organizations that care for them.
           </h2>
         </div>
 
@@ -140,7 +140,7 @@ export default function Auth() {
           <Button
             onClick={() => handleOAuthSignIn('google')}
             disabled={authLoading}
-            className="w-full bg-white hover:bg-gray-100 text-black font-medium py-3 rounded-full flex items-center justify-center gap-3"
+            className="w-full bg-card hover:bg-muted text-foreground border border-border font-medium py-3 rounded-full flex items-center justify-center gap-3"
           >
             {authLoading ? (
               <Loader2 className="h-5 w-5 animate-spin" />
@@ -159,7 +159,7 @@ export default function Auth() {
           <Button
             onClick={() => handleOAuthSignIn('apple')}
             disabled={authLoading}
-            className="w-full bg-white hover:bg-gray-100 text-black font-medium py-3 rounded-full flex items-center justify-center gap-3"
+            className="w-full bg-card hover:bg-muted text-foreground border border-border font-medium py-3 rounded-full flex items-center justify-center gap-3"
           >
             {authLoading ? (
               <Loader2 className="h-5 w-5 animate-spin" />
@@ -173,15 +173,15 @@ export default function Auth() {
 
           {/* Divider */}
           <div className="flex items-center my-6">
-            <div className="flex-1 border-t border-gray-600"></div>
-            <span className="px-4 text-gray-400 text-sm">OR</span>
-            <div className="flex-1 border-t border-gray-600"></div>
+            <div className="flex-1 border-t border-border"></div>
+            <span className="px-4 text-muted-foreground text-sm">OR</span>
+            <div className="flex-1 border-t border-border"></div>
           </div>
 
           {/* Create Account / Sign In Button */}
           <Button
             onClick={() => setIsSignUp(!isSignUp)}
-            className="w-full bg-white hover:bg-gray-100 text-black font-medium py-3 rounded-full"
+            className="w-full bg-card hover:bg-muted text-foreground border border-border font-medium py-3 rounded-full"
           >
             {isSignUp ? 'Sign In' : 'Create account'}
           </Button>
@@ -190,39 +190,39 @@ export default function Auth() {
           {isSignUp && (
             <form onSubmit={handleEmailAuth} className="space-y-4 mt-6">
               <div className="space-y-2">
-                <Label htmlFor="fullName" className="text-white">Full Name</Label>
+                <Label htmlFor="fullName" className="text-foreground">Full Name</Label>
                 <Input
                   id="fullName"
                   name="fullName"
                   type="text"
                   placeholder="Your full name"
                   required
-                  className="bg-black border-gray-600 text-white placeholder:text-gray-400 rounded-md"
+                  className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-white">Email</Label>
+                <Label htmlFor="email" className="text-foreground">Email</Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
                   placeholder="your@email.com"
                   required
-                  className="bg-black border-gray-600 text-white placeholder:text-gray-400 rounded-md"
+                  className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="organization" className="text-white">Organization (Optional)</Label>
+                <Label htmlFor="organization" className="text-foreground">Organization (Optional)</Label>
                 <Input
                   id="organization"
                   name="organization"
                   type="text"
                   placeholder="Your organization"
-                  className="bg-black border-gray-600 text-white placeholder:text-gray-400 rounded-md"
+                  className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-white">Password</Label>
+                <Label htmlFor="password" className="text-foreground">Password</Label>
                 <div className="relative">
                   <Input
                     id="password"
@@ -230,11 +230,11 @@ export default function Auth() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Create a password"
                     required
-                    className="bg-black border-gray-600 text-white placeholder:text-gray-400 rounded-md pr-10"
+                    className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md pr-10"
                   />
                   <button
                     type="button"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
@@ -248,7 +248,7 @@ export default function Auth() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-full"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-full"
               >
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Create account
@@ -258,17 +258,17 @@ export default function Auth() {
         </div>
 
         {/* Terms */}
-        <div className="text-xs text-gray-400 text-center leading-relaxed">
+        <div className="text-xs text-muted-foreground text-center leading-relaxed">
           By signing up, you agree to the{' '}
-          <a href="/terms" className="text-blue-400 hover:underline">
+          <a href="/terms" className="text-primary hover:underline">
             Terms of Service
           </a>{' '}
           and{' '}
-          <a href="/privacy" className="text-blue-400 hover:underline">
+          <a href="/privacy" className="text-primary hover:underline">
             Privacy Policy
           </a>
           , including{' '}
-          <a href="/cookies" className="text-blue-400 hover:underline">
+          <a href="/cookies" className="text-primary hover:underline">
             Cookie Use
           </a>
           .
@@ -276,25 +276,25 @@ export default function Auth() {
 
         {/* Already have account section */}
         <div className="text-center space-y-4 pt-8">
-          <h3 className="text-xl font-bold text-white">
+          <h3 className="text-xl font-bold text-foreground">
             Already have an account?
           </h3>
           
           {!isSignUp && (
             <form onSubmit={handleEmailAuth} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="signin-email" className="text-white">Email</Label>
+                <Label htmlFor="signin-email" className="text-foreground">Email</Label>
                 <Input
                   id="signin-email"
                   name="email"
                   type="email"
                   placeholder="your@email.com"
                   required
-                  className="bg-black border-gray-600 text-white placeholder:text-gray-400 rounded-md"
+                  className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="signin-password" className="text-white">Password</Label>
+                <Label htmlFor="signin-password" className="text-foreground">Password</Label>
                 <div className="relative">
                   <Input
                     id="signin-password"
@@ -302,11 +302,11 @@ export default function Auth() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Your password"
                     required
-                    className="bg-black border-gray-600 text-white placeholder:text-gray-400 rounded-md pr-10"
+                    className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md pr-10"
                   />
                   <button
                     type="button"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
@@ -320,7 +320,7 @@ export default function Auth() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-transparent border border-gray-600 hover:bg-gray-900 text-white font-medium py-3 rounded-full"
+                className="w-full bg-transparent border border-border hover:bg-muted text-foreground font-medium py-3 rounded-full"
               >
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Sign in
