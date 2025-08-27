@@ -47,7 +47,7 @@ By making meaningful support both scalable and deeply personal, SoulSpark AI is 
             <h2 className="text-3xl font-bold">Our Story</h2>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Founded by a diverse team passionate about faith, technology, and social good, SoulSpark AI was born from a simple yet profound idea: wellness apps often overlook the soul. Inspired by the rising stress, loneliness, and identity crisis among Gen Z and Millennials, we created a platform that meets you where you are—spiritually and emotionally. Our beta program is already sparking change, with early users praising its impact on their daily lives.
+            SoulSpark AI was created with a bold belief: the next generation deserves more than surface-level wellness. While most apps track steps or offer quick fixes, they often miss what matters most—the soul. Seeing the rise in stress, burnout, and disconnection among Gen Z and Millennials, we set out to build something different: a platform that blends behavioral science, cultural relevance, and AI into support that feels personal, practical, and inspiring. What began as an idea is already proving its power—our beta users report feeling more grounded, connected, and resilient in just minutes a day.
           </p>
         </div>
       </section>
@@ -60,7 +60,7 @@ By making meaningful support both scalable and deeply personal, SoulSpark AI is 
             <h2 className="text-3xl font-bold">Our Impact</h2>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Every action on SoulSpark AI makes a difference. Through our "1 SoulDrop = 1 Meal" initiative, each check-in supports a child in need via our charity partners. Our beta users have already donated thousands of meals, proving that personal growth can fuel global hope. Join us to spark your soul and change the world.
+            At SoulSpark AI, growth doesn't stop with the individual. Every daily check-in creates a ripple of change in the world. Through our "1 SoulDrop = 1 Meal" initiative, each moment of reflection on the platform helps provide meals to children in need. Already, our early community has fueled thousands of meals—turning personal well-being into global hope. With SoulSpark, taking care of yourself means helping take care of others.
           </p>
         </div>
       </section>
