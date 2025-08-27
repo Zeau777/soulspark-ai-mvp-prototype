@@ -43,10 +43,12 @@ const Navigation = () => {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" onClick={() => navigate('/auth')}>
-              Sign In
-            </Button>
-            <Button variant="outline" size="sm" onClick={() => navigate('/book-demo')}>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => navigate('/book-demo')}
+              className="bg-black text-white border-black hover:bg-black/90 hover:text-white"
+            >
               Book a Demo
             </Button>
             <Button variant="spiritual" size="sm" onClick={() => navigate('/auth')}>
@@ -106,10 +108,12 @@ const Navigation = () => {
               For Organizations
             </a>
             <div className="flex flex-col space-y-2 px-3 pt-4">
-              <Button variant="ghost" size="sm" className="w-full" onClick={() => navigate('/auth')}>
-                Sign In
-              </Button>
-              <Button variant="outline" size="sm" className="w-full" onClick={() => navigate('/book-demo')}>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full bg-black text-white border-black hover:bg-black/90 hover:text-white" 
+                onClick={() => navigate('/book-demo')}
+              >
                 Book a Demo
               </Button>
               <Button variant="spiritual" size="sm" className="w-full" onClick={() => navigate('/auth')}>
