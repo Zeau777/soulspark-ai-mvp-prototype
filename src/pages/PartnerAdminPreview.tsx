@@ -137,6 +137,31 @@ export default function PartnerAdminPreview() {
   ];
   const totalMeals = groupUsage.reduce((sum, g) => sum + g.meals, 0);
 
+  // Mock engagement metrics data
+  const mockTopMoods = [
+    { mood: 'peaceful', count: 45 },
+    { mood: 'grateful', count: 38 },
+    { mood: 'joyful', count: 32 },
+    { mood: 'hopeful', count: 28 },
+    { mood: 'anxious', count: 19 }
+  ];
+
+  const getMoodEmoji = (mood: string) => {
+    const moodMap: Record<string, string> = {
+      anxious: '😰',
+      peaceful: '😌',
+      lost: '🤔',
+      tired: '😴',
+      joyful: '😊',
+      stressed: '😤',
+      hopeful: '🌟',
+      overwhelmed: '😵',
+      grateful: '🙏',
+      restless: '😣'
+    };
+    return moodMap[mood] || '😊';
+  };
+
   return (
     <main className="min-h-screen bg-background">
       <header className="max-w-6xl mx-auto px-4 pt-14 pb-8">
@@ -152,6 +177,37 @@ export default function PartnerAdminPreview() {
           <Button variant="outline" onClick={() => navigate('/partners')}>Back to Partners</Button>
         </div>
       </header>
+
+      {/* Plan Info */}
+      <section className="max-w-6xl mx-auto px-4 pb-8">
+        <Card className="shadow-spiritual border-accent/20">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="text-lg">Current Plan: Professional</CardTitle>
+                <CardDescription>
+                  245 of 500 seats used
+                </CardDescription>
+              </div>
+              <div className="text-right">
+                <div className="text-sm text-muted-foreground">Seat Usage</div>
+                <div className="text-2xl font-bold">49%</div>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="w-full bg-muted rounded-full h-2 mb-4">
+              <div 
+                className="bg-primary h-2 rounded-full transition-all duration-300"
+                style={{ width: '49%' }}
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Preview mode. Sign up to see your actual plan usage.
+            </p>
+          </CardContent>
+        </Card>
+      </section>
 
       {/* KPI summary */}
       <section className="max-w-6xl mx-auto px-4 pb-16 grid gap-6 md:grid-cols-4">
@@ -412,6 +468,66 @@ export default function PartnerAdminPreview() {
             </CardContent>
           </Card>
         </div>
+      </section>
+
+      {/* Overview and Insights */}
+      <section className="max-w-6xl mx-auto px-4 pb-16 grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Emotional Pulse</CardTitle>
+            <CardDescription>Most common moods this week</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {mockTopMoods.map(({ mood, count }) => (
+                <div key={mood} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xl">{getMoodEmoji(mood)}</span>
+                    <span className="capitalize">{mood}</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground">{count} check-ins</div>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-muted-foreground mt-4">
+              Preview data. Sign up to see real emotional insights.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Engagement Metrics</CardTitle>
+            <CardDescription>Average user performance indicators</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary mb-2">
+                  8.3 days
+                </div>
+                <p className="text-muted-foreground">Average user streak</p>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div>
+                  <div className="text-xl font-semibold text-accent">
+                    89%
+                  </div>
+                  <p className="text-xs text-muted-foreground">Weekly retention</p>
+                </div>
+                <div>
+                  <div className="text-xl font-semibold text-secondary">
+                    2.4x
+                  </div>
+                  <p className="text-xs text-muted-foreground">Daily engagement</p>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground mt-4">
+              Preview metrics. Actual data available after signup.
+            </p>
+          </CardContent>
+        </Card>
       </section>
 
       {/* Invite Links & Cohort Management */}
