@@ -8,9 +8,11 @@ const About = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             About <span className="text-gradient">SoulSpark AI</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">SoulSpark AI is a next-generation, AI-powered soul-care platform designed to make personal, meaningful support available anytime to Gen Z and Millennials. It helps them strengthen their mental, emotional, and inner wellbeing through accessible, personalized guidance that blends timeless wisdom with modern science.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">SoulSpark AI is reimagining well-being for the next generation. Our AI-powered platform gives Gen Z and Millennials personalized support that strengthens mental, emotional, and inner resilience in just 60-second a day. It feels simple, relatable, and built for the way they actually live.
 
-We partner with forward-thinking organizations—ranging from companies and employee resource groups to colleges and professional sports teams—while also growing as a direct-to-user platform. SoulSpark is bridging one of the most overlooked gaps in mental and emotional care for the next generation. And every interaction on the platform creates real-world change by helping provide meals to children in need.</p>
+We work with leading companies, colleges, and athletic programs to improve engagement, retention, and performance, while also growing a direct-to-user community. Every interaction on SoulSpark creates real-world impact by helping provide meals to children in need.
+
+By making meaningful support both scalable and deeply personal, SoulSpark AI is opening an untapped market and shaping the future of well-being at scale.</p>
         </div>
       </section>
 
