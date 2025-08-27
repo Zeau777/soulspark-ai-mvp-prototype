@@ -35,9 +35,7 @@ By making meaningful support both scalable and deeply personal, SoulSpark AI is 
             <h2 className="text-3xl font-bold">Our Vision</h2>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">SoulSpark AI will become the daily home for the inner well-being of a generation—empowering millions of young people to build resilience, find purpose, and thrive in life, work, and play. Just as people turn to Spotify for music or Calm for meditation, they will turn to SoulSpark for the health of their soul.</p>
-          <blockquote className="border-l-4 border-primary pl-6 italic text-lg text-foreground">
-            "Just like people check Calm or Spotify daily — they'll check SoulSpark AI for the health of their soul."
-          </blockquote>
+          
         </div>
       </section>
 
