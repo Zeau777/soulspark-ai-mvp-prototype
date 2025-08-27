@@ -10,9 +10,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Users, Plus, Calendar, Heart, MessageCircle, Target, Award } from 'lucide-react';
+import { Users, Plus, Calendar, Heart, MessageCircle, Target, Award, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 import { useUserProfile } from '@/hooks/useUserProfile';
+import { useNavigate } from 'react-router-dom';
 import { useAccess } from '@/hooks/useAccess';
 import QuickFeedback from "@/components/feedback/QuickFeedback";
 import FeedbackModal from "@/components/feedback/FeedbackModal";
@@ -66,6 +67,7 @@ const Community = () => {
   const { user } = useAuth();
 const { profile, loading: profileLoading } = useUserProfile(user?.id);
   const { fullAccess } = useAccess();
+  const navigate = useNavigate();
   const [circles, setCircles] = useState<SparkCircle[]>([]);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -281,11 +283,21 @@ if (profileLoading || loading) {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          SoulSpark Community
-        </h1>
-        <p className="text-muted-foreground">Connect, grow, and inspire one another on your journey.</p>
+      <div className="flex items-center gap-4 mb-6">
+        <Button 
+          variant="ghost" 
+          size="icon"
+          onClick={() => navigate('/')}
+          className="hover:bg-accent/10"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <div className="text-center space-y-2 flex-1">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            SoulSpark Community
+          </h1>
+          <p className="text-muted-foreground">Connect, grow, and inspire one another on your journey.</p>
+        </div>
       </div>
 
       <Tabs defaultValue="feed" className="w-full">

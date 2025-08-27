@@ -7,8 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import { Heart, Sparkles, Loader2, Instagram, Youtube, Share2, Volume2 } from "lucide-react";
+import { Heart, Sparkles, Loader2, Instagram, Youtube, Share2, Volume2, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import { speakText } from "@/utils/tts";
 import QuickFeedback from "@/components/feedback/QuickFeedback";
 import FeedbackModal from "@/components/feedback/FeedbackModal";
@@ -24,6 +25,7 @@ const PAGE_SIZE = 20;
 export default function ForYou() {
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -391,8 +393,20 @@ const renderCard = (d: RankedDrop) => (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
         <div className="mx-auto max-w-3xl px-4 py-4">
-          <h1 className="text-2xl md:text-3xl font-semibold text-foreground">For You</h1>
-          <p className="text-sm text-muted-foreground">Endless, personalized SoulDrops tuned to your journey.</p>
+          <div className="flex items-center gap-3">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => navigate('/')}
+              className="hover:bg-accent/10"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <div>
+              <h1 className="text-2xl md:text-3xl font-semibold text-foreground">For You</h1>
+              <p className="text-sm text-muted-foreground">Endless, personalized SoulDrops tuned to your journey.</p>
+            </div>
+          </div>
         </div>
       </header>
 
