@@ -22,7 +22,7 @@ const PRICING_PLANS: PricingPlan[] = [
     features: [
       'Personalized SoulDrops',
       '24/7 AI well-being support',
-      'Mobile, Slack, and Teams access',
+      'Mobile and Slack access',
       'Engagement tracking'
     ]
   },

@@ -8,7 +8,7 @@ interface PricingSectionProps {
   selectedPlan?: 'starter' | 'growth' | 'enterprise';
 }
 const features = {
-  starter: ["Personalized SoulDrops", "24/7 AI well-being support", "Mobile, Slack, and Teams access", "Engagement tracking"],
+  starter: ["Personalized SoulDrops", "24/7 AI well-being support", "Mobile and Slack access", "Engagement tracking"],
   growth: ["Everything in Starter", "Priority onboarding", "Advanced engagement insights"],
   enterprise: ["Everything in Growth", "White-label branding", "Advanced analytics", "API integration"]
 };
@@ -172,7 +172,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
           <div className="rounded-xl border bg-popover p-6 md:p-8">
             <h4 className="text-lg font-semibold mb-3">All plans include</h4>
             <p className="text-sm text-muted-foreground">
-              Daily 60-second "SoulDrops" • 24/7 AI-powered support • Mobile, Slack, and Teams access • Impact dashboard to track real-world change
+              Daily 60-second "SoulDrops" • 24/7 AI-powered support • Mobile and Slack access • Impact dashboard to track real-world change
             </p>
           </div>
         </aside>
