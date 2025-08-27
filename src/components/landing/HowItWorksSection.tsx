@@ -14,7 +14,7 @@ const HowItWorksSection = () => {
     {
       icon: Brain,
       title: "Take the SoulScan",
-      description: "2-minute personalized quiz to understand your faith background, emotional state, and personal goals.",
+      description: "1-minute personalized quiz to understand your faith background, emotional state, and personal goals.",
       step: "02"
     },
     {
