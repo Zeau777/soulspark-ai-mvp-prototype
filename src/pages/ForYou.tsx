@@ -397,7 +397,7 @@ const renderCard = (d: RankedDrop) => (
             <Button 
               variant="ghost" 
               size="icon"
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/dashboard')}
               className="hover:bg-accent/10"
             >
               <ArrowLeft className="h-5 w-5" />
