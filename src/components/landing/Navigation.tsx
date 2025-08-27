@@ -56,8 +56,16 @@ const Navigation = () => {
             </Button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile CTA and menu button */}
+          <div className="md:hidden flex items-center space-x-2">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => navigate('/book-demo')}
+              className="bg-black text-white border-black hover:bg-black/90 hover:text-white text-xs px-3"
+            >
+              Book Demo
+            </Button>
             <Button
               variant="ghost"
               size="icon"
