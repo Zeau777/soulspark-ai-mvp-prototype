@@ -23,7 +23,7 @@ By making meaningful support both scalable and deeply personal, SoulSpark AI is 
             <Target className="h-8 w-8 text-primary" />
             <h2 className="text-3xl font-bold">Our Mission</h2>
           </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">SoulSpark AI exists to ignite a global movement of emotionally resilient, purpose-driven young people by pioneering AI-powered, faith-centered soul care.</p>
+          <p className="text-lg text-muted-foreground leading-relaxed">SoulSpark AI exists to empower the next generation with the resilience, purpose, and support they need to thrive—using AI to make personal well-being as natural and universal as daily life itself.</p>
         </div>
       </section>
 
