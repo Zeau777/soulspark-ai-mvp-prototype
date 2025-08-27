@@ -35,9 +35,14 @@ serve(async (req: Request) => {
   );
 
   try {
-    const { action, organization_id, code, state, organization_name } = await req.json();
+    const { action, organization_id, code, state, organization_name, config } = await req.json();
 
     switch (action) {
+      case 'get_config':
+        return handleGetConfig(supabase, organization_id);
+      
+      case 'update_config':
+        return handleUpdateConfig(supabase, organization_id, config);
       case 'generate_oauth_url':
         return handleGenerateOAuthUrl(organization_id, organization_name);
       
@@ -258,6 +263,54 @@ async function handleTestBot(supabase: any, organizationId: string) {
       bot_id: authData.bot_id,
       user_id: authData.user_id 
     }),
+    { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+  );
+}
+
+async function handleGetConfig(supabase: any, organizationId: string) {
+  const { data: config, error } = await supabase
+    .from('slack_configurations')
+    .select('*')
+    .eq('organization_id', organizationId)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error('Failed to fetch Slack configuration');
+  }
+
+  // Return default config if none exists
+  const defaultConfig = {
+    organization_id: organizationId,
+    is_connected: false,
+    channels: [],
+    auto_souldrop_enabled: true,
+    souldrop_time: '09:00',
+    checkin_reminder_enabled: true,
+    checkin_reminder_time: '17:00',
+    welcome_message: 'Welcome to SoulSpark AI! 🌟 I\'m here to support your well-being journey. Type \'checkin\' to start or \'help\' for more options.'
+  };
+
+  return new Response(
+    JSON.stringify({ config: config || defaultConfig }),
+    { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+  );
+}
+
+async function handleUpdateConfig(supabase: any, organizationId: string, config: any) {
+  const { error } = await supabase
+    .from('slack_configurations')
+    .upsert({
+      ...config,
+      organization_id: organizationId,
+      updated_at: new Date().toISOString()
+    });
+
+  if (error) {
+    throw new Error('Failed to update Slack configuration');
+  }
+
+  return new Response(
+    JSON.stringify({ success: true }),
     { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
   );
 }

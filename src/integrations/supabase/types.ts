@@ -696,6 +696,96 @@ export type Database = {
         }
         Relationships: []
       }
+      slack_configurations: {
+        Row: {
+          auto_souldrop_enabled: boolean
+          bot_token: string | null
+          bot_user_id: string | null
+          channels: string[] | null
+          checkin_reminder_enabled: boolean
+          checkin_reminder_time: string
+          created_at: string
+          id: string
+          is_connected: boolean
+          organization_id: string
+          settings: Json | null
+          souldrop_time: string
+          updated_at: string
+          welcome_message: string | null
+          workspace_id: string | null
+          workspace_name: string | null
+        }
+        Insert: {
+          auto_souldrop_enabled?: boolean
+          bot_token?: string | null
+          bot_user_id?: string | null
+          channels?: string[] | null
+          checkin_reminder_enabled?: boolean
+          checkin_reminder_time?: string
+          created_at?: string
+          id?: string
+          is_connected?: boolean
+          organization_id: string
+          settings?: Json | null
+          souldrop_time?: string
+          updated_at?: string
+          welcome_message?: string | null
+          workspace_id?: string | null
+          workspace_name?: string | null
+        }
+        Update: {
+          auto_souldrop_enabled?: boolean
+          bot_token?: string | null
+          bot_user_id?: string | null
+          channels?: string[] | null
+          checkin_reminder_enabled?: boolean
+          checkin_reminder_time?: string
+          created_at?: string
+          id?: string
+          is_connected?: boolean
+          organization_id?: string
+          settings?: Json | null
+          souldrop_time?: string
+          updated_at?: string
+          welcome_message?: string | null
+          workspace_id?: string | null
+          workspace_name?: string | null
+        }
+        Relationships: []
+      }
+      slack_interactions: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: string
+          interaction_type: string
+          metadata: Json | null
+          organization_id: string
+          slack_channel_id: string
+          slack_user_id: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          interaction_type: string
+          metadata?: Json | null
+          organization_id: string
+          slack_channel_id: string
+          slack_user_id: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          interaction_type?: string
+          metadata?: Json | null
+          organization_id?: string
+          slack_channel_id?: string
+          slack_user_id?: string
+        }
+        Relationships: []
+      }
       soul_drops: {
         Row: {
           content: string

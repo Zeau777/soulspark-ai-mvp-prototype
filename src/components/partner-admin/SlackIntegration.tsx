@@ -95,16 +95,19 @@ export default function SlackIntegration({ organizationId, organizationName }: S
 
   const loadSlackConfig = async () => {
     try {
-      // Load existing Slack configuration
-      const { data: configData } = await supabase
-        .from('slack_configurations')
-        .select('*')
-        .eq('organization_id', organizationId)
-        .maybeSingle();
+      // Load existing Slack configuration using edge function
+      const { data, error } = await supabase.functions.invoke('slack-integration', {
+        body: { 
+          action: 'get_config',
+          organization_id: organizationId
+        }
+      });
 
-      if (configData) {
-        setConfig(configData);
-        if (configData.is_connected) {
+      if (error) throw error;
+      
+      if (data?.config) {
+        setConfig(data.config);
+        if (data.config.is_connected) {
           await loadChannels();
           await loadAnalytics();
         }
@@ -235,12 +238,13 @@ export default function SlackIntegration({ organizationId, organizationName }: S
     try {
       const newConfig = { ...config, ...updates };
       
-      const { error } = await supabase
-        .from('slack_configurations')
-        .upsert({
-          ...newConfig,
-          updated_at: new Date().toISOString()
-        });
+      const { data, error } = await supabase.functions.invoke('slack-integration', {
+        body: { 
+          action: 'update_config',
+          organization_id: organizationId,
+          config: newConfig
+        }
+      });
 
       if (error) throw error;
 
