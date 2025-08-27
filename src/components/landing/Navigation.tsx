@@ -46,6 +46,9 @@ const Navigation = () => {
             <Button variant="ghost" size="sm" onClick={() => navigate('/auth')}>
               Sign In
             </Button>
+            <Button variant="outline" size="sm" onClick={() => navigate('/book-demo')}>
+              Book a Demo
+            </Button>
             <Button variant="spiritual" size="sm" onClick={() => navigate('/auth')}>
               Join Now
             </Button>
@@ -105,6 +108,9 @@ const Navigation = () => {
             <div className="flex flex-col space-y-2 px-3 pt-4">
               <Button variant="ghost" size="sm" className="w-full" onClick={() => navigate('/auth')}>
                 Sign In
+              </Button>
+              <Button variant="outline" size="sm" className="w-full" onClick={() => navigate('/book-demo')}>
+                Book a Demo
               </Button>
               <Button variant="spiritual" size="sm" className="w-full" onClick={() => navigate('/auth')}>
                 Join Now

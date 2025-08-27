@@ -22,6 +22,7 @@ import CookiePolicy from "./pages/CookiePolicy";
 import Partners from "./pages/Partners";
 import Pricing from "./pages/Pricing";
 import PartnerAdminPreview from "./pages/PartnerAdminPreview";
+import BookDemo from "./pages/BookDemo";
 import PrayerRooms from "./pages/PrayerRooms";
 import Journal from "./pages/Journal";
 import RoleSelection from "./pages/RoleSelection";
@@ -89,6 +90,7 @@ const App = () => (
             <Route path="/partners" element={<Partners />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/partner-preview" element={<PartnerAdminPreview />} />
+            <Route path="/book-demo" element={<BookDemo />} />
             <Route path="/role-selection" element={<ProtectedRoute><RoleSelection /></ProtectedRoute>} />
             
             {/* Protected routes */}
