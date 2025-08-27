@@ -196,7 +196,7 @@ const BookDemo = () => {
                 </Button>
 
                 <p className="text-sm text-muted-foreground text-center">
-                  SoulSpark is HIPAA compliant and built with enterprise-grade data security.
+                  SoulSpark AI is HIPAA compliant and built with enterprise-grade data security.
                   <br />
                   Your people's well-being data is safe, private, and never shared.
                 </p>
