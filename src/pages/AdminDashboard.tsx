@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -24,7 +25,9 @@ import {
   UserMinus,
   Mail,
   X,
-  MessageSquare
+  MessageSquare,
+  Copy,
+  Plus
 } from 'lucide-react';
 import SlackIntegration from '@/components/partner-admin/SlackIntegration';
 
@@ -46,6 +49,22 @@ interface User {
   created_at: string;
 }
 
+interface GroupData {
+  group: string;
+  members: number;
+  active: number;
+  checkins: number;
+  meals: number;
+}
+
+interface Cohort {
+  id: string;
+  name: string;
+  members: number;
+  invites: number;
+  status: string;
+}
+
 export default function AdminDashboard() {
   const [stats, setStats] = useState<OrgStats | null>(null);
   const [users, setUsers] = useState<User[]>([]);
@@ -55,6 +74,23 @@ export default function AdminDashboard() {
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Mock groups data (in production, this would come from database)
+  const [groupsData] = useState<GroupData[]>([
+    { group: "Marketing", members: 45, active: 89, checkins: 34, meals: 156 },
+    { group: "Engineering", members: 67, active: 93, checkins: 52, meals: 231 },
+    { group: "Sales", members: 28, active: 82, checkins: 19, meals: 87 },
+    { group: "Support", members: 23, active: 95, checkins: 21, meals: 98 }
+  ]);
+
+  // Cohort management state
+  const [cohorts, setCohorts] = useState<Cohort[]>([
+    { id: "1", name: "Q1 Wellness Challenge", members: 45, invites: 8, status: "Active" },
+    { id: "2", name: "Leadership Development", members: 23, invites: 2, status: "Active" },
+    { id: "3", name: "New Employee Onboarding", members: 12, invites: 15, status: "Recruiting" }
+  ]);
+  const [showCreateCohort, setShowCreateCohort] = useState(false);
+  const [newCohortName, setNewCohortName] = useState('');
 
   // Content upload form state
   const [contentForm, setContentForm] = useState({
@@ -345,6 +381,43 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleCreateCohort = () => {
+    if (!newCohortName.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter a cohort name",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const newCohort: Cohort = {
+      id: Date.now().toString(),
+      name: newCohortName,
+      members: 0,
+      invites: 0,
+      status: "Recruiting"
+    };
+
+    setCohorts([...cohorts, newCohort]);
+    setNewCohortName('');
+    setShowCreateCohort(false);
+
+    toast({
+      title: "Cohort created successfully!",
+      description: `${newCohortName} has been created`
+    });
+  };
+
+  const copyInviteLink = (cohortName: string) => {
+    const inviteLink = `${window.location.origin}/invite/${organization?.code}/${cohortName.replace(/\s+/g, '-').toLowerCase()}`;
+    navigator.clipboard.writeText(inviteLink);
+    toast({
+      title: "Invite link copied!",
+      description: "Share this link with potential members"
+    });
+  };
+
   const getMoodEmoji = (mood: string) => {
     const moodMap: Record<string, string> = {
       anxious: '😰',
@@ -514,9 +587,37 @@ export default function AdminDashboard() {
           </Card>
         </div>
 
+        {/* Impact Engine - No Kid Hungry */}
+        <Card className="shadow-spiritual">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Heart className="h-5 w-5" /> Impact Engine — No Kid Hungry
+            </CardTitle>
+            <CardDescription>Progress to 1,000,000 meals this year</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-end justify-between">
+              <div>
+                <div className="text-3xl font-semibold text-foreground">{(stats?.totalMealsDonated || 0).toLocaleString()} meals YTD</div>
+                <p className="text-sm text-muted-foreground">Goal: 1,000,000</p>
+              </div>
+              <div className="text-sm text-muted-foreground">{Math.min(100, Math.round(((stats?.totalMealsDonated || 0)/1000000)*100))}%</div>
+            </div>
+            <div className="mt-3 h-3 w-full rounded-full bg-muted">
+              <div
+                className="h-3 rounded-full bg-primary"
+                style={{ width: `${Math.min(100, Math.round(((stats?.totalMealsDonated || 0)/1000000)*100))}%` }}
+              />
+            </div>
+            <p className="mt-3 text-xs text-muted-foreground">Live organization impact data</p>
+          </CardContent>
+        </Card>
+
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="groups">Groups</TabsTrigger>
+            <TabsTrigger value="cohorts">Cohorts</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
             <TabsTrigger value="content">Content</TabsTrigger>
             <TabsTrigger value="slack">
@@ -566,6 +667,151 @@ export default function AdminDashboard() {
                   </div>
                   <p className="text-muted-foreground">Average user streak</p>
                 </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="groups" className="space-y-6">
+            <Card className="shadow-spiritual">
+              <CardHeader>
+                <CardTitle>Overview by Groups</CardTitle>
+                <CardDescription>Performance metrics across different groups</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Group</TableHead>
+                      <TableHead className="text-right">Members</TableHead>
+                      <TableHead className="text-right">Active %</TableHead>
+                      <TableHead className="text-right">Check-ins (today)</TableHead>
+                      <TableHead className="text-right">Meals Donated</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {groupsData.map((group) => (
+                      <TableRow key={group.group}>
+                        <TableCell className="font-medium">{group.group}</TableCell>
+                        <TableCell className="text-right">{group.members}</TableCell>
+                        <TableCell className="text-right">{group.active}%</TableCell>
+                        <TableCell className="text-right">{group.checkins}</TableCell>
+                        <TableCell className="text-right">{group.meals}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="cohorts" className="space-y-6">
+            <Card className="shadow-spiritual">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Cohort Management</CardTitle>
+                    <CardDescription>Organize users into focused groups</CardDescription>
+                  </div>
+                  <Button 
+                    onClick={() => setShowCreateCohort(true)}
+                    className="flex items-center space-x-2"
+                    variant="spiritual"
+                  >
+                    <Plus className="h-4 w-4" />
+                    <span>Create Cohort</span>
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {showCreateCohort && (
+                  <Card className="mb-6 border-2 border-primary/20">
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg">Create New Cohort</CardTitle>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setShowCreateCohort(false);
+                            setNewCohortName('');
+                          }}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="cohortName">Cohort Name</Label>
+                        <Input
+                          id="cohortName"
+                          placeholder="e.g., Q2 Wellness Challenge"
+                          value={newCohortName}
+                          onChange={(e) => setNewCohortName(e.target.value)}
+                        />
+                      </div>
+                      <div className="flex space-x-2">
+                        <Button 
+                          onClick={handleCreateCohort}
+                          disabled={!newCohortName.trim()}
+                          className="flex items-center space-x-2"
+                        >
+                          <Plus className="h-4 w-4" />
+                          <span>Create Cohort</span>
+                        </Button>
+                        <Button 
+                          variant="outline"
+                          onClick={() => {
+                            setShowCreateCohort(false);
+                            setNewCohortName('');
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Cohort</TableHead>
+                      <TableHead className="text-right">Members</TableHead>
+                      <TableHead className="text-right">Active Invites</TableHead>
+                      <TableHead className="text-right">Status</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {cohorts.map((cohort) => (
+                      <TableRow key={cohort.id}>
+                        <TableCell className="font-medium">{cohort.name}</TableCell>
+                        <TableCell className="text-right">{cohort.members}</TableCell>
+                        <TableCell className="text-right">{cohort.invites}</TableCell>
+                        <TableCell className="text-right">
+                          <Badge variant={cohort.status === 'Active' ? 'default' : 'secondary'}>
+                            {cohort.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <div className="flex space-x-1 justify-end">
+                            <Button variant="outline" size="sm">
+                              Manage
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="sm"
+                              onClick={() => copyInviteLink(cohort.name)}
+                            >
+                              <Copy className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </CardContent>
             </Card>
           </TabsContent>
