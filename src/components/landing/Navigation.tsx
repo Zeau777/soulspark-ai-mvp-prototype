@@ -46,7 +46,10 @@ const Navigation = () => {
             <Button 
               variant="outline" 
               size="sm" 
-              onClick={() => navigate('/book-demo')}
+              onClick={() => {
+                navigate('/book-demo');
+                window.scrollTo(0, 0);
+              }}
               className="bg-black text-white border-black hover:bg-black/90 hover:text-white"
             >
               Book a Demo
@@ -61,7 +64,10 @@ const Navigation = () => {
             <Button 
               variant="outline" 
               size="sm" 
-              onClick={() => navigate('/book-demo')}
+              onClick={() => {
+                navigate('/book-demo');
+                window.scrollTo(0, 0);
+              }}
               className="bg-black text-white border-black hover:bg-black/90 hover:text-white text-xs px-3"
             >
               Book Demo
@@ -116,11 +122,15 @@ const Navigation = () => {
               For Organizations
             </a>
             <div className="flex flex-col space-y-2 px-3 pt-4">
-              <Button 
+               <Button 
                 variant="outline" 
                 size="sm" 
                 className="w-full bg-black text-white border-black hover:bg-black/90 hover:text-white" 
-                onClick={() => navigate('/book-demo')}
+                onClick={() => {
+                  navigate('/book-demo');
+                  window.scrollTo(0, 0);
+                  setIsOpen(false);
+                }}
               >
                 Book a Demo
               </Button>
