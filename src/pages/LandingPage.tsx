@@ -1,3 +1,4 @@
+import { Shield } from "lucide-react";
 import Navigation from "@/components/landing/Navigation";
 import HeroSection from "@/components/landing/HeroSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
@@ -26,12 +27,15 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center items-center gap-8 text-center">
             <div className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-primary" />
               <span className="text-sm font-medium text-foreground">✅ HIPAA Compliant</span>
             </div>
             <div className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-primary" />
               <span className="text-sm font-medium text-foreground">✅ SOC-2 Ready</span>
             </div>
             <div className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-primary" />
               <span className="text-sm font-medium text-foreground">✅ U.S. Data Privacy Aligned</span>
             </div>
           </div>
