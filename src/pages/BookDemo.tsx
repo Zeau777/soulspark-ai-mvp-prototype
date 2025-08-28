@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Shield, Clock, TrendingUp, Users, CheckCircle, Calendar } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -219,54 +220,112 @@ const BookDemo = () => {
             <div>
               <h2 className="text-2xl font-bold text-foreground mb-6">FAQs for Partner Organizations</h2>
               
-              <div className="space-y-6">
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">1️⃣ Differentiation</h3>
-                  <p className="text-sm font-medium text-primary mb-1">What makes SoulSpark different?</p>
-                  <p className="text-sm text-muted-foreground">Unlike generic wellness apps, SoulSpark AI is emotionally intelligent, values-aligned, and built for the way Gen Z & Millennials live and work.</p>
-                </div>
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-semibold text-foreground">Differentiation - What makes SoulSpark different?</span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-sm text-muted-foreground">Unlike generic wellness apps, SoulSpark AI is emotionally intelligent, values-aligned, and built for the way Gen Z & Millennials live and work.</p>
+                  </AccordionContent>
+                </AccordionItem>
 
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">2️⃣ Time Commitment</h3>
-                  <p className="text-sm font-medium text-primary mb-1">How much time does it take?</p>
-                  <p className="text-sm text-muted-foreground">Just 60 seconds a day plus 24/7 AI support.</p>
-                </div>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-semibold text-foreground">Time Commitment - How much time does it take?</span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-sm text-muted-foreground">Just 60 seconds a day plus 24/7 AI support.</p>
+                  </AccordionContent>
+                </AccordionItem>
 
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">3️⃣ Organizational Benefits</h3>
-                  <p className="text-sm font-medium text-primary mb-1">How does it help us?</p>
-                  <p className="text-sm text-muted-foreground">Boosts engagement, retention, and productivity while reducing burnout.</p>
-                </div>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-semibold text-foreground">Organizational Benefits - How does it help us?</span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-sm text-muted-foreground">Boosts engagement, retention, and productivity while reducing burnout.</p>
+                  </AccordionContent>
+                </AccordionItem>
 
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">4️⃣ Compliance & Privacy ✅</h3>
-                  <p className="text-sm font-medium text-primary mb-1">Is SoulSpark AI secure and compliant?</p>
-                  <p className="text-sm text-muted-foreground">Yes. SoulSpark is built with enterprise-grade security, HIPAA compliance, and strict adherence to U.S. data privacy regulations. Your people's data is safe, encrypted, and never shared without consent.</p>
-                </div>
+                <AccordionItem value="item-4">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-semibold text-foreground">Compliance & Privacy ✅ - Is SoulSpark AI secure and compliant?</span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-sm text-muted-foreground">Yes. SoulSpark is built with enterprise-grade security, HIPAA compliance, and strict adherence to U.S. data privacy regulations. Your people's data is safe, encrypted, and never shared without consent.</p>
+                  </AccordionContent>
+                </AccordionItem>
 
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">5️⃣ Customization</h3>
-                  <p className="text-sm font-medium text-primary mb-1">Is it customizable?</p>
-                  <p className="text-sm text-muted-foreground">Yes—tailored to your organization's values, culture, and goals.</p>
-                </div>
+                <AccordionItem value="item-5">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-semibold text-foreground">Customization - Is it customizable?</span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-sm text-muted-foreground">Yes—tailored to your organization's values, culture, and goals.</p>
+                  </AccordionContent>
+                </AccordionItem>
 
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">6️⃣ Implementation</h3>
-                  <p className="text-sm font-medium text-primary mb-1">What does implementation look like?</p>
-                  <p className="text-sm text-muted-foreground">Fast, seamless, and plug-and-play. Launch in days, not months.</p>
-                </div>
-              </div>
+                <AccordionItem value="item-6">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-semibold text-foreground">Implementation - What does implementation look like?</span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-sm text-muted-foreground">Fast, seamless, and plug-and-play. Launch in days, not months.</p>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
 
               {/* Five Questions Leaders Are Already Asking */}
               <div className="mt-8">
-                <h3 className="text-xl font-bold text-foreground mb-4">🤔 Five Questions Leaders Are Already Asking</h3>
-                <div className="space-y-3 text-sm">
-                  <p><strong>Will my people actually use it?</strong> → Yes. SoulSpark is designed to be sticky, with quick and relatable interactions.</p>
-                  <p><strong>How is this different from our EAP or mental health benefits?</strong> → We're proactive, personalized, and daily—not just reactive.</p>
-                  <p><strong>Does this work for diverse groups?</strong> → Absolutely. SoulSpark adapts across workplaces, campuses, and athletic programs.</p>
-                  <p><strong>Is it secure and compliant?</strong> → 100%. HIPAA compliant, data encrypted, and aligned with U.S. privacy regulations.</p>
-                  <p><strong>How do I know ROI is real?</strong> → Clear dashboards track engagement, retention, and cultural impact.</p>
-                </div>
+                <h3 className="text-xl font-bold text-foreground mb-4">🤔 Five questions leaders are asking.</h3>
+                
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="question-1">
+                    <AccordionTrigger className="text-left">
+                      <span className="font-medium text-foreground">Will my people actually use it?</span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-sm text-muted-foreground">Yes. SoulSpark is designed to be sticky, with quick and relatable interactions.</p>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="question-2">
+                    <AccordionTrigger className="text-left">
+                      <span className="font-medium text-foreground">How is this different from our EAP or mental health benefits?</span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-sm text-muted-foreground">We're proactive, personalized, and daily—not just reactive.</p>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="question-3">
+                    <AccordionTrigger className="text-left">
+                      <span className="font-medium text-foreground">Does this work for diverse groups?</span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-sm text-muted-foreground">Absolutely. SoulSpark adapts across workplaces, campuses, and athletic programs.</p>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="question-4">
+                    <AccordionTrigger className="text-left">
+                      <span className="font-medium text-foreground">Is it secure and compliant?</span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-sm text-muted-foreground">100%. HIPAA compliant, data encrypted, and aligned with U.S. privacy regulations.</p>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="question-5">
+                    <AccordionTrigger className="text-left">
+                      <span className="font-medium text-foreground">How do I know ROI is real?</span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-sm text-muted-foreground">Clear dashboards track engagement, retention, and cultural impact.</p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
               </div>
             </div>
           </div>
