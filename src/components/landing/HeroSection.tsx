@@ -17,7 +17,7 @@ const HeroSection = () => {
             </div>
             <div className="flex items-center space-x-2">
               <Heart className="h-4 w-4" />
-              <span>Faith-centered care</span>
+              <span>Human-centered care</span>
             </div>
             <div className="flex items-center space-x-2">
               <Sparkles className="h-4 w-4" />
