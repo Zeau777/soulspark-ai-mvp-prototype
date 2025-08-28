@@ -172,7 +172,7 @@ const BookDemo = () => {
                     <span className="font-semibold text-foreground">Differentiation - What makes SoulSpark AI different?</span>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p className="text-sm text-muted-foreground">Unlike generic wellness apps that are underused or one-size-fits-all, SoulSpark AI is designed for how the next generation actually lives. It combines bite-sized daily well-being practices with 24/7 AI coaching to help people build resilience, belonging, and purpose. For organizations, this translates into stronger cultures, measurable impact, and better retention.</p>
+                    <p className="text-sm text-muted-foreground">Unlike traditional wellness programs that people rarely use, SoulSpark AI is designed for the way Gen Z and Millennials live today. Our human-centered AI delivers bite-sized well-being practices and 24/7 personalized support that drive real engagement, resilience, and belonging—while giving leaders the data they need to measure cultural and performance impact.</p>
                   </AccordionContent>
                 </AccordionItem>
 
