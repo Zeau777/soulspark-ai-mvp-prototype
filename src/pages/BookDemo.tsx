@@ -9,9 +9,10 @@ import { Shield, Clock, TrendingUp, Users, CheckCircle, Calendar } from "lucide-
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useSEO } from "@/hooks/useSEO";
-
 const BookDemo = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,25 +22,24 @@ const BookDemo = () => {
     organizationName: "",
     painPoints: ""
   });
-
   useSEO({
     title: "Book a Demo - SoulSpark AI | Transform Your Organization's Wellbeing",
     description: "Schedule a personalized demo to see how SoulSpark AI drives engagement, retention, and measurable impact for employees, students, and athletes.",
     canonical: "https://mysoulsparkai.com/book-demo"
   });
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+    const {
+      name,
+      value
+    } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
       // Send to MailChimp via edge function
       const mailchimpPayload = {
@@ -53,36 +53,31 @@ const BookDemo = () => {
         role: formData.role,
         painPoints: formData.painPoints
       };
-
       const response = await supabase.functions.invoke('submit-mailchimp-lead', {
         body: mailchimpPayload
       });
-
       if (response.error) {
         throw new Error(response.error.message);
       }
-
       console.log('Demo request submitted successfully:', response.data);
       setIsSubmitted(true);
       toast({
         title: "Demo Request Submitted!",
-        description: "We'll be in touch within 24 hours to schedule your personalized demo.",
+        description: "We'll be in touch within 24 hours to schedule your personalized demo."
       });
     } catch (error) {
       console.error('Failed to submit demo request:', error);
       toast({
         title: "Submission Failed",
         description: "Please try again or contact us directly at partners@mysoulsparkai.com",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
   if (isSubmitted) {
-    return (
-      <div className="min-h-screen bg-background">
+    return <div className="min-h-screen bg-background">
         <div className="max-w-4xl mx-auto px-4 py-20">
           <div className="text-center">
             <CheckCircle className="h-16 w-16 text-primary mx-auto mb-6" />
@@ -95,12 +90,9 @@ const BookDemo = () => {
             </Button>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Side - Form */}
@@ -119,64 +111,27 @@ const BookDemo = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Your full name"
-                    />
+                    <Input id="name" name="name" value={formData.name} onChange={handleInputChange} required placeholder="Your full name" />
                   </div>
                   <div>
                     <Label htmlFor="role">Role</Label>
-                    <Input
-                      id="role"
-                      name="role"
-                      value={formData.role}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="e.g., HR Director, Dean of Students"
-                    />
+                    <Input id="role" name="role" value={formData.role} onChange={handleInputChange} required placeholder="e.g., HR Director, Dean of Students" />
                   </div>
                 </div>
 
                 <div>
                   <Label htmlFor="workEmail">Work Email</Label>
-                  <Input
-                    id="workEmail"
-                    name="workEmail"
-                    type="email"
-                    value={formData.workEmail}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="your.email@company.com"
-                  />
+                  <Input id="workEmail" name="workEmail" type="email" value={formData.workEmail} onChange={handleInputChange} required placeholder="your.email@company.com" />
                 </div>
 
                 <div>
                   <Label htmlFor="organizationName">Organization Name</Label>
-                  <Input
-                    id="organizationName"
-                    name="organizationName"
-                    value={formData.organizationName}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="Your organization or company name"
-                  />
+                  <Input id="organizationName" name="organizationName" value={formData.organizationName} onChange={handleInputChange} required placeholder="Your organization or company name" />
                 </div>
 
                 <div>
                   <Label htmlFor="painPoints">Describe your current pain points (e.g. high burnout)</Label>
-                  <Textarea
-                    id="painPoints"
-                    name="painPoints"
-                    value={formData.painPoints}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="Tell us about the challenges your organization is facing..."
-                    rows={4}
-                  />
+                  <Textarea id="painPoints" name="painPoints" value={formData.painPoints} onChange={handleInputChange} required placeholder="Tell us about the challenges your organization is facing..." rows={4} />
                 </div>
 
                 {/* Call-to-Action Banner */}
@@ -186,12 +141,7 @@ const BookDemo = () => {
                   </p>
                 </div>
 
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground hover:shadow-glow transition-all duration-300"
-                  size="lg"
-                >
+                <Button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground hover:shadow-glow transition-all duration-300" size="lg">
                   <Calendar className="h-5 w-5 mr-2" />
                   {isSubmitting ? "Submitting..." : "📅 Book a 30-Minute Discovery Demo"}
                 </Button>
@@ -209,11 +159,7 @@ const BookDemo = () => {
           <div className="space-y-8">
             {/* Mobile Image */}
             <div className="text-center">
-              <img 
-                src="/lovable-uploads/f071bb3c-ad6b-4d6f-8760-6892fc0be615.png" 
-                alt="SoulSpark AI mobile app demo showing partner and user interfaces"
-                className="max-w-full h-auto mx-auto rounded-lg shadow-lg"
-              />
+              <img src="/lovable-uploads/f071bb3c-ad6b-4d6f-8760-6892fc0be615.png" alt="SoulSpark AI mobile app demo showing partner and user interfaces" className="max-w-full h-auto mx-auto rounded-lg shadow-lg" />
             </div>
 
             {/* FAQs */}
@@ -271,7 +217,7 @@ const BookDemo = () => {
                     <span className="font-semibold text-foreground">Implementation - What does implementation look like?</span>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p className="text-sm text-muted-foreground">Fast, seamless, and plug-and-play. Launch in days, not months.</p>
+                    <p className="text-sm text-muted-foreground">Fast, seamless, and plug-and-play. </p>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -349,8 +295,6 @@ const BookDemo = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default BookDemo;
