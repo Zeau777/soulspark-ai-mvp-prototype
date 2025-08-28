@@ -169,10 +169,10 @@ const BookDemo = () => {
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
                   <AccordionTrigger className="text-left">
-                    <span className="font-semibold text-foreground">Differentiation - What makes SoulSpark different?</span>
+                    <span className="font-semibold text-foreground">Differentiation - What makes SoulSpark AI different?</span>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p className="text-sm text-muted-foreground">Unlike generic wellness apps, SoulSpark AI is emotionally intelligent, values-aligned, and built for the way Gen Z & Millennials live and work.</p>
+                    <p className="text-sm text-muted-foreground">Unlike generic wellness apps that are underused or one-size-fits-all, SoulSpark AI is designed for how the next generation actually lives. It combines bite-sized daily well-being practices with 24/7 AI coaching to help people build resilience, belonging, and purpose. For organizations, this translates into stronger cultures, measurable impact, and better retention.</p>
                   </AccordionContent>
                 </AccordionItem>
 
