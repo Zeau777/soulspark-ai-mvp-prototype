@@ -14,25 +14,25 @@ const HowItWorksSection = () => {
     {
       icon: Brain,
       title: "Take the SoulScan",
-      description: "1-minute personalized quiz to understand your faith background, emotional state, and personal goals.",
+      description: "A 1-minute personalized check-in to understand your mindset, emotional state, and personal goals.",
       step: "02"
     },
     {
       icon: Activity,
       title: "Pulse Check",
-      description: "Check in with how you feel, and SoulSpark AI responds with soul care rooted in faith — right when you need it most.",
+      description: "Log how you're feeling, and SoulSpark AI responds instantly with personalized support when you need it most.",
       step: "03"
     },
     {
       icon: Heart,
       title: "Receive Daily SoulDrops",
-      description: "Get personalized 60-second soul-care experiences: AI-generated devotional, journal prompt, breathwork, guided prayer, etc., powered by your context.",
+      description: "Get tailored 60-second well-being boosts—like guided reflection, micro-journaling, breathwork, or motivational insights—powered by your context.",
       step: "04"
     },
     {
       icon: TrendingUp,
-      title: "Grow & Impact",
-      description: "Track your spiritual growth streaks while creating real-world impact through our meals donation program.",
+      title: "Grow & Create Impact",
+      description: "Track your progress, build positive habits, and contribute to real-world impact through our social good initiatives.",
       step: "05"
     }
   ];
@@ -45,7 +45,7 @@ const HowItWorksSection = () => {
             How <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">SoulSpark AI</span> Works
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Five simple steps to transform your spiritual and emotional wellbeing while making a positive impact in the world.
+            Five simple steps to transform well-being and create meaningful impact
           </p>
         </div>
 
