@@ -6,7 +6,7 @@ const HowItWorksSection = () => {
   const steps = [{
     icon: UserPlus,
     title: "Join Your Community",
-    description: "Enter via organization invite or public link. Choose your path: Student, Employee, or Athlete.",
+    description: "Enter via organization invite. Choose your path: Student, Employee, or Athlete.",
     step: "01"
   }, {
     icon: Brain,
