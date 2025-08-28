@@ -182,7 +182,7 @@ const BookDemo = () => {
                 {/* Call-to-Action Banner */}
                 <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl p-6 border border-primary/20">
                   <p className="text-lg font-medium text-foreground mb-4">
-                    ✨ "If you've ever wondered how to truly engage the next generation, SoulSpark AI was built for you."
+                    If you've ever wondered how to truly engage the next generation—with tools that are safe, compliant, and designed for impact—SoulSpark AI was built for you.
                   </p>
                 </div>
 
@@ -278,7 +278,7 @@ const BookDemo = () => {
 
               {/* Five Questions Leaders Are Already Asking */}
               <div className="mt-8">
-                <h3 className="text-xl font-bold text-foreground mb-4">🤔 Five questions leaders are asking.</h3>
+                <h3 className="text-xl font-bold text-foreground mb-4">Five questions leaders are asking.</h3>
                 
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="question-1">
