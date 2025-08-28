@@ -52,7 +52,7 @@ const HeroSection = () => {
                 <Brain className="h-8 w-8 text-primary" />
               </div>
               <h3 className="font-semibold text-lg mb-2">SoulMatch AI™ Engine</h3>
-              <p className="text-muted-foreground">Proprietary algorithm that dynamically adapts content based on your faith level, mood, and growth patterns.</p>
+              <p className="text-muted-foreground">A proprietary system that personalizes content in real time—adapting to each person's mood, mindset, and growth patterns.</p>
             </div>
             
             <div className="text-center">
@@ -60,15 +60,15 @@ const HeroSection = () => {
                 <Shield className="h-8 w-8 text-primary" />
               </div>
               <h3 className="font-semibold text-lg mb-2">Pulse Tracking AI</h3>
-              <p className="text-muted-foreground">Advanced memory + risk scoring system that detects burnout and faith drift before they happen.</p>
+              <p className="text-muted-foreground">An advanced well-being tracker that uses memory and predictive signals to detect stress and burnout before they surface.</p>
             </div>
             
             <div className="text-center">
               <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Zap className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Viral Impact Gamification</h3>
-              <p className="text-muted-foreground">Leaderboards, impact badges, and shareable growth moments that create real-world change.</p>
+              <h3 className="font-semibold text-lg mb-2">Impact Gamification</h3>
+              <p className="text-muted-foreground">Leaderboards, progress badges, and shareable milestones that motivate positive habits and foster lasting change.</p>
             </div>
           </div>
 
@@ -79,29 +79,29 @@ const HeroSection = () => {
               <div className="flex items-start space-x-3">
                 <Heart className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1">Faith-Centered Behavioral AI</h4>
-                  <p className="text-sm text-muted-foreground">Trained on Scripture, ancient wisdom, and psychological frameworks.</p>
+                  <h4 className="font-semibold mb-1">Human-Centered Behavioral AI</h4>
+                  <p className="text-sm text-muted-foreground">Built on psychology, wisdom traditions, and modern behavioral science to support whole-person well-being.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <Users className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Social Impact Engine</h4>
-                  <p className="text-sm text-muted-foreground">Every user action creates real-world impact (like TOMS for soul care).</p>
+                  <p className="text-sm text-muted-foreground">Every action in the platform contributes to meaningful real-world outcomes, turning personal growth into collective impact.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <Sparkles className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Hyper-Personalization Engine</h4>
-                  <p className="text-sm text-muted-foreground">Adjusts tone, depth, and doctrine-level per user/org preference.</p>
+                  <p className="text-sm text-muted-foreground">Customizes tone, depth, and guidance for each user and organization's unique culture and preferences.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <Brain className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1">Dynamic Persona-Shaping AI</h4>
-                  <p className="text-sm text-muted-foreground">Personal AI soul-care coach that evolves with your journey.</p>
+                  <h4 className="font-semibold mb-1">Dynamic Growth Coach AI</h4>
+                  <p className="text-sm text-muted-foreground">An adaptive digital coach that evolves with each user's journey, offering support that feels more human over time.</p>
                 </div>
               </div>
             </div>
