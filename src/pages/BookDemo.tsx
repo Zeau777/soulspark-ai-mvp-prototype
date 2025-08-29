@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Shield, Clock, TrendingUp, Users, CheckCircle, Calendar } from "lucide-react";
+import { Shield, Clock, TrendingUp, Users, CheckCircle, Calendar, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useSEO } from "@/hooks/useSEO";
@@ -285,6 +285,7 @@ const BookDemo = () => {
               <h4 className="font-semibold text-foreground mb-4 text-lg">Why Organizations Choose SoulSpark AI</h4>
               <p className="text-muted-foreground leading-relaxed mb-6">Gen Z and Millennials are facing record stress, burnout, and disconnection—hurting engagement and retention. SoulSpark AI delivers personalized, 24/7 soul-care that boosts mental, emotional, and inner wellbeing. Organizations see stronger culture, higher performance, and real-world impact—every check-in funds a meal for a child in need. It's more than a perk; it's a culture shift.</p>
               <div className="flex items-center text-muted-foreground">
+                <Heart className="h-4 w-4 text-primary mr-2" />
                 <span>Purpose-built for holistic wellbeing at work, school, and beyond.</span>
               </div>
             </div>
