@@ -135,8 +135,8 @@ const BookDemo = () => {
                 </div>
 
                 {/* Call-to-Action Banner */}
-                <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl p-6 border border-primary/20">
-                  <p className="text-lg font-medium text-foreground mb-4">
+                <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl p-4 border border-primary/20">
+                  <p className="text-lg font-medium text-foreground mb-0">
                     See how SoulSpark AI improves resilience, culture, and retention in just 90 days.
                   </p>
                 </div>
