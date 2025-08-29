@@ -102,7 +102,7 @@ const BookDemo = () => {
                 Book a <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Demo</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-6">
-                Provide your details below and equip your people with resilience and belonging. SoulSpark AI helps employees, students, and athletes thrive emotionally and mentally—while driving engagement, retention, and measurable impact.
+                Provide your details below and equip your people to thrive. SoulSpark AI helps employees, students, and athletes build resilience, connection, and well-being—while driving engagement, retention, and measurable organizational impact.
               </p>
             </div>
 
@@ -137,7 +137,7 @@ const BookDemo = () => {
                 {/* Call-to-Action Banner */}
                 <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl p-6 border border-primary/20">
                   <p className="text-lg font-medium text-foreground mb-4">
-                    If you've ever wondered how to truly engage the next generation—with tools that are safe, compliant, and designed for impact—SoulSpark AI was built for you.
+                    See how SoulSpark AI improves resilience, culture, and retention in just 90 days.
                   </p>
                 </div>
 
