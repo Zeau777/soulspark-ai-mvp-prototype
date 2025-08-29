@@ -277,20 +277,32 @@ const BookDemo = () => {
           </div>
         </div>
 
-        {/* Trust Badges Row */}
+        {/* Bottom Section with Organization Info and Trust Badges */}
         <div className="mt-16 py-8 border-t border-border/40">
-          <div className="flex flex-wrap justify-center items-center gap-8 text-center">
-            <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-foreground">✅ HIPAA Compliant</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            {/* Left Side - Why Organizations Choose SoulSpark AI */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4 text-lg">Why Organizations Choose SoulSpark AI</h4>
+              <p className="text-muted-foreground leading-relaxed mb-6">Gen Z and Millennials are facing record stress, burnout, and disconnection—hurting engagement and retention. SoulSpark AI delivers personalized, 24/7 soul-care that boosts mental, emotional, and inner wellbeing. Organizations see stronger culture, higher performance, and real-world impact—every check-in funds a meal for a child in need. It's more than a perk; it's a culture shift.</p>
+              <div className="flex items-center text-muted-foreground">
+                <span>Purpose-built for holistic wellbeing at work, school, and beyond.</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-foreground">✅ SOC-2 Ready</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-foreground">✅ U.S. Data Privacy Aligned</span>
+
+            {/* Right Side - Trust Badges */}
+            <div className="flex flex-wrap justify-center lg:justify-end items-center gap-6">
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-primary" />
+                <span className="text-sm font-medium text-foreground">✅ HIPAA Compliant</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-primary" />
+                <span className="text-sm font-medium text-foreground">✅ SOC-2 Ready</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-primary" />
+                <span className="text-sm font-medium text-foreground">✅ U.S. Data Privacy Aligned</span>
+              </div>
             </div>
           </div>
         </div>
