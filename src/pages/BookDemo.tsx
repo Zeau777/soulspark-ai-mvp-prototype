@@ -283,7 +283,7 @@ const BookDemo = () => {
             {/* Left Side - Why Organizations Choose SoulSpark AI */}
             <div>
               <h4 className="font-semibold text-foreground mb-4 text-lg">Why Organizations Choose SoulSpark AI</h4>
-              <p className="text-muted-foreground leading-relaxed mb-6">Gen Z and Millennials are facing record stress, burnout, and disconnection—hurting engagement and retention. SoulSpark AI delivers personalized, 24/7 soul-care that boosts mental, emotional, and inner wellbeing. Organizations see stronger culture, higher performance, and real-world impact—every check-in funds a meal for a child in need. It's more than a perk; it's a culture shift.</p>
+              <p className="text-muted-foreground leading-relaxed mb-6">Gen Z and Millennials are experiencing unprecedented levels of stress, burnout, and disconnection—costing organizations billions in lost productivity and engagement. SoulSpark AI provides personalized, 24/7 well-being support that strengthens mental, emotional, and inner resilience. The result: healthier cultures, higher performance, and greater retention. Plus, every check-in creates real-world impact by funding meals for children in need. It's more than a wellness perk—it's a culture shift.</p>
               <div className="flex items-center text-muted-foreground">
                 <Heart className="h-4 w-4 text-primary mr-2" />
                 <span>Purpose-built for holistic wellbeing at work, school, and beyond.</span>
