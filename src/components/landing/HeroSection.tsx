@@ -33,12 +33,6 @@ const HeroSection = () => {
 
           <p className="text-lg font-medium text-primary mb-6">SoulSpark AI — Turn well-being into engagement, retention, and growth.</p>
 
-          {/* CTA Button - Moved up for mobile visibility */}
-          <div className="flex justify-center mb-8">
-            <Button variant="spiritual" size="lg" className="text-lg px-8 py-4 min-w-[200px]" onClick={() => navigate('/auth')}>
-              Start Your Journey
-            </Button>
-          </div>
 
           <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Gen Z and Millennials are upgrading everything, from our skills to our devices to our hustle. But what about our inner life? SoulSpark AI is the first platform designed to supercharge your mental, emotional, and purpose-driven well-being in just 60 seconds a day. It is powered by timeless wisdom, proven science, and human-centered AI, and is always accessible and always judgment-free.</p>
           
