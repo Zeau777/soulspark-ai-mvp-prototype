@@ -9,7 +9,7 @@ interface PricingSectionProps {
 }
 const features = {
   starter: ["Personalized SoulDrops", "24/7 AI well-being support", "Mobile, Slack, Teams, and Discord access", "Engagement tracking"],
-  growth: ["Everything in Starter", "Priority onboarding", "Advanced engagement insights"],
+  growth: ["Everything in Startup", "Priority onboarding", "Advanced engagement insights"],
   enterprise: ["Everything in Growth", "White-label branding", "Advanced analytics", "API integration"]
 };
 const item = (text: string) => <li key={text} className="flex items-start gap-3">
