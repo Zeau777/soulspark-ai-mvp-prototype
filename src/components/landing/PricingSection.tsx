@@ -36,7 +36,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
           <article className="relative">
             <Card className={`h-full ${selectedPlan === 'starter' ? 'border-accent ring-2 ring-accent/40 shadow-spiritual' : 'border-border/60'}`}>
               <CardHeader>
-                <CardTitle className="text-xl">Starter</CardTitle>
+                <CardTitle className="text-xl">Startup</CardTitle>
                 <p className="text-sm text-muted-foreground">Small to mid-size companies</p>
                 <div className="mt-4 flex items-baseline gap-1">
                   <span className="text-3xl font-semibold">$6</span>
