@@ -49,7 +49,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                   {features.starter.map(item)}
                 </ul>
                 <Button asChild className="w-full" variant="spiritual">
-                  <a href="/partners?plan=starter#partner-plans">Choose Starter</a>
+                  <a href="/partners?plan=starter#partner-plans">Choose Startup</a>
                 </Button>
               </CardContent>
             </Card>
