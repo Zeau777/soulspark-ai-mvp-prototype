@@ -31,10 +31,7 @@ const HeroSection = () => {
             <span className="text-foreground"> Workplaces, Campuses, and Locker Rooms.</span>
           </h1>
 
-          <p className="text-lg font-medium text-primary mb-6">SoulSpark AI — Turn well-being into engagement, retention, and growth.</p>
-
-
-          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Gen Z and Millennials upgrade everything—skills, devices, hustle. But what about our inner lives? SoulSpark AI delivers personalized support in just 60 seconds a day, helping young people feel stronger and more purposeful. For organizations, it turns well-being into engagement, retention, and healthier performance. For investors, it's a platform at the intersection of mental health, AI, and the future of how we work, learn, and compete. Built on timeless wisdom, proven science, and human-centered AI.</p>
+          <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">Gen Z and Millennials upgrade everything—skills, devices, hustle. But what about our inner lives? SoulSpark AI delivers personalized support in just 60 seconds a day, helping young people feel stronger and more purposeful. For organizations, it turns well-being into engagement, retention, and healthier performance. For investors, it's a platform at the intersection of mental health, AI, and the future of how we work, learn, and compete. Built on timeless wisdom, proven science, and human-centered AI.</p>
           
 
 
