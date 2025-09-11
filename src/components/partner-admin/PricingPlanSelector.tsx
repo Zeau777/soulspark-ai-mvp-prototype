@@ -15,7 +15,7 @@ interface PricingPlan {
 const PRICING_PLANS: PricingPlan[] = [
   {
     id: 'starter',
-    name: 'Starter',
+    name: 'Startup',
     price: 6,
     maxSeats: 250,
     description: 'Small to mid-size companies',
