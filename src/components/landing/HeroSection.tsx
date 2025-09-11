@@ -34,7 +34,7 @@ const HeroSection = () => {
           <p className="text-lg font-medium text-primary mb-6">SoulSpark AI — Turn well-being into engagement, retention, and growth.</p>
 
 
-          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Gen Z and Millennials are upgrading everything, from our skills to our devices to our hustle. But what about our inner life? SoulSpark AI is the first platform designed to supercharge your mental, emotional, and purpose-driven well-being in just 60 seconds a day. It is powered by timeless wisdom, proven science, and human-centered AI, and is always accessible and always judgment-free.</p>
+          <p className="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">Gen Z and Millennials are constantly upgrading—our skills, our devices, our hustle. But what about our inner lives? That's where SoulSpark AI comes in. In just 60 seconds a day, it delivers personalized support to help young people feel stronger, more connected, and more purposeful. For workplaces, campuses, and locker rooms, it turns well-being into real results—higher engagement, stronger retention, and healthier performance. And for investors, it's a rare chance to back a platform at the intersection of mental health, AI, and the future of how we work, learn, and compete. Built on timeless wisdom, proven science, and human-centered AI, SoulSpark AI is accessible, personal, and designed to create impact at scale.</p>
           
 
 
