@@ -42,7 +42,7 @@ const Footer = () => {
         <div className="border-t border-border/40 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center mb-4">
             <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-              © 2025 SoulSpark AI. All rights reserved.
+              © 2025 SoulSpark AI, Inc. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
               <a 
