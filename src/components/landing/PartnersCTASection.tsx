@@ -7,7 +7,7 @@ const PartnersCTASection = () => {
   return <section id="for-organizations" className="pt-16 md:pt-24 pb-8 md:pb-12 bg-muted/30">
       <div className="max-w-6xl mx-auto px-4">
         <header className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">For Organizations: Workplaces, Campuses, and Sports Teams.</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">For Organizations: companies, colleges, and sports orgs.</h2>
           <p className="mt-3 text-muted-foreground max-w-2xl">Give your people more than tools—give them hope. SoulSpark AI walks with your employees, students, or athletes through life’s challenges, building resilience, connection, and purpose.</p>
         </header>
 
