@@ -51,7 +51,10 @@ const PartnersCTASection = () => {
           <Button variant="ghost" onClick={() => navigate('/partner-preview')}>
             View Admin Partner Preview
           </Button>
-          <Button variant="ghost" onClick={() => navigate('/partners')}>
+          <Button variant="ghost" onClick={() => {
+            navigate('/partners');
+            window.scrollTo(0, 0);
+          }}>
             Learn more for partners
           </Button>
         </div>
