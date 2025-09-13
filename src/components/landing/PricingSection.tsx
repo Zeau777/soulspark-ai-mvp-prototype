@@ -160,7 +160,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
         <div className="mt-12 md:mt-16">
           <h3 className="text-xl font-semibold mb-4">Premium Add-Ons (Any Plan)</h3>
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            {["Advanced AI coaching & emotional intelligence modules", "Custom cultural and faith-aligned content", "API integrations with HR/wellness systems"].map(t => <li key={t} className="flex items-start gap-3 p-4 rounded-lg border bg-card text-card-foreground">
+            {["Advanced AI coaching & emotional intelligence modules", "Custom content designed to honor diverse backgrounds and strengthen culture across organizations, campuses, and teams", "API integrations with HR/wellness systems"].map(t => <li key={t} className="flex items-start gap-3 p-4 rounded-lg border bg-card text-card-foreground">
                 <Check className="mt-0.5 h-5 w-5 text-primary" aria-hidden="true" />
                 <span>{t}</span>
               </li>)}
