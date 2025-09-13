@@ -23,7 +23,7 @@ const PartnersCTASection = () => {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><GraduationCap className="h-5 w-5" /> Campuses</CardTitle>
+              <CardTitle className="flex items-center gap-2"><GraduationCap className="h-5 w-5" /> Colleges</CardTitle>
               <CardDescription>Student success & safety</CardDescription>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground">
