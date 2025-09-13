@@ -32,7 +32,7 @@ const PartnersCTASection = () => {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Trophy className="h-5 w-5" /> Sports Teams</CardTitle>
+              <CardTitle className="flex items-center gap-2"><Trophy className="h-5 w-5" /> Sports Orgs</CardTitle>
               <CardDescription>Performance and mental fitness</CardDescription>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground">
