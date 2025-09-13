@@ -100,7 +100,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                   {features.enterprise.map(item)}
                 </ul>
                 <Button asChild className="w-full" variant="outline">
-                  <a href="/partners?plan=enterprise#partner-plans">Choose Enterprise</a>
+                  <a href="/partners?plan=enterprise#partner-plans">Contact Sales Team</a>
                 </Button>
               </CardContent>
             </Card>
