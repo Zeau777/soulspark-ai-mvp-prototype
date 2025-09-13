@@ -14,7 +14,7 @@ const PartnersCTASection = () => {
         <div className="grid gap-6 md:grid-cols-3">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Building2 className="h-5 w-5" /> Workplaces</CardTitle>
+              <CardTitle className="flex items-center gap-2"><Building2 className="h-5 w-5" /> Companies</CardTitle>
               <CardDescription>Well-being, culture, retention</CardDescription>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground">
