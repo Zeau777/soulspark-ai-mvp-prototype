@@ -171,9 +171,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
         <aside className="mt-12 md:mt-16">
           <div className="rounded-xl border bg-popover p-6 md:p-8">
             <h4 className="text-lg font-semibold mb-3">All plans include</h4>
-            <p className="text-sm text-muted-foreground">
-              Daily 60-second "SoulDrops" • 24/7 AI-powered support • Mobile and Slack access • Impact dashboard to track real-world change
-            </p>
+            <p className="text-sm text-muted-foreground">Daily 60-second &quot;SoulDrops&quot; • 24/7 AI-powered support • Mobile, Slack, Teams, and Discord access • Impact dashboard to track real-world change.</p>
           </div>
         </aside>
       </div>
