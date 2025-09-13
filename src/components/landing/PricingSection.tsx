@@ -135,7 +135,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
           <article className="relative">
             <Card className="h-full">
               <CardHeader>
-                <CardTitle className="text-lg">Sports Teams</CardTitle>
+                <CardTitle className="text-lg">Sports Orgs</CardTitle>
                 <p className="text-sm text-muted-foreground">College & Pro</p>
                 <div className="mt-2 space-y-1 text-sm">
                   <div><span className="font-semibold">College Teams</span> – $4 / athlete / month</div>
