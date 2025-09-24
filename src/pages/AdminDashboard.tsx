@@ -30,6 +30,7 @@ import {
   Plus
 } from 'lucide-react';
 import SlackIntegration from '@/components/partner-admin/SlackIntegration';
+import { DiscordIntegration } from '@/components/partner-admin/DiscordIntegration';
 
 interface OrgStats {
   totalUsers: number;
@@ -614,7 +615,7 @@ export default function AdminDashboard() {
         </Card>
 
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="groups">Groups</TabsTrigger>
             <TabsTrigger value="cohorts">Cohorts</TabsTrigger>
@@ -623,6 +624,10 @@ export default function AdminDashboard() {
             <TabsTrigger value="slack">
               <MessageSquare className="h-4 w-4 mr-1" />
               Slack
+            </TabsTrigger>
+            <TabsTrigger value="discord">
+              <MessageSquare className="h-4 w-4 mr-1" />
+              Discord
             </TabsTrigger>
             <TabsTrigger value="reports">Reports</TabsTrigger>
           </TabsList>
@@ -1061,6 +1066,10 @@ export default function AdminDashboard() {
                 organizationName={organization.name} 
               />
             )}
+          </TabsContent>
+
+          <TabsContent value="discord" className="space-y-6">
+            <DiscordIntegration />
           </TabsContent>
 
           <TabsContent value="reports" className="space-y-6">
