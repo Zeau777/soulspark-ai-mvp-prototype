@@ -189,6 +189,96 @@ export type Database = {
         }
         Relationships: []
       }
+      discord_configurations: {
+        Row: {
+          auto_souldrop_enabled: boolean
+          bot_token: string | null
+          bot_user_id: string | null
+          channels: string[] | null
+          checkin_reminder_enabled: boolean
+          checkin_reminder_time: string
+          created_at: string
+          guild_id: string | null
+          guild_name: string | null
+          id: string
+          is_connected: boolean
+          organization_id: string
+          settings: Json | null
+          souldrop_time: string
+          updated_at: string
+          welcome_message: string | null
+        }
+        Insert: {
+          auto_souldrop_enabled?: boolean
+          bot_token?: string | null
+          bot_user_id?: string | null
+          channels?: string[] | null
+          checkin_reminder_enabled?: boolean
+          checkin_reminder_time?: string
+          created_at?: string
+          guild_id?: string | null
+          guild_name?: string | null
+          id?: string
+          is_connected?: boolean
+          organization_id: string
+          settings?: Json | null
+          souldrop_time?: string
+          updated_at?: string
+          welcome_message?: string | null
+        }
+        Update: {
+          auto_souldrop_enabled?: boolean
+          bot_token?: string | null
+          bot_user_id?: string | null
+          channels?: string[] | null
+          checkin_reminder_enabled?: boolean
+          checkin_reminder_time?: string
+          created_at?: string
+          guild_id?: string | null
+          guild_name?: string | null
+          id?: string
+          is_connected?: boolean
+          organization_id?: string
+          settings?: Json | null
+          souldrop_time?: string
+          updated_at?: string
+          welcome_message?: string | null
+        }
+        Relationships: []
+      }
+      discord_interactions: {
+        Row: {
+          content: string | null
+          created_at: string
+          discord_channel_id: string
+          discord_user_id: string
+          id: string
+          interaction_type: string
+          metadata: Json | null
+          organization_id: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          discord_channel_id: string
+          discord_user_id: string
+          id?: string
+          interaction_type: string
+          metadata?: Json | null
+          organization_id: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          discord_channel_id?: string
+          discord_user_id?: string
+          id?: string
+          interaction_type?: string
+          metadata?: Json | null
+          organization_id?: string
+        }
+        Relationships: []
+      }
       feedback: {
         Row: {
           content_id: string | null
