@@ -149,7 +149,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                 <Button className="w-full" variant="outline" onClick={() => {
                 window.location.href = 'mailto:partners@mysoulsparkai.com?subject=Sports%20Partnership%20Inquiry';
               }}>
-                  Talk to Sports Team
+                  Contact Sports Team
                 </Button>
               </CardContent>
             </Card>
