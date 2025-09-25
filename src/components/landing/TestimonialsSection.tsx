@@ -1,51 +1,38 @@
 import { Star, Quote } from "lucide-react";
-
 const TestimonialsSection = () => {
-  const testimonials = [
-    {
-      name: "Sarah M.",
-      role: "College Student",
-      organization: "University of California",
-      quote: "SoulSpark AI has been my daily anchor. The SoulDrops perfectly match my mood and help me find peace between classes and stress.",
-      rating: 5,
-      impact: "14-day streak"
-    },
-    {
-      name: "Marcus T.",
-      role: "Software Engineer",
-      organization: "Tech Company ERG",
-      quote: "As someone who struggles with work-life balance, the AI coach gives me exactly the spiritual guidance I need, when I need it.",
-      rating: 5,
-      impact: "Donated 45 meals"
-    },
-    {
-      name: "Priya K.",
-      role: "Division I Athlete",
-      organization: "Stanford Athletics",
-      quote: "Training is intense, but SoulSpark AI helps me stay centered. The personalized prayers and breathwork are game-changers.",
-      rating: 5,
-      impact: "28-day streak"
-    }
-  ];
-
-  return (
-    <section id="testimonials" className="py-20 bg-background">
+  const testimonials = [{
+    name: "Sarah M.",
+    role: "College Student",
+    organization: "University of California",
+    quote: "SoulSpark AI has been my daily anchor. The SoulDrops perfectly match my mood and help me find peace between classes and stress.",
+    rating: 5,
+    impact: "14-day streak"
+  }, {
+    name: "Marcus T.",
+    role: "Software Engineer",
+    organization: "Tech Company ERG",
+    quote: "As someone who struggles with work-life balance, the AI coach gives me exactly the spiritual guidance I need, when I need it.",
+    rating: 5,
+    impact: "Donated 45 meals"
+  }, {
+    name: "Priya K.",
+    role: "Division I Athlete",
+    organization: "Stanford Athletics",
+    quote: "Training is intense, but SoulSpark AI helps me stay centered. The personalized prayers and breathwork are game-changers.",
+    rating: 5,
+    impact: "28-day streak"
+  }];
+  return <section id="testimonials" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
             Stories of <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Transformation</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Real students, employees, and athletes sharing how SoulSpark AI has strengthened their spiritual and emotional wellbeing.
-          </p>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Students, employees, and athletes sharing how SoulSpark AI has strengthened their spiritual and emotional wellbeing.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={index}
-              className="bg-card border border-border/40 rounded-xl p-6 hover:shadow-spiritual transition-all duration-300 relative"
-            >
+          {testimonials.map((testimonial, index) => <div key={index} className="bg-card border border-border/40 rounded-xl p-6 hover:shadow-spiritual transition-all duration-300 relative">
               {/* Quote icon */}
               <div className="absolute -top-4 left-6">
                 <div className="bg-gradient-to-r from-primary to-accent rounded-full w-8 h-8 flex items-center justify-center">
@@ -55,9 +42,7 @@ const TestimonialsSection = () => {
 
               {/* Rating */}
               <div className="flex items-center mb-4 pt-2">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 text-accent fill-current" />
-                ))}
+                {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 text-accent fill-current" />)}
               </div>
 
               {/* Quote */}
@@ -80,8 +65,7 @@ const TestimonialsSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* Trust indicators */}
@@ -104,8 +88,6 @@ const TestimonialsSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default TestimonialsSection;
