@@ -69,7 +69,7 @@ const BookDemo = () => {
       console.error('Failed to submit demo request:', error);
       toast({
         title: "Submission Failed",
-        description: "Please try again or contact us directly at sales@mysoulsparkai.com",
+        description: "Please try again or contact us directly at partners@mysoulsparkai.com",
         variant: "destructive"
       });
     } finally {
@@ -136,9 +136,7 @@ const BookDemo = () => {
 
                 {/* Call-to-Action Banner */}
                 <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl p-4 border border-primary/20">
-                  <p className="text-lg font-medium text-foreground mb-0">
-                    See how SoulSpark AI improves resilience, culture, and retention in just 90 days.
-                  </p>
+                  <p className="text-lg font-medium text-foreground mb-0">See how SoulSpark AI improves resilience, performance, and retention in just 90 days.</p>
                 </div>
 
                 <Button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground hover:shadow-glow transition-all duration-300" size="lg">
