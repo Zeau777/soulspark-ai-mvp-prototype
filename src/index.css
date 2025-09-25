@@ -24,6 +24,8 @@ All colors MUST be HSL. Brand colors from flame logo: warm orange, yellow, soft 
 
     /* Brand token that stays orange in light and dark */
     --brand-orange: 20 90% 55%;
+    --orange: 25 95% 53%;
+    --orange-foreground: 0 0% 100%;
 
     /* Warm secondary from logo yellow */
     --secondary: 45 95% 70%;
@@ -83,6 +85,8 @@ All colors MUST be HSL. Brand colors from flame logo: warm orange, yellow, soft 
 
     /* Keep brand orange in dark mode for highlights */
     --brand-orange: 20 90% 55%;
+    --orange: 25 95% 53%;
+    --orange-foreground: 0 0% 100%;
 
 
     --secondary: 217.2 32.6% 17.5%;

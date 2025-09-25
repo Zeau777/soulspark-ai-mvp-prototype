@@ -16,6 +16,7 @@ export default function Auth() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [isOrgSignUp, setIsOrgSignUp] = useState(false);
+  const [isPartnerMode, setIsPartnerMode] = useState(false);
   const [selectedPricingPlan, setSelectedPricingPlan] = useState<any>(null);
   const { signIn, signUp } = useAuth();
   const { toast } = useToast();
@@ -23,9 +24,17 @@ export default function Auth() {
   const { isOrgAdmin, loading: orgLoading } = useOrgAdmin();
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPartner = urlParams.get('partner') === 'true';
     const hash = window.location.hash.replace('#', '');
+    
+    setIsPartnerMode(isPartner);
+    
     if (hash === 'signup') {
       setIsSignUp(true);
+      if (isPartner) {
+        setIsOrgSignUp(true);
+      }
     }
   }, []);
 
@@ -69,7 +78,6 @@ export default function Auth() {
     const password = formData.get('password') as string;
     const fullName = formData.get('fullName') as string;
     const organization = formData.get('organization') as string;
-    const adminEmail = formData.get('adminEmail') as string;
 
     try {
       if (isSignUp) {
@@ -97,12 +105,25 @@ export default function Auth() {
           // If this is an organization signup, create the organization
           if (isOrgSignUp && organization && selectedPricingPlan && userData) {
             try {
+              // Validate that email domain matches company name
+              const emailDomain = email.split('@')[1];
+              const companyDomain = organization.toLowerCase().replace(/\s+/g, '');
+              
+              if (!emailDomain.includes(companyDomain.split('-')[0]) && !companyDomain.includes(emailDomain.split('.')[0])) {
+                toast({
+                  title: "Email validation failed",
+                  description: "Please use a company email that matches your organization name.",
+                  variant: "destructive",
+                });
+                return;
+              }
+              
               await supabase
                 .from('organizations')
                 .insert({
                   name: organization,
                   code: organization.toLowerCase().replace(/\s+/g, '-'),
-                  admin_email: adminEmail || email,
+                  admin_email: email,
                   pricing_plan: selectedPricingPlan.id,
                   max_seats: selectedPricingPlan.maxSeats,
                   current_seats: 0
@@ -174,19 +195,23 @@ export default function Auth() {
         {/* Auth Options */}
         <div className="space-y-4">
           {/* Create Account / Sign In Button */}
-          <div className="space-y-2">
-            <Button
-              onClick={() => {
-                setIsSignUp(!isSignUp);
-                setIsOrgSignUp(false);
-                setSelectedPricingPlan(null);
-              }}
-              className="w-full bg-card hover:bg-muted text-foreground border border-border font-medium py-3 rounded-full"
-            >
-              {isSignUp ? 'Sign In' : 'Create account'}
-            </Button>
-            
-            {!isSignUp && (
+          {!isPartnerMode && (
+            <div className="space-y-2">
+              <Button
+                onClick={() => {
+                  setIsSignUp(!isSignUp);
+                  setIsOrgSignUp(false);
+                  setSelectedPricingPlan(null);
+                }}
+                className="w-full bg-card hover:bg-muted text-foreground border border-border font-medium py-3 rounded-full"
+              >
+                {isSignUp ? 'Sign In' : 'Create account'}
+              </Button>
+            </div>
+          )}
+          
+          {(isPartnerMode || (!isSignUp && !isPartnerMode)) && (
+            <div className="space-y-2">
               <Button
                 onClick={() => {
                   setIsSignUp(true);
@@ -196,8 +221,8 @@ export default function Auth() {
               >
                 Create Organization Account
               </Button>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Email Form */}
           {isSignUp && (
@@ -225,12 +250,14 @@ export default function Auth() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-foreground">Email</Label>
+                  <Label htmlFor="email" className="text-foreground">
+                    {isOrgSignUp ? "Company Email" : "Email"}
+                  </Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="your@email.com"
+                    placeholder={isOrgSignUp ? "your@company.com" : "your@email.com"}
                     required
                     className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
                   />
@@ -239,25 +266,18 @@ export default function Auth() {
                 {isOrgSignUp && (
                   <>
                     <div className="space-y-2">
-                      <Label htmlFor="organization" className="text-foreground">Organization Name</Label>
+                      <Label htmlFor="organization" className="text-foreground">Company Name</Label>
                       <Input
                         id="organization"
                         name="organization"
                         type="text"
-                        placeholder="Your organization name"
+                        placeholder="Your company name"
                         required
                         className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
                       />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="adminEmail" className="text-foreground">Admin Email (if different)</Label>
-                      <Input
-                        id="adminEmail"
-                        name="adminEmail"
-                        type="email"
-                        placeholder="Optional: Different admin email"
-                        className="bg-background border-border text-foreground placeholder:text-muted-foreground rounded-md"
-                      />
+                      <p className="text-xs text-muted-foreground">
+                        Your email domain should match your company name
+                      </p>
                     </div>
                   </>
                 )}

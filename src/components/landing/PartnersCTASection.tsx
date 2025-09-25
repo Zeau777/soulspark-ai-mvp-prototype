@@ -42,10 +42,7 @@ const PartnersCTASection = () => {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button variant="spiritual" onClick={() => navigate('/auth#signup')}>
-            Partner Sign Up
-          </Button>
-          <Button variant="outline" onClick={() => navigate('/auth')}>
+          <Button variant="orange" onClick={() => navigate('/auth?partner=true')}>
             Partner Login
           </Button>
           <Button variant="ghost" onClick={() => navigate('/partner-preview')}>
