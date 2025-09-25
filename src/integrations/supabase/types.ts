@@ -14,6 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_organization_actions: {
+        Row: {
+          action_type: string
+          admin_user_id: string
+          created_at: string
+          details: Json | null
+          id: string
+          organization_id: string
+        }
+        Insert: {
+          action_type: string
+          admin_user_id: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          organization_id: string
+        }
+        Update: {
+          action_type?: string
+          admin_user_id?: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          organization_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_organization_actions_admin_user_id_fkey"
+            columns: ["admin_user_id"]
+            isOneToOne: false
+            referencedRelation: "admin_users"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "admin_organization_actions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      admin_users: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          permissions: Json | null
+          role: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          permissions?: Json | null
+          role?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          permissions?: Json | null
+          role?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       challenge_participations: {
         Row: {
           challenge_id: string
@@ -518,12 +590,21 @@ export type Database = {
       organizations: {
         Row: {
           admin_email: string
+          annual_contract_value: number | null
+          billing_contact_email: string | null
+          billing_contact_name: string | null
           code: string
+          contract_end_date: string | null
+          contract_start_date: string | null
           created_at: string
           current_seats: number | null
           id: string
+          managed_by_admin: string | null
           max_seats: number | null
           name: string
+          payment_date: string | null
+          payment_method: string | null
+          payment_status: string | null
           pricing_plan: string | null
           settings: Json | null
           type: string
@@ -531,12 +612,21 @@ export type Database = {
         }
         Insert: {
           admin_email: string
+          annual_contract_value?: number | null
+          billing_contact_email?: string | null
+          billing_contact_name?: string | null
           code: string
+          contract_end_date?: string | null
+          contract_start_date?: string | null
           created_at?: string
           current_seats?: number | null
           id?: string
+          managed_by_admin?: string | null
           max_seats?: number | null
           name: string
+          payment_date?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
           pricing_plan?: string | null
           settings?: Json | null
           type?: string
@@ -544,18 +634,35 @@ export type Database = {
         }
         Update: {
           admin_email?: string
+          annual_contract_value?: number | null
+          billing_contact_email?: string | null
+          billing_contact_name?: string | null
           code?: string
+          contract_end_date?: string | null
+          contract_start_date?: string | null
           created_at?: string
           current_seats?: number | null
           id?: string
+          managed_by_admin?: string | null
           max_seats?: number | null
           name?: string
+          payment_date?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
           pricing_plan?: string | null
           settings?: Json | null
           type?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "organizations_managed_by_admin_fkey"
+            columns: ["managed_by_admin"]
+            isOneToOne: false
+            referencedRelation: "admin_users"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       partnership_leads: {
         Row: {
@@ -1057,6 +1164,30 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_create_organization: {
+        Args: {
+          p_admin_email: string
+          p_annual_contract_value?: number
+          p_billing_contact_email?: string
+          p_billing_contact_name?: string
+          p_contract_end_date?: string
+          p_contract_start_date?: string
+          p_max_seats: number
+          p_name: string
+          p_pricing_plan: string
+          p_type: string
+        }
+        Returns: string
+      }
+      admin_process_payment: {
+        Args: {
+          p_organization_id: string
+          p_payment_amount: number
+          p_payment_method: string
+          p_payment_notes?: string
+        }
+        Returns: boolean
+      }
       cleanup_push_subscriptions: {
         Args: Record<PropertyKey, never>
         Returns: undefined
@@ -1064,6 +1195,16 @@ export type Database = {
       current_user_email: {
         Args: Record<PropertyKey, never>
         Returns: string
+      }
+      get_admin_dashboard_data: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          active_organizations: number
+          pending_payments: number
+          recent_actions: Json
+          total_organizations: number
+          total_revenue_cents: number
+        }[]
       }
       get_daily_soul_drop: {
         Args: { p_user_id: string }
