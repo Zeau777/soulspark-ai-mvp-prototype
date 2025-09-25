@@ -78,7 +78,7 @@ serve(async (req) => {
   } catch (error) {
     console.error('Discord integration error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: (error instanceof Error) ? error.message : String(error) }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
@@ -216,7 +216,7 @@ async function handleOAuthCallback(supabase: any, code: string, state: string) {
         <body>
           <h1 class="error">Discord Connection Failed</h1>
           <p>There was an error connecting your Discord integration.</p>
-          <p>Error: ${error.message}</p>
+          <p>Error: ${error instanceof Error ? error.message : String(error)}</p>
           <p>Please try again or contact support.</p>
         </body>
       </html>
@@ -266,7 +266,7 @@ async function handleListChannels(supabase: any, organizationId: string) {
   } catch (error) {
     console.error('List channels error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: (error instanceof Error) ? error.message : String(error) }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
@@ -313,7 +313,7 @@ async function handleTestBot(supabase: any, organizationId: string) {
   } catch (error) {
     console.error('Test bot error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: (error instanceof Error) ? error.message : String(error) }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
@@ -359,7 +359,7 @@ async function handleGetConfig(supabase: any, organizationId: string) {
   } catch (error) {
     console.error('Get config error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: (error instanceof Error) ? error.message : String(error) }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
@@ -386,7 +386,7 @@ async function handleUpdateConfig(supabase: any, organizationId: string, config:
   } catch (error) {
     console.error('Update config error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: (error instanceof Error) ? error.message : String(error) }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
@@ -417,7 +417,7 @@ async function handleDisconnect(supabase: any, organizationId: string) {
   } catch (error) {
     console.error('Disconnect error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: (error instanceof Error) ? error.message : String(error) }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
@@ -504,7 +504,7 @@ async function handleSendMessage(supabase: any, organizationId: string) {
           results.push({ channelId, success: false, error: response.statusText });
         }
       } catch (error) {
-        results.push({ channelId, success: false, error: error.message });
+        results.push({ channelId, success: false, error: (error instanceof Error) ? error.message : String(error) });
       }
     }
 
@@ -518,7 +518,7 @@ async function handleSendMessage(supabase: any, organizationId: string) {
   } catch (error) {
     console.error('Send message error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: (error instanceof Error) ? error.message : String(error) }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

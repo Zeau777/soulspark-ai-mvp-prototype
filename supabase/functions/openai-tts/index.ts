@@ -46,7 +46,7 @@ serve(async (req) => {
     }
 
     const arrayBuffer = await response.arrayBuffer();
-    const base64Audio = b64encode(new Uint8Array(arrayBuffer));
+    const base64Audio = b64encode(arrayBuffer as ArrayBuffer);
 
     return new Response(JSON.stringify({ audioContent: base64Audio, format: "mp3" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

@@ -73,7 +73,7 @@ serve(async (req: Request) => {
   } catch (error) {
     console.error('Slack integration error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: (error instanceof Error) ? error.message : 'Unknown error' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
@@ -420,7 +420,7 @@ async function handleSendMessage(supabase: any, organizationId: string) {
       const responseData = await response.json();
       results.push({ channel: channelId, success: responseData.ok, error: responseData.error });
     } catch (error) {
-      results.push({ channel: channelId, success: false, error: error.message });
+      results.push({ channel: channelId, success: false, error: (error instanceof Error) ? error.message : String(error) });
     }
   }
 

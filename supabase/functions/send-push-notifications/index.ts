@@ -142,7 +142,7 @@ const handler = async (req: Request): Promise<Response> => {
         return { success: true, userId: sub.user_id, status: response?.status };
       } catch (error) {
         console.error(`Failed to send notification to ${sub.user_id}:`, error);
-        return { success: false, userId: sub.user_id, error: error.message };
+        return { success: false, userId: sub.user_id, error: (error instanceof Error) ? error.message : String(error) };
       }
     }) || [];
 
@@ -165,7 +165,7 @@ const handler = async (req: Request): Promise<Response> => {
   } catch (error) {
     console.error('Error in send-push-notifications function:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: (error instanceof Error) ? error.message : 'Unknown error' }),
       { 
         status: 500, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
