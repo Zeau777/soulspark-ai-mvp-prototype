@@ -76,7 +76,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                 <ul className="space-y-3 text-sm">
                   {features.growth.map(item)}
                 </ul>
-                <Button asChild className="w-full" variant="default">
+                <Button asChild className="w-full" variant="spiritual">
                   <a href="/partners?plan=growth#partner-plans">Choose Growth</a>
                 </Button>
               </CardContent>
@@ -99,7 +99,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                 <ul className="space-y-3 text-sm">
                   {features.enterprise.map(item)}
                 </ul>
-                <Button className="w-full" variant="outline" onClick={() => {
+                <Button className="w-full" variant="spiritual" onClick={() => {
                 window.location.href = 'mailto:sales@mysoulsparkai.com?subject=Enterprise%20Partnership%20Inquiry';
               }}>
                   Contact Sales Team
@@ -125,7 +125,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                 <ul className="space-y-3 text-sm">
                   {["Campus-wide well-being programs", "Engagement analytics", "Student community features"].map(item)}
                 </ul>
-                <Button className="w-full" variant="default" onClick={() => {
+                <Button className="w-full" variant="spiritual" onClick={() => {
                 window.location.href = 'mailto:campus@mysoulsparkai.com?subject=College%20Partnership%20Inquiry';
               }}>
                   Contact Campus Team
@@ -148,7 +148,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                 <ul className="space-y-3 text-sm">
                   {["Team-specific motivation tracks", "Performance mindset modules", "Engagement analytics"].map(item)}
                 </ul>
-                <Button className="w-full" variant="outline" onClick={() => {
+                <Button className="w-full" variant="spiritual" onClick={() => {
                 window.location.href = 'mailto:sports@mysoulsparkai.com?subject=Sports%20Partnership%20Inquiry';
               }}>
                   Contact Sports Team
