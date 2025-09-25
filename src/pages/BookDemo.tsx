@@ -69,7 +69,7 @@ const BookDemo = () => {
       console.error('Failed to submit demo request:', error);
       toast({
         title: "Submission Failed",
-        description: "Please try again or contact us directly at partners@mysoulsparkai.com",
+        description: "Please try again or contact us directly at sales@mysoulsparkai.com",
         variant: "destructive"
       });
     } finally {

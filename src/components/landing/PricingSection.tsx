@@ -99,8 +99,10 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                 <ul className="space-y-3 text-sm">
                   {features.enterprise.map(item)}
                 </ul>
-                <Button asChild className="w-full" variant="outline">
-                  <a href="/partners?plan=enterprise#partner-plans">Contact Sales Team</a>
+                <Button className="w-full" variant="outline" onClick={() => {
+                window.location.href = 'mailto:sales@mysoulsparkai.com?subject=Enterprise%20Partnership%20Inquiry';
+              }}>
+                  Contact Sales Team
                 </Button>
               </CardContent>
             </Card>
@@ -124,7 +126,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                   {["Campus-wide well-being programs", "Engagement analytics", "Student community features"].map(item)}
                 </ul>
                 <Button className="w-full" variant="default" onClick={() => {
-                window.location.href = 'mailto:partners@mysoulsparkai.com?subject=College%20Partnership%20Inquiry';
+                window.location.href = 'mailto:campus@mysoulsparkai.com?subject=College%20Partnership%20Inquiry';
               }}>
                   Contact Campus Team
                 </Button>
@@ -147,7 +149,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                   {["Team-specific motivation tracks", "Performance mindset modules", "Engagement analytics"].map(item)}
                 </ul>
                 <Button className="w-full" variant="outline" onClick={() => {
-                window.location.href = 'mailto:partners@mysoulsparkai.com?subject=Sports%20Partnership%20Inquiry';
+                window.location.href = 'mailto:sports@mysoulsparkai.com?subject=Sports%20Partnership%20Inquiry';
               }}>
                   Contact Sports Team
                 </Button>
