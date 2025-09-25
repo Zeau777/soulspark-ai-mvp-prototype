@@ -37,19 +37,6 @@ const PRICING_PLANS: PricingPlan[] = [
       'Priority onboarding',
       'Advanced engagement insights'
     ]
-  },
-  {
-    id: 'enterprise',
-    name: 'Enterprise',
-    price: 12,
-    maxSeats: 10000,
-    description: 'Large companies & global teams',
-    features: [
-      'Everything in Growth',
-      'White-label branding',
-      'Advanced analytics',
-      'API integration'
-    ]
   }
 ];
 
@@ -66,7 +53,7 @@ export default function PricingPlanSelector({ selectedPlan, onPlanSelect }: Pric
         <p className="text-muted-foreground">Select the plan that best fits your organization size</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {PRICING_PLANS.map((plan) => (
           <Card 
             key={plan.id}
